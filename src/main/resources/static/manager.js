@@ -1,0 +1,52 @@
+const { createApp } = Vue;
+
+createApp({
+    data() {
+    return {
+        rest:undefined,
+        clients:[],
+        newClient:{ 
+                firstName:"",
+                lastName:"",
+                email:"",
+                    },
+        modiClient:{},
+    }
+    },
+    created(){
+        this.loadData();
+    },
+    methods:{
+        addClient:function(){
+            axios.post("http://localhost:8080/clients",this.newClient)
+            .then(res=>this.loadData())
+            .catch(err=>console.log(err));
+        },
+        loadData:function(){
+        axios.get("http://localhost:8080/clients")
+        .then(response=>{
+            this.rest=response.data;
+            this.clients=response.data._embedded.clients;
+            this.newClient.firstName="";
+            this.newClient.lastName="";
+            this.newClient.email="";
+        })
+        .catch(err=>console.log(err));
+        },
+        deleteClient:function(){
+            axios.delete(this.modiClient._links.self.href)
+            .then(res=>this.loadData())
+            .catch(err=>console.log(err));
+        },
+        modify:function(client){
+            this.modiClient={...client};
+        },
+        modifyClient:function(){
+            axios.put(this.modiClient._links.self.href,this.modiClient)
+            .then(res=>{
+                this.loadData();
+            })
+            .catch(err=>console.log(err));
+        }
+    }
+}).mount('#app');

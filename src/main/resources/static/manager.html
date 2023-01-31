@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="./manager.css">
+    <link rel="shortcut icon" href="./alienIcon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app" class="d-flex flex-lg-row flex-wrap">
+        <main class="p-3 col-12 col-md-6 border-end">
+            <h1 class="text-center p-2">Client Manager</h1>
+            <div>
+                <div class="mb-3">
+                    <label class="form-label" form="disabledTextInput1">Name:</label>
+                    <input v-model="newClient.firstName" type="text" id="disabledTextInput1" class="form-control"
+                        placeholder="David">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" form="disabledTextInput2">Last name:</label>
+                    <input v-model="newClient.lastName" type="text" id="disabledTextInput2" class="form-control"
+                        placeholder="Dovy">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" form="disabledTextInput3">Email:</label>
+                    <input v-model="newClient.email" type="email" id="disabledTextInput3" class="form-control"
+                        placeholder="david@gmial.com">
+                </div>
+                <button type="submit" class="p-1 buttonAdd" @click="addClient">Add Client</button>
+            </div>
+            <h3 class="p-3 text-center">Client List</h3>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="client of clients">
+                        <th>{{client.firstName}}</th>
+                        <th>{{client.lastName}}</th>
+                        <th>{{client.email}}<button class="buttonDetails ms-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modify(client)">Edit</button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <article class="col-12 col-md-6 border-start">
+            <h3 class="text-center pt-3">Client REST resoponse</h3>
+            <pre class="p-4">{{rest}}</pre>
+        </article>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-duotone fa-arrow-up-right-from-square"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="mb-3">
+                                <label class="form-label" form="disabledTextInput4">Name:</label>
+                                <input v-model="modiClient.firstName" type="text" id="disabledTextInput4" class="form-control"
+                                    placeholder="David">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" form="disabledTextInput5">Last name:</label>
+                                <input v-model="modiClient.lastName" type="text" id="disabledTextInput5" class="form-control"
+                                    placeholder="Dovy">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" form="disabledTextInput6">Email:</label>
+                                <input v-model="modiClient.email" type="email" id="disabledTextInput6" class="form-control"
+                                    placeholder="david@gmial.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger text-dark" data-bs-dismiss="modal" aria-label="Close" @click="deleteClient()">Delete</button>
+                        <button type="button" class="btn btn-warning text-dark" data-bs-dismiss="modal" aria-label="Close" @click="modifyClient()">Modify</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="./manager.js"></script>
+</body>
+
+</html>

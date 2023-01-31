@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+body {
+  background: rgb(30,7,38);
+  background: linear-gradient(180deg, rgba(30,7,38,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(30,7,38,1) 100%);
+}
+input table {
+    max-width: 30rem;
+}
+h1,h2,h3{
+  color: rgb(113,21,143);
+}
+tbody>tr{
+  background-color: rgb(113,21,143);
+}
+.buttonAdd{
+  display: inline-block;
+  position: relative;
+  color: white;
+  background: black;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 16px 24px;
+  margin: 20px;
+  border: 2px solid rgb(113,21,143);
+  border-radius: 8px;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.buttonAdd:before{
+  content: "";
+  position: absolute;
+  background: rgb(113,21,143);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+  z-index: -1;
+}
+.buttonAdd:hover{
+  color: white;
+}
+.buttonAdd:before{
+  top: 100%;
+  left: 100%;
+  transition: 0.7s;
+}
+.buttonAdd:hover:before{
+  top: -30px;
+  left: -30px;
+}
+.buttonAdd:active:before{
+  background: black;
+  transition: 0s;
+}
+.buttonDetails{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.3rem;
+  border: 2px solid white;
+  background-color: black;
+}
+.buttonDetails:hover{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.3rem;
+  color: black;
+  border: 2px solid black;
+  background-color: white;
+}
