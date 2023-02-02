@@ -31,6 +31,8 @@ body{
     height: 100%;
 }
 .accounts{
+    border-radius: 3rem;
+    max-width: 25rem;
     background: #f2debab8;
     margin: 2rem;
     padding: 2rem;
