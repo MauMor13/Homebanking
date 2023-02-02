@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size:1rem;
+}
+/*fondo*/
+canvas {
+    z-index: -1;
+    max-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+}
+#particle-canvas {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #6C00FF 0%, #3C79F5 100%);
+    vertical-align: middle;
+}
+img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+body{
+    color: black;
+}
+.modifi{
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+}
+.accounts{
+    background: #f2debab8;
+    margin: 2rem;
+    padding: 2rem;
+}
