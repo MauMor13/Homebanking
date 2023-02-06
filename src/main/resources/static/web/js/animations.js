@@ -14,9 +14,9 @@ function rand(low, high) {
 
 function createParticle(canvas) {
     const colour = {
-        r: 255,
-        g: randomNormal({ mean: 125, dev: 20 }),
-        b: 50,
+        r: 45,
+        g: randomNormal({ mean: 205, dev: 20 }),
+        b: 223,
         a: rand(0, 1),
     };
     return {
@@ -29,6 +29,7 @@ function createParticle(canvas) {
         arc: Math.PI * 2,
         startTime: performance.now() - rand(0, SPEED),
         colour: `rgba(${colour.r}, ${colour.g}, ${colour.b}, ${colour.a})`,
+        shape:"diamond",
     }
 }
 
@@ -42,21 +43,24 @@ function moveParticle(particle, canvas, time) {
 }
 
 function drawParticle(particle, canvas, ctx) {
-    canvas = document.getElementById('particle-canvas');
     const vh = canvas.height / 100;
+    const size = particle.diameter * vh * 2;
+    const x = particle.x * canvas.width;
+    const y = particle.y * vh + (canvas.height / 2);
 
-    ctx.fillStyle = particle.colour;
+    ctx.strokeStyle = particle.colour;
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.ellipse(
-        particle.x * canvas.width,
-        particle.y * vh + (canvas.height / 2),
-        particle.diameter * vh,
-        particle.diameter * vh,
-        0,
-        0,
-        2 * Math.PI
-    );
-    ctx.fill();
+    ctx.moveTo(x, y - size/2);
+    ctx.lineTo(x + size/4, y - size/4);
+    ctx.lineTo(x + size/2, y);
+    ctx.lineTo(x + size/4, y + size/4);
+    ctx.lineTo(x, y + size/2);
+    ctx.lineTo(x - size/4, y + size/4);
+    ctx.lineTo(x - size/2, y);
+    ctx.lineTo(x - size/4, y - size/4);
+    ctx.closePath();
+    ctx.stroke();
 }
 
 function draw(time, canvas, ctx) {
@@ -113,3 +117,9 @@ function startAnimation() {
         })
     }
 }());
+
+
+
+
+
+

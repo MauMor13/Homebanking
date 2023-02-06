@@ -1,33 +1,42 @@
-body {
+:root{
+    --color-major:#304A6E;
+    --color-secondary:#668DC0;
+    --color-neutral:#C2C6CE;
+    --color-dark:#0F1C30;
+    --color-light:#C0D0EF;
+}
+* {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
+    font-size:1rem;
+    color: black;
     font-family: "Open Sans", arial;
 }
 /* ScrolBar  */
 .scrollbar {
-    height: 90%;
     width: 100%;
     overflow-y: hidden;
     overflow-x: hidden;
 }
 .scrollbar:hover {
-    height: 90%;
+    height: 100%;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 /* Scrollbar Style */
 #style-1::-webkit-scrollbar-track {
-    border-radius: 2px;
+    border-radius: .3rem;
 }
 #style-1::-webkit-scrollbar {
     width: 5px;
-    background-color: #F7F7F7;
+    background-color: white;
 }
 #style-1::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    background-color: #BFBFBF;
+    border-radius: 7px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #0F1C30;
 }
 /* Scrollbar End */
 .fa-lg {
@@ -43,26 +52,27 @@ body {
     font-size: 20px;
 }
 .main-menu:hover,nav.main-menu.expanded {
-    width: 250px;
+    width: 12rem;
     overflow: hidden;
     opacity: 1;
 }
 .main-menu {
-    background: #f2debab8;
-    height: 100%;
-    left: 0;
+    position: sticky;
+    top: 25vh;
+    border-radius:.5rem;
+    height: 19rem;
+    background:var(--color-secondary) ;
     width: 55px;
+    z-index: 100;
     overflow: hidden;
     transition: width .2s linear;
-    transition: width .2s linear;
     transform: translateZ(0) scale(1, 1);
-    box-shadow: 1px 0 15px rgba(0, 0, 0, 0.447);
-    opacity: 1;
 }
 .main-menu li {
     position: relative;
     display: block;
     width: 250px;
+    cursor: pointer;
 }
 .main-menu .nav-text {
     position: relative;
@@ -88,8 +98,8 @@ nav li {
 /* Darker element side menu End*/
 li:hover{
     color: black;
-    border-radius: .5rem;
-    background-color:#2DCDDF;
+    border-radius: .3rem;
+    background-color:#304a6e6b;
 }
 @font-face {
     font-family: 'Titillium Web';

@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             data:{},
+            state:"accounts",
         }
     },
     created(){
