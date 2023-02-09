@@ -16,7 +16,7 @@ public class Account {
     private LocalDateTime creationDate;
     private double balance;
     @OneToMany(mappedBy = "accountId",fetch = FetchType.EAGER)
-    Set<Transaction> transactions=new HashSet<>();
+    private Set<Transaction> transactions=new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client clientId;

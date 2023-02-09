@@ -10,7 +10,7 @@ public class AccountDTO {
     private LocalDateTime creationDate;
     private double balance;
 
-    Set <TransactionDTO> transaction;
+    private Set <TransactionDTO> transaction;
 
     public AccountDTO(Account account) {
 
