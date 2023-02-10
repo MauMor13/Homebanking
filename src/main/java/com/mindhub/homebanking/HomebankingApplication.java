@@ -1,6 +1,6 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.dtos.ClientDTO;
+
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
@@ -9,12 +9,38 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class HomebankingApplication {
-
+//	public static void generateRandomTransactions(Account account, int cant){
+//		Random rand = new Random();
+//		TransactionType type;
+//		Double amount;
+//		for (int i=0;i<cant;i++){
+//			String description = "Description "+Integer.toString(i);
+//			amount = new Double(rand.nextInt(1000));
+//			if(rand.nextInt(2)==0){
+//				type=DEBIT;
+//				amount=new Double(rand.nextInt(500))*-1;
+//			}else{
+//				type=CREDIT;
+//			}
+//			Transaction trans = new Transaction(type,amount,description);
+//			trans.setDate(LocalDateTime.now().plusMonths(rand.nextInt(9)).plusDays(rand.nextInt(10)));
+//			account.addTransaction(trans);
+//		}
+//	}
+//	public static void saveAccountsAndTransactions(Client client, AccountRepository accountRepository, TransactionRepository transactionRepository){
+//		for (Account account: client.getAccounts()){
+//			accountRepository.save(account);
+//			for(Transaction transaction: account.getTransactions()){
+//				transactionRepository.save(transaction);
+//			}
+//		}
+//	}
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
