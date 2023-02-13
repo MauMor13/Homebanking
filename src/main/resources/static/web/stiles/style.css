@@ -1,0 +1,216 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+:root {
+    --color-major: #304A6E;
+    --color-secondary: #668DC0;
+    --color-neutral: #C2C6CE;
+    --color-dark: #0F1C30;
+    --color-light: #C0D0EF;
+}
+
+.avatar {
+    width: 3rem;
+}
+
+.icons {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 2rem;
+}
+
+.icon_help {
+    width: 2.6rem;
+}
+
+.content {
+    font-family: "Hind Vadodara", -apple-system, BlinkMacSystemFont, Segoe UI,
+        Helvetica Neue, Arial, sans-serif;
+    min-height: 100vh;
+    max-width: 100vw;
+    color: white;
+    background-image: url(../images/background/pexels-guilherme-rossi-1755693.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-columns: 36vh auto;
+}
+
+.image_body {
+    background-image: url(../images/background/pexels-david-skyrius-2129796.jpg);
+}
+
+/*button nav*/
+
+/*nav*/
+.sidebar {
+    position: sticky;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-right: 1px solid var(--color-neutral);
+    backdrop-filter: blur(10px);
+    border-radius: 0rem 2rem 2rem 0rem;
+    max-width: 36vh;
+    height: 100vh;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    border-bottom: 1px solid var(--color-neutral);
+}
+
+li {
+    padding: .3rem;
+    margin-top: 1.2rem;
+    width: 90%;
+}
+
+span {
+    cursor: pointer;
+}
+
+li:hover {
+    color: var(--color-dark);
+    background-color: #c0d0ef95;
+    border-radius: 3rem;
+
+}
+
+/*bar options and search*/
+.container_select {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--color-light);
+    border-radius: 2rem 2rem 2rem 2rem;
+    backdrop-filter: blur(10px);
+    top: 0;
+    right: 0;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    width: 11rem;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+    appearance: none;
+    outline: none;
+    background-color: #ebebeb;
+    transition: .5s;
+    border-radius: 20px;
+}
+
+input:checked[type="checkbox"] {
+    background-color: #000000;
+    transition: 0.5s;
+}
+
+input[type="checkbox"]::before {
+    content: '☀️';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    border-radius: 50px;
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    transition: 0.5s;
+}
+
+input:checked[type="checkbox"]::before {
+    left: 2rem;
+    content: '🌜';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #555555;
+}
+
+/*imput search*/
+.wrapper {
+    position: absolute;
+    top: 0;
+    right: 20rem;
+    text-align: center;
+    width: 3rem;
+}
+
+.search {
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 50px;
+    transition: 0.4s;
+}
+
+.search:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search:hover input {
+    max-width: 180px;
+}
+
+.search input {
+    background: transparent;
+    border: 0;
+    max-width: 0;
+    padding: 0;
+    text-indent: 12px;
+    color: #f9f9f9;
+    font-size: 22px;
+    font-family: "Poppins";
+    outline: none;
+    transition: 0.4s;
+}
+
+.search input::placeholder {
+    color: rgba(255, 255, 255, 0.375);
+}
+
+.search span {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    background: #8f44fd;
+    color: #f9f9f9;
+    border-radius: inherit;
+    font-size: 24px;
+    pointer-events: none;
+}
+
+/*Nav Button*/
+
+/*div account*/
+.account {
+    width: 15rem;
+    height: 15rem;
+    border: 2px solid #000000;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.644);
+    box-shadow: .5rem .5rem #00000051;
+}
+
+/*------table transactions--------*/
+

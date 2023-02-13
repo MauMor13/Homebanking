@@ -5,64 +5,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css"
-        href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="shortcut icon" href="./images/user.png" type="image/x-icon">
-    <link rel="stylesheet" href="./stiles/stile2.css">
-    <link rel="stylesheet" href="./stiles/stile1.css">
-    <title>My Profile | Deamond Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stiles/style.css">
+    <title>My Movements | Deamond Bank</title>
 </head>
 <body>    
-    <div id="app">
-        <div class="modifi">
-            <div>
-                <img  class="logo" src="./images/Logo.svg" alt="">
-                <nav class="main-menu">
-                    <div class="scrollbar " id="style-1">
-                        <ul>
-                            <li class="mt-2 pb-3">
-                                <i class="fa fa-lg"><img class="svg_wallet" src="./images/wallet2.svg" alt="Accounts"></i>
-                                <span class="nav-text">Accounts</span>
-                            </li>
-                            <li class="mt-2 pb-3">
-                                <i class="fa fa-lg"><img src="./images/tarjeta-de-credito.png" alt="Cards"></i>
-                                <span class="col nav-text">Cards</span>
-                            </li>
-                            <li class="mt-2 pb-3">
-                                <i class="fa fa-lg"><img src="./images/inversion.png" alt="Investments"></i>
-                                <span class="nav-text">Investments</span>
-                            </li>
-                            <li class="mt-2 pb-3">
-                                <i class="fa fa-lg"><img src="./images/transaction.png" alt="Transactions"></i>
-                                <span class="nav-text">Transactions</span>
-                            </li>
-                            <li class="mt-2 pb-3">
-                                <i class="fa fa-lg"><img src="./images/skills.png" alt="Settings"></i>
-                                <span class="nav-text">Settings</span>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+    <div id="app" class="content">
+        <!-- <div class="wrapper">
+            <div class="search">
+                <span class="uil uil-search">
+                </span>
+                <input placeholder="Search" type="text" />
             </div>
-            <main>
-                <!-- seccion de transacciones dinamicas -->
-                    <h1 class="mt-4 text-center">Transactions</h1>
-                    <div v-if="account" v-for="transaction in account.transaction" class="d-flex justify-content-evenly">
-                        <p :class=" [transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">{{transaction.description}}</p>
-                        <p :class=" [transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">{{transaction.date.split("T")[0]}}</p>
-                        <p :class=" [transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">$ {{transaction.amount}}</p>
-                    </div>
-            </main>
+        </div> -->
+        <div class="d-flex container_select">
+            <input class="mb-1 am_pm" type="checkbox">
+            <img onclick="location.href='#'" class="icon_help me-2" src="./images/icons/help.svg" alt="">
         </div>
+        <nav class="sidebar">
+            <section class="ms-3">
+                <div class="d-flex p-1">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-10-svgrepo-com.svg" alt="">
+                    <h5 class="ms-2">nombre de cliente</h5>
+                </div>
+                <p>email</p>
+                <p>direccion</p>
+            </section>
+            <ul>
+                <li onclick="location.href='./accounts.html'">
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                    <span>Accounts</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/credit-card.svg" alt="cards">
+                    <span>Cards</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/finance.svg" alt="transactions">
+                    <span>Transactions</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/transaction.svg" alt="loans">
+                    <span>Loans</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/money.svg" alt="invertments">
+                    <span>Invertments</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/settings.svg" alt="">
+                    <span>Setting</span>
+                </li>
+            </ul>
+        </nav>
+        <main>
+            <h1 class="m-3 ">Transactions</h1>
+            <div class="p-4 d-flex justify-content-center ">
+                <table class="table table-striped table-hover user-list fixed-header">
+                    <thead>
+                        <th><div>Description</div></th>
+                        <th><div>Date</div></th>
+                        <th><div>Amount</div></th>
+                    </thead>
+                    <tbody>
+                        <tr v-if="account" v-for="transaction in account.transaction" :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
+                            <td>{{transaction.description}}</td>
+                            <td>{{transaction.date.split("T")[0]}}</td>
+                            <td>$ {{transaction.amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/transaction.js"></script>
 </body>
 
 </html>
+

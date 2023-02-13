@@ -1,3 +1,23 @@
+let sidebar = document.querySelector('.sidebar');
+let am_pm = document.querySelector('.am_pm');
+let body = document.querySelector('.content');
+
+am_pm.addEventListener('change',function(){
+    if(am_pm.checked)
+    body.classList.toggle('image_body');
+    else
+    body.classList.remove('image_body');
+})
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth < 800) {
+        sidebar.style.display = 'none';
+    } else {
+        sidebar.style.display = 'block';
+    }
+});
+
+//app the vue
 const { createApp } = Vue;
 
 createApp({
