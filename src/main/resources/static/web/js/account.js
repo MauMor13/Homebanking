@@ -1,22 +1,3 @@
-let sidebar = document.querySelector('.sidebar');
-let am_pm = document.querySelector('.am_pm');
-let body = document.querySelector('.content');
-
-am_pm.addEventListener('change',function(){
-    if(am_pm.checked)
-    body.classList.toggle('image_body');
-    else
-    body.classList.remove('image_body');
-})
-
-window.addEventListener('resize', function() {
-    if (window.innerWidth < 800) {
-        sidebar.style.display = 'none';
-    } else {
-        sidebar.style.display = 'block';
-    }
-});
-
 //app the vue
 const { createApp } = Vue;
 
@@ -24,10 +5,13 @@ createApp({
     data() {
         return {
             data: [],
+            navbar:true,
+            title:true,
         }
     },
     created() {
         this.loadData();
+        
     },
     methods: {
         loadData: function () {
@@ -57,6 +41,26 @@ createApp({
             elementId.innerHTML="";
             let chart = new ApexCharts(elementId, options);
             chart.render();
-        }
-    }
+        }, 
+        updateScreenSize:function() {
+            this.title = window.innerWidth < 500;
+            this.navbar = window.innerWidth < 750;
+        },
+        changeBackground:function(events){
+            if(events.target.checked){
+            document.body.classList.remove('image_day');
+            document.body.classList.toggle('image_night');
+            }
+            else{
+            document.body.classList.remove('image_night');
+            document.body.classList.toggle('image_day');
+        }},
+    },
+    mounted(){
+        this.updateScreenSize();
+        window.addEventListener("resize", this.updateScreenSize);
+    },
+        beforeDestroy() {
+        window.removeEventListener("resize", this.updateScreenSize);
+    },
 }).mount('#app');

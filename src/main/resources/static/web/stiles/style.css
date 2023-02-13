@@ -33,19 +33,23 @@
     min-height: 100vh;
     max-width: 100vw;
     color: white;
+    display: grid;
+    grid-template-columns: 36vh auto;
+}
+.image_night{
+    background-image: url(../images/background/pexels-david-skyrius-2129796.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.image_day{
     background-image: url(../images/background/pexels-guilherme-rossi-1755693.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: grid;
-    grid-template-columns: 36vh auto;
 }
-
-.image_body {
-    background-image: url(../images/background/pexels-david-skyrius-2129796.jpg);
-}
-
 /*button nav*/
+
 
 /*nav*/
 .sidebar {
@@ -199,7 +203,11 @@ input:checked[type="checkbox"]::before {
     font-size: 24px;
     pointer-events: none;
 }
-
+/*logo bank*/
+.logo{
+    width: 5rem;
+    height: 5rem;
+}
 /*Nav Button*/
 
 /*div account*/
@@ -213,4 +221,15 @@ input:checked[type="checkbox"]::before {
 }
 
 /*------table transactions--------*/
-
+.table{
+    backdrop-filter: blur(10px);
+}
+th{
+    color: white;
+}
+/*Media Query*/
+@media (max-width:750px) {
+    .content{
+        grid-template-columns: 1fr;
+    }
+}
