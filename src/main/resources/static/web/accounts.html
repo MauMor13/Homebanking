@@ -64,15 +64,15 @@
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo"><h1 v-show="!title">Deamond Bank</h1>
             </div>
             <h2 class="m-3 text-center">Accounts</h2>
-            <div class="d-flex flex-column justify-content-evenly">
+            <div class="d-flex flex-wrap justify-content-evenly">
                 <template v-if="data">
                 <div class="account m-3 d-flex flex-column justify-content-evenly text-dark" v-for="account of data.accounts">
                     <div class="d-flex justify-content-between">
-                        <h6 class="ms-2">My Balance:</h6><button type="button" class="me-3 btn btn-outline-warning text-start"><img src="./images/icons/three-dots.svg" alt=""></button>
+                        <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 btn btn-outline-warning text-start"><img src="./images/icons/three-dots.svg" alt=""></button>
                     </div>
                     <h1 class="text-center">$ {{account.balance}}</h1>
                     <h5 class="ms-3">Account: {{account.number.toUpperCase()}}</h5>
-                    <h5 class="ms-3">{{account.creationDate.split("T")[0]}}</h5>
+                    <h5 class="ms-3">Created: {{account.creationDate.split("T")[0]}}</h5>
                     <div class="d-flex justify-content-evenly">
                         <a :href="'./account.html?id=' + account.id"><button class="btn btn-outline-primary">Transactions</button></a><button type="button" class="btn btn-outline-secondary">Investments</button>
                     </div>
@@ -80,22 +80,26 @@
                 </template>
             </div>
             <div class="loans d-flex justify-content-center">
-                <table class="table">
-                    <thead>
-                        <th>Loans Type</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                    </thead>
-                    <tbody>
-                        <template v-if="account">
-                        <tr v-for="transaction in account.transaction" :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
-                            <td>{{transaction.description}}</td>
-                            <td>{{transaction.date.split("T")[0]}}</td>
-                            <td>$ {{transaction.amount}}</td>
-                        </tr>
-                        </template>
-                    </tbody>
-                </table>
+                <template v-if="data.loans">
+                    <table class="table">
+                        <thead class="text-center">
+                            <th>Loans Type</th>
+                            <th>N° Payments</th>
+                            <th>Amount</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="loan in data.loans" class="text-light text-center">
+                                <td>{{loan.name}}</td>
+                                <td>{{loan.payments}}</td>
+                                <td>$ {{loan.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </template>
+                <div v-else class="text_loans d-flex flex-column align-items-center justify-content-center container">   
+                    <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by clicking on the following button.</h5>
+                    <button type="button" class="btn btn-dark">Loans</button>
+                </div>
             </div>
         </main>
     </div>
