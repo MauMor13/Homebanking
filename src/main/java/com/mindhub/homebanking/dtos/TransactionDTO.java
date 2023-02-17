@@ -11,11 +11,11 @@ public class TransactionDTO {
     private LocalDateTime date;
     public TransactionDTO(){}
     public TransactionDTO(Transaction transaction){
-        this.id=transaction.getId();
-        this.type=transaction.getType();
-        this.amount= transaction.getAmount();
-        this.description= transaction.getDescription();
-        this.date=transaction.getDate();
+        this.id = transaction.getId();
+        this.type = transaction.getType();
+        this.amount = transaction.getAmount();
+        this.description = transaction.getDescription();
+        this.date = transaction.getDate();
     }
     public Long getId() {
         return id;

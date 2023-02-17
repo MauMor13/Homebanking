@@ -22,7 +22,7 @@ public class AccountDTO {
 
         this.balance = account.getBalance();
 
-        this.transaction=account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(toSet());
+        this.transaction = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(toSet());
 
     }
     public String getNumber(){

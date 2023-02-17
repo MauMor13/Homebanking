@@ -11,11 +11,15 @@ public class ClientLoanDTO {
     private String name;
 
     public ClientLoanDTO(ClientLoan clientLoans){
-        this.id=clientLoans.getId();
-        this.amount= clientLoans.getAmount();
-        this.payments=clientLoans.getPayments();
-        this.Loans_id=clientLoans.getLoan().getId();
-        this.name=clientLoans.getLoan().getName();
+        this.id = clientLoans.getId();
+
+        this.amount = clientLoans.getAmount();
+
+        this.payments = clientLoans.getPayments();
+
+        this.Loans_id = clientLoans.getLoan().getId();
+
+        this.name = clientLoans.getLoan().getName();
     }
 
     public Long getId() {

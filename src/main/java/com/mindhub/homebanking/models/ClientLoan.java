@@ -1,5 +1,4 @@
 package com.mindhub.homebanking.models;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,41 +19,35 @@ public class ClientLoan {
     private Loan loan;
     public ClientLoan(){}
 
-    public ClientLoan(int amount, Integer payments, Client client, Loan loan) {
+    public ClientLoan(int amount, Integer payments) {
         this.amount = amount;
-        this.payments = payments;
-        this.client = client;
-        this.loan = loan;
-    }
 
+        this.payments = payments;
+    }
     public long getId() {
         return id;
     }
     public int getAmount() {
         return amount;
     }
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
     public Integer getPayments() {
         return payments;
+    }
+    public Client getClient() {
+        return client;
+    }
+    public Loan getLoan() {
+        return loan;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
     public void setPayments(Integer payments) {
         this.payments = payments;
     }
-
-    public Client getClient() {
-        return client;
-    }
-
     public void setClient(Client client) {
         this.client = client;
     }
-
-    public Loan getLoan() {
-        return loan;
-    }
-
     public void setLoan(Loan loan) {
         this.loan = loan;
     }

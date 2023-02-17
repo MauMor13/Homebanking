@@ -16,18 +16,20 @@ public class Transaction {
     private LocalDateTime date;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
-    private Account accountId;
+    private Account account;
 
     public Transaction(){}
     public Transaction(TransactionType type,double amount,String description,LocalDateTime date){
-        this.type=type;
-        this.amount=amount;
-        this.description=description;
-        this.date=date;
-    }
-
-    public void setType(TransactionType type) {
         this.type = type;
+
+        this.amount = amount;
+
+        this.description = description;
+
+        this.date = date;
+    }
+    public Long getId() {
+        return id;
     }
     public TransactionType getType() {
         return type;
@@ -35,26 +37,26 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
     public String getDescription() {
         return description;
+    }
+    public LocalDateTime getDate() {
+        return date;
+    }
+    public Account getAccount(){ return account; }
+    public void setAccount(Account account){
+        this.account = account;
+    }
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
     public void setDescription(String description) {
         this.description = description;
     }
     public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-    public LocalDateTime getDate() {
-        return date;
-    }
-    public Long getId() {
-        return id;
-    }
-    public Account getAccountId(){ return accountId; }
-    public void setAccountId(Account accountId){
-        this.accountId=accountId;
     }
 }

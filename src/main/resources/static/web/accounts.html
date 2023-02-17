@@ -26,7 +26,7 @@
         <nav v-show="!navbar" class="sidebar">
             <section class="ms-3">
                 <div class="d-flex align-items-center p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-10-svgrepo-com.svg" alt="avatar">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
                     <h5 class="ms-2 text-bottom">{{data.firstName}} {{data.lastName}}</h5>
                 </div>
                 <p>{{data.email}}</p>
@@ -81,7 +81,7 @@
             </div>
             <div class="loans d-flex justify-content-center">
                 <template v-if="data.loans">
-                    <table class="table">
+                    <table class="table m-2">
                         <thead class="text-center">
                             <th>Loans Type</th>
                             <th>N° Payments</th>
@@ -96,7 +96,7 @@
                         </tbody>
                     </table>
                 </template>
-                <div v-else class="text_loans d-flex flex-column align-items-center justify-content-center container">   
+                <div v-else class="text_loans d-flex flex-column align-items-center justify-content-center container m-2">   
                     <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by clicking on the following button.</h5>
                     <button type="button" class="btn btn-dark">Loans</button>
                 </div>
