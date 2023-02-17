@@ -16,7 +16,7 @@ public class Card {
     private LocalDate thruDate;
     private String cardHolder;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cardHolder_id")
+    @JoinColumn(name = "client_id")
     private Client client;
     public Card() {}
     public Card(Client client, CardType type, CardColor color, String number, int cvv, LocalDate fromDate, LocalDate thruDate) {

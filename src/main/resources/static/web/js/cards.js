@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             data: [],
+            cards:[],
             navbar:true,
             title:true,
         }
@@ -16,29 +17,11 @@ createApp({
             axios.get("http://localhost:8080/api/clients/1")
                 .then(response => {
                     this.data = response.data;
+                    this.cards = this.data.cards.sort((a, b) => a.id - b.id);
                     this.data.accounts.sort((a, b) => a.id - b.id);
                 })
                 .catch(err => console.log(err));
         },
-        grapicAccount: function (account) {
-            let options = {
-                chart: {
-                    type: 'line'
-                },
-                series: [{
-                    name: 'sales',
-                    data:account.transaction.map(transaction=>transaction.amount),
-                }],
-                xaxis: {
-                    categories: account.transaction.map(transaction=>transaction.date.split("T")[0]),
-                }
-            }
-            let elementId=document.getElementById("grapic" + account.id);
-            if(!elementId) return;
-            elementId.innerHTML="";
-            let chart = new ApexCharts(elementId, options);
-            chart.render();
-        }, 
         updateScreenSize:function() {
             this.title = window.innerWidth < 500;
             this.navbar = window.innerWidth < 750;
@@ -51,7 +34,16 @@ createApp({
             else{
             document.body.classList.remove('image_night');
             document.body.classList.toggle('image_day');
-        }},
+            }
+        },
+        colorCard:function(color){
+            if(color=="SILVER")
+            return "var(--color-silver)";
+            if(color=="GOLD")
+            return "var(--color-golden)";
+            else
+            return "var(--color-titanium)";
+        },
     },
     mounted(){
         this.updateScreenSize();
