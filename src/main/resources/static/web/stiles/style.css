@@ -5,9 +5,9 @@
     font-size: 1rem;
 }
 :root{
-    --color-golden:	#D4AF37;
-    --color-silver: #c0c0c0;
-    --color-titanium: #383835;
+    --color-golden:	linear-gradient(130deg, rgb(186 120 2), rgb(245 208 111), rgb(186 120 2)) ;
+    --color-silver: linear-gradient(130deg, #c0c0c0, #ffffff, #c0c0c0);
+    --color-titanium: linear-gradient(130deg, #1e1d1d, #757474, #1e1d1d);
 } 
 :root {
     --color-major: #304A6E;
@@ -111,7 +111,6 @@ li:hover {
     align-items: center;
     width: 11rem;
 }
-
 input[type="checkbox"] {
     position: relative;
     width: 4rem;
@@ -122,12 +121,10 @@ input[type="checkbox"] {
     transition: .5s;
     border-radius: 20px;
 }
-
 input:checked[type="checkbox"] {
     background-color: #000000;
     transition: 0.5s;
 }
-
 input[type="checkbox"]::before {
     content: '☀️';
     display: flex;
@@ -144,7 +141,6 @@ input[type="checkbox"]::before {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
     transition: 0.5s;
 }
-
 input:checked[type="checkbox"]::before {
     left: 2rem;
     content: '🌜';
@@ -153,7 +149,6 @@ input:checked[type="checkbox"]::before {
     align-items: center;
     background-color: #555555;
 }
-
 /*imput search*/
 .wrapper {
     position: absolute;
@@ -288,7 +283,6 @@ h1, h2{
     box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background-image: linear-gradient(to right,var(--color-golden), #555);
     overflow: hidden;
 }
 .front {

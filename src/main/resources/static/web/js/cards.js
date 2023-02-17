@@ -7,6 +7,8 @@ createApp({
             cards:[],
             navbar:true,
             title:true,
+            typeCard:"CREDIT",
+            allCards:[],
         }
     },
     created() {
@@ -17,8 +19,9 @@ createApp({
             axios.get("http://localhost:8080/api/clients/1")
                 .then(response => {
                     this.data = response.data;
-                    this.cards = this.data.cards.sort((a, b) => a.id - b.id);
                     this.data.accounts.sort((a, b) => a.id - b.id);
+                    this.allCards=this.data.cards;
+                    this.cardType()
                 })
                 .catch(err => console.log(err));
         },
@@ -43,6 +46,9 @@ createApp({
             return "var(--color-golden)";
             else
             return "var(--color-titanium)";
+        },
+        cardType:function (){
+            this.cards = this.allCards.filter(cards => cards.type.includes(this.typeCard));
         },
     },
     mounted(){
