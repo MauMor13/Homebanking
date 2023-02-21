@@ -70,7 +70,7 @@
                     <div class="d-flex justify-content-between">
                         <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 btn btn-outline-warning text-start"><img src="./images/icons/three-dots.svg" alt=""></button>
                     </div>
-                    <h1 class="text-center">$ {{account.balance}}</h1>
+                    <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</h1>
                     <h5 class="ms-3">Account: {{account.number.toUpperCase()}}</h5>
                     <h5 class="ms-3">Created: {{account.creationDate.split("T")[0]}}</h5>
                     <div class="d-flex justify-content-evenly">
@@ -91,7 +91,7 @@
                             <tr v-for="loan in data.loans" class="text-light text-center">
                                 <td>{{loan.name}}</td>
                                 <td>{{loan.payments}}</td>
-                                <td>$ {{loan.amount}}</td>
+                                <td>{{loan.amount.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</td>
                             </tr>
                         </tbody>
                     </table>

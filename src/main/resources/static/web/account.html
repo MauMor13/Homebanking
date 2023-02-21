@@ -76,7 +76,7 @@
                         <tr v-for="transaction in account.transaction" :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
                             <td>{{transaction.description}}</td>
                             <td>{{transaction.date.split("T")[0]}}</td>
-                            <td>$ {{transaction.amount}}</td>
+                            <td>$ {{transaction.amount.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</td>
                         </tr>
                         </template>
                     </tbody>
