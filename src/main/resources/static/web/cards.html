@@ -9,7 +9,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>My Accounts | Deamond Bank</title>
+    <title>My Accounts | Diamond Bank</title>
 </head>
 
 <body class="image_day">
@@ -23,7 +23,7 @@
         </div> -->
         <div class="d-flex container_select">
             <input class="mb-1 am_pm" type="checkbox" @change="changeBackground">
-            <img onclick="location.href='#'" class="icon_help me-2" src="./images/icons/help.svg" alt="">
+            <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
         </div>
         <nav v-show="!navbar" class="sidebar">
             <section class="ms-3">
@@ -57,15 +57,19 @@
                     <span>Invertments</span>
                 </li>
                 <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/settings.svg" alt="">
+                    <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/help.svg" alt="help">
+                    <span>Help</span>
                 </li>
             </ul>
         </nav>
         <main>
             <div class="d-flex align-items-center p-2">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="!title">Deamond Bank</h1>
+                <h1 v-show="!title">Diamond Bank</h1>
             </div>
             <h2 class="m-3 text-center">Cards</h2>
             <div class="form-check ms-3">
@@ -122,11 +126,11 @@
                                     <div>{{card.cvv}}</div>
                                 </div>
                                 <div class="terms">
-                                    Sure, here's the English version with some random numbers and Deamond Bank as the
+                                    Sure, here's the English version with some random numbers and Diamond Bank as the
                                     bank name:
                                     For 24-hour assistance, call 1-800-555-1234. If your card is lost or stolen, please
-                                    call immediately at the same number. Visit our website at www.deamondbank.com for
-                                    more information about our products and services. Thank you for choosing Deamond
+                                    call immediately at the same number. Visit our website at www.Diamondbank.com for
+                                    more information about our products and services. Thank you for choosing Diamond
                                     Bank - Member FDIC.
                                     Use of this card is subject to the credit card agreement.
                                 </div>

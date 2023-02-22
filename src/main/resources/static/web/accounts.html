@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>My Accounts | Deamond Bank</title>
+    <title>My Accounts | Diamond Bank</title>
 </head>
 <body class="image_day">
     <div id="app" class="content">
@@ -21,7 +21,7 @@
         </div> -->
         <div class="d-flex container_select">
             <input class="mb-1 am_pm" type="checkbox" @change="changeBackground">
-            <img onclick="location.href='#'" class="icon_help me-2" src="./images/icons/help.svg" alt="">
+            <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
         </div>
         <nav v-show="!navbar" class="sidebar">
             <section class="ms-3">
@@ -54,14 +54,18 @@
                     <span>Invertments</span>
                 </li>
                 <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/settings.svg" alt="">
+                    <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
+                </li>
+                <li onclick="location.href='#'">
+                    <img class="icons" src="images/icons/help.svg" alt="help">
+                    <span>Help</span>
                 </li>
             </ul>
         </nav>
         <main>
             <div class="d-flex align-items-center p-2">
-                <img class="logo" src="./images/icons/Logo.svg" alt="logo"><h1 v-show="!title">Deamond Bank</h1>
+                <img class="logo" src="./images/icons/Logo.svg" alt="logo"><h1 v-show="!title">Diamond Bank</h1>
             </div>
             <h2 class="m-3 text-center">Accounts</h2>
             <div class="d-flex flex-wrap justify-content-evenly">

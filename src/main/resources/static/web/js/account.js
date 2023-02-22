@@ -13,7 +13,7 @@ createApp({
     },
     methods: {
         loadData: function () {
-            axios.get("http://localhost:8080/api/clients/1")
+            axios.get("/api/clients/current")
                 .then(response => {
                     this.data = response.data;
                     this.data.accounts.sort((a, b) => a.id - b.id);
@@ -39,6 +39,15 @@ createApp({
             let chart = new ApexCharts(elementId, options);
             chart.render();
         }, 
+        logout:function() {
+            axios.post('/api/logout') 
+                .then(response => {
+                    window.location.href = '/web/index.html';
+                })
+                .catch(error => {
+                    this.error = error.response.data.message;
+                });
+        },
         updateScreenSize:function() {
             this.title = window.innerWidth < 500;
             this.navbar = window.innerWidth < 750;

@@ -16,15 +16,15 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/web/account.html", "/web/cards.html", "/web/accounts.html").hasAuthority("CLIENT")
-                .antMatchers("/api/logout").hasAnyAuthority("ADMIN","CLIENT")
-                .antMatchers("/rest/").hasAuthority("ADMIN")
-                .antMatchers("/h2console").hasAuthority("ADMIN")
-                .antMatchers("/manager/").hasAuthority("ADMIN")
-                .antMatchers("/web/").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.GET,"api/clients").hasAuthority("ADMIN")
-                .antMatchers("/api/").hasAuthority("ADMIN");
+                .antMatchers("/manager/manager.html").hasAuthority("ADMIN")
+                .antMatchers("/h2-console").hasAuthority("ADMIN")
+                .antMatchers("/rest/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/clients").hasRole("ADMIN,CLIENT")
+                .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
+                .antMatchers("/web/account.html").hasAuthority("CLIENT")
+                .antMatchers("/web/cards.html").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers("/web/index.html").permitAll();
 
         http.formLogin()
                 .usernameParameter("email")
@@ -32,7 +32,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/api/login");
 
         http.logout()
-                .logoutUrl("/api/logout");
+                .logoutUrl("/api/logout")
+                .deleteCookies("JSESSIONID");
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

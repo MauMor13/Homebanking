@@ -7,26 +7,37 @@ createApp({
             data: [],
             navbar:true,
             title:true,
+            id:"",
         }
     },
     created(){
+        let stringUrl = location.search;//lee la url actual para seccion mas detalles
+        let parameter= new URLSearchParams(stringUrl); 
+        this.id = parameter.get("id");
         this.loadData();
         this.loadTransactions();
     },
     methods:{
         loadTransactions:function(){
-            let stringUrl = location.search;//lee la url actual para seccion mas detalles
-            let parameter= new URLSearchParams(stringUrl); 
-            let id = parameter.get("id");
-            axios.get('http://localhost:8080/api/accounts/'+id)
+            axios.get('/api/accounts/' + this.id)
             .then(response=>{
                 this.account=response.data;
+                console.log(this.account.transaction)
                 this.account.transaction.sort((a,b)=>a.id-b.id);
             })
             .catch(err=>console.log(err)); 
         },
-            loadData: function () {
-                axios.get("http://localhost:8080/api/clients/1")
+        logout:function() {
+            axios.post('/api/logout') 
+                .then(response => {
+                    window.location.href = '/web/index.html';
+                })
+                .catch(error => {
+                    this.error = error.response.data.message;
+                });
+        },
+        loadData: function () {
+                axios.get('/api/clients/current')
                     .then(response => {
                         this.data = response.data;
                         this.data.accounts.sort((a, b) => a.id - b.id);
