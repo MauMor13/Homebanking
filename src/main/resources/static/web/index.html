@@ -14,10 +14,11 @@
 
 <body>
     <div id="app">
-        <div class="title">
+        <header class="title">
             <img src="./images/icons/Logo.svg" alt="logo">
             <h1 class="text-dark">Diamond Bank</h1>
-        </div>
+        </header>
+        <main class="d-flex ">
             <div class="cont_centrar">
                 <div class="cont_login">
                     <div class="cont_info_log_sign_up">
@@ -38,14 +39,12 @@
                     </div>
                     <div class="cont_back_info">
                         <div class="cont_img_back_grey">
-                            <img src="./images/background/pexels-david-skyrius-2129796.jpg"
-                                alt="" />
+                            <img src="./images/background/pexels-david-skyrius-2129796.jpg" alt="" />
                         </div>
                     </div>
                     <div class="cont_forms">
                         <div class="cont_img_back_">
-                            <img src="./images/background/pexels-guilherme-rossi-1755693.jpg"
-                                alt="" />
+                            <img src="./images/background/pexels-guilherme-rossi-1755693.jpg" alt="" />
                         </div>
                         <div class="cont_form_login">
                             <a href="#" @click="ocultar_login_sign_up"><i class="material-icons"></i></a>
@@ -66,7 +65,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>

@@ -5,43 +5,17 @@
   font-family: "Open Sans", sans-serif;
 }
 .title{
-  max-width:22rem;
+  max-width:25rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: center;
+  align-items:center;
 }
 .title img{
   padding: 1rem;
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 6rem;
 }
-body {
-  width: 100vw;
-  height: 100vh;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfd8dc+0,607d8b+100,b0bec5+100 */
-  background: #cfd8dc; /* Old browsers */
-  background: -moz-linear-gradient(
-    -45deg,
-    #cfd8dc 0%,
-    #607d8b 100%,
-    #b0bec5 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    -45deg,
-    #cfd8dc 0%,
-    #607d8b 100%,
-    #b0bec5 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    135deg,
-    #cfd8dc 0%,
-    #607d8b 100%,
-    #b0bec5 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfd8dc', endColorstr='#b0bec5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
-
 .cont_centrar {
   display: flex;
   align-self: center;
@@ -92,7 +66,7 @@ body {
 
 .cont_forms_active_sign_up {
   box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-  height: 420px;
+  height: 500px;
   top: -60px;
   left: 320px;
   -webkit-transition: all 0.5s;

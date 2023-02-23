@@ -39,6 +39,15 @@ createApp({
             let chart = new ApexCharts(elementId, options);
             chart.render();
         }, 
+        newAccount:function(){
+            axios.post('/api/clients/current/accounts') 
+                .then(response => {
+                    this.loadData();
+                })
+                .catch(error => {
+                    this.error = error.response.data.message;
+                });
+        },
         logout:function() {
             axios.post('/api/logout') 
                 .then(response => {
