@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.ClientDTO;
+import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
 import java.util.List;
+import static com.mindhub.homebanking.utils.Utilitis.GenereteNumber;
 import static java.util.stream.Collectors.toList;
 
 @RequestMapping("/api")
@@ -36,14 +39,21 @@ public class ClientController {
             @RequestParam String lastName,
             @RequestParam String email,
             @RequestParam String password) {
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
-        }
-        if (clientRepository.findByEmail(email) !=  null) {
-            return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
-        }
-        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+        if (firstName.isEmpty())
+            return new ResponseEntity<>("Missing firstname", HttpStatus.BAD_REQUEST);
+        else if (lastName.isEmpty())
+            return new ResponseEntity<>("Missing lastname", HttpStatus.BAD_REQUEST);
+        else if (email.isEmpty() )
+            return new ResponseEntity<>("Missing email", HttpStatus.BAD_REQUEST);
+        else if (password.isEmpty())
+            return new ResponseEntity<>("Missing password", HttpStatus.BAD_REQUEST);
 
+        if (clientRepository.findByEmail(email) !=  null)
+            return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
+
+        Client client=new Client(firstName, lastName, email, passwordEncoder.encode(password));
+        client.addAccount(new Account(GenereteNumber(), LocalDateTime.now(),0));
+        clientRepository.save(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
