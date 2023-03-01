@@ -5,12 +5,12 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 public class AccountDTO {
-    private long id;
-    private String number;
-    private LocalDateTime creationDate;
-    private double balance;
+    private final long id;
+    private final String number;
+    private final LocalDateTime creationDate;
+    private final double balance;
 
-    private Set <TransactionDTO> transaction;
+    private final Set <TransactionDTO> transaction;
 
     public AccountDTO(Account account) {
 

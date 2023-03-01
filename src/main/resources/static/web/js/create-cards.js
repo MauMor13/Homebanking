@@ -1,14 +1,12 @@
-//app the vue
 const { createApp } = Vue;
 createApp({
     data() {
         return {
             data: [],
-            cards: [],
             navbar: true,
             title: true,
-            typeCard: "CREDIT",
-            allCards: [],
+            cardType: "",
+            cardColor:"",
         }
     },
     created() {
@@ -51,27 +49,15 @@ createApp({
                 document.body.classList.toggle('image_day');
             }
         },
-        colorCard: function (color) {
-            if (color == "SILVER")
-                return "url(https://media.istockphoto.com/id/1051466618/es/vector/fondo-de-tecnolog%C3%ADa-con-textura-metal.jpg?s=612x612&w=0&k=20&c=TNQ6UyN2SJH8jj2BkQfTzUp0Kxh0GBiAHz1lAevhpVA=)";
-            if (color == "GOLD")
-                return "url(https://i.pinimg.com/originals/96/36/3c/96363c9337b2d1aad24323b1d9efda72.jpg)";
-            else
-                return "url(https://media.istockphoto.com/id/1320912181/vector/abstract-gray-gradient-metallic-texture.jpg?s=612x612&w=0&k=20&c=R04SBrq_5Li51HaGl3MCeObiLml0yRSeQfIiweRxmHQ=)";
+        newCard: function () {
+            axios.post('/api/clients/current/cards',`type=${this.cardType}&color=${this.cardColor}`)
+                .then(response => {
+                    window.location.href = '/web/cards.html';
+                })
+                .catch(error => {
+                    this.error = error.response.data
+                    console.log(this.error)
+                });
         },
-        cardType: function () {
-            this.cards = this.allCards.filter(cards => cards.type.includes(this.typeCard));
-        },
-    },
-    mounted() {
-        window.addEventListener("resize", this.updateScreenSize);
-        const checkbox = document.querySelector('.my-form input[type="checkbox"]');
-        const btns = document.querySelectorAll(".my-form button");
-        checkbox.addEventListener("change", function () {
-            const checked = this.checked;
-            for (const btn of btns) {
-                checked ? (btn.disabled = false) : (btn.disabled = true);
-            }
-        });
     },
 }).mount('#app');

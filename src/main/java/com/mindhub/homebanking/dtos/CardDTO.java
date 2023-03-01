@@ -43,9 +43,7 @@ public class CardDTO {
     public String getNumber() {
         return number;
     }
-    public int getCvv() {
-        return cvv;
-    }
+    public int getCvv() { return cvv; }
     public LocalDate getFromDate() {
         return fromDate;
     }

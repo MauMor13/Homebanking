@@ -6,13 +6,13 @@ import static java.util.stream.Collectors.toSet;
 
 
 public class ClientDTO {
-    private long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Set<ClientLoanDTO> loans;
-    private Set<AccountDTO> accounts;
-    private Set<CardDTO> cards ;
+    private final long id;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final Set<ClientLoanDTO> loans;
+    private final Set<AccountDTO> accounts;
+    private final Set<CardDTO> cards ;
     public ClientDTO(Client client) {
 
         this.id = client.getId();

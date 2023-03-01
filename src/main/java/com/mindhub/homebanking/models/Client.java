@@ -17,11 +17,11 @@ public class Client {
     private String lastName;
     private String email;
     @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
-    private Set<Card> cards = new HashSet<>();
+    private final Set<Card> cards = new HashSet<>();
     @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
-    private Set<Account> accounts = new HashSet<>();
+    private final Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoans = new HashSet<>();
+    private final Set<ClientLoan> clientLoans = new HashSet<>();
     public Client(){}
     public Client(String firstName,String lastName,String email,String password){
         this.firstName = firstName;

@@ -39,7 +39,7 @@ createApp({
             let chart = new ApexCharts(elementId, options);
             chart.render();
         }, 
-        newAccount:function(){
+        newAccount:function() {
             axios.post('/api/clients/current/accounts') 
                 .then(response => {
                     this.loadData();

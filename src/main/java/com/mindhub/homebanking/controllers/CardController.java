@@ -8,17 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.lang.reflect.Array;
+import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
-import java.util.Arrays;
-
+import java.util.Set;
 import static com.mindhub.homebanking.utils.Utilitis.randomNumberCard;
 import static com.mindhub.homebanking.utils.Utilitis.returnCvvNumber;
+import static java.util.stream.Collectors.toSet;
 
 @RequestMapping("/api")
 @RestController
@@ -32,12 +27,14 @@ public class CardController {
             Authentication authentication,
             @RequestParam CardType type,
             @RequestParam CardColor color){
-
-        if (clientRepository.findByEmail(authentication.getName()).getCards().stream().filter(card -> card.getColor()==color&&card.getType()==type)!=null){
+        Set<Card> cards=clientRepository.findByEmail(authentication.getName()).getCards().stream().filter(card -> card.getType()==type).collect(toSet());
+        if(cards.size()>=3){
+            return new ResponseEntity<>("You have already reached the limit of 3 "+type+" cards, you cannot be given another one", HttpStatus.BAD_REQUEST);
+        }
+        if (clientRepository.findByEmail(authentication.getName()).getCards().stream().anyMatch(card -> card.getColor()==color&&card.getType()==type)){
             return new ResponseEntity<>("you have already the same card", HttpStatus.BAD_REQUEST);
         }
-
-        Card card=new Card(clientRepository.findByEmail(authentication.getName()), type, color,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+        Card card = new Card(clientRepository.findByEmail(authentication.getName()), type, color,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
         clientRepository.findByEmail(authentication.getName()).addCard(card);
         cardRepository.save(card);
         return new ResponseEntity<>(HttpStatus.CREATED);

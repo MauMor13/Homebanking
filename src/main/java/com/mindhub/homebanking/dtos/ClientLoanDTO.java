@@ -4,11 +4,11 @@ import com.mindhub.homebanking.models.ClientLoan;
 
 public class ClientLoanDTO {
 
-    private long id;
-    private int amount;
-    private int payments;
-    private Long Loans_id;
-    private String name;
+    private final long id;
+    private final int amount;
+    private final int payments;
+    private final Long Loans_id;
+    private final String name;
 
     public ClientLoanDTO(ClientLoan clientLoans){
         this.id = clientLoans.getId();

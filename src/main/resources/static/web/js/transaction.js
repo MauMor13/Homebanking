@@ -15,18 +15,8 @@ createApp({
         let parameter= new URLSearchParams(stringUrl); 
         this.id = parameter.get("id");
         this.loadData();
-        this.loadTransactions();
     },
     methods:{
-        loadTransactions:function(){
-            axios.get('/api/accounts/' + this.id)
-            .then(response=>{
-                this.account=response.data;
-                console.log(this.account.transaction)
-                this.account.transaction.sort((a,b)=>a.id-b.id);
-            })
-            .catch(err=>console.log(err)); 
-        },
         logout:function() {
             axios.post('/api/logout') 
                 .then(response => {
@@ -41,6 +31,7 @@ createApp({
                     .then(response => {
                         this.data = response.data;
                         this.data.accounts.sort((a, b) => a.id - b.id);
+                        this.account=this.data.accounts[id];
                     })
                     .catch(err => console.log(err));
             },

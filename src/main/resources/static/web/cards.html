@@ -14,13 +14,6 @@
 
 <body class="image_day">
     <div id="app" class="content">
-        <!-- <div class="wrapper">
-            <div class="search">
-                <span class="uil uil-search">
-                </span>
-                <input placeholder="Search" type="text" />
-            </div>
-        </div> -->
         <div class="d-flex container_select">
             <input class="mb-1 am_pm" type="checkbox" @change="changeBackground">
             <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
@@ -67,11 +60,13 @@
             </ul>
         </nav>
         <main>
-            <div class="d-flex align-items-center p-2">
+            <section class="d-flex align-items-center p-2">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
                 <h1 v-show="!title">Diamond Bank</h1>
-            </div>
-            <h2 class="m-3 text-center">Cards</h2>
+            </section>
+            <section class="d-flex justify-content-evenly align-items-center">
+                <h2 class="m-3 text-center">Cards</h2><button onclick="location.href='create-cards.html'">Cards +</button>
+            </section>
             <div class="form-check ms-3">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
                 <label class="form-check-label" for="flexRadioDefault1">
@@ -88,7 +83,7 @@
                 <template v-if="data">
                     <div class="card m-3" v-for="card of cards">
                         <div class="flip">
-                            <div class="front" :style="'background:' + colorCard(card.color)">
+                            <div class="front" :style="'background-image:' + colorCard(card.color)">
                                 <div class="strip-bottom"></div>
                                 <div class="strip-top"></div>
                                 <img src="./images/icons/Logo.svg" class="logo-cards" alt="logo">
@@ -140,7 +135,7 @@
                 </template>
                 <div v-else>
                     <p>
-                        It does not have cards, to obtain it you just have to press the button <button>Cards +</button>
+                        It does not have cards, to obtain it you just have to press the button 
                     </p>
                 </div>
             </div>

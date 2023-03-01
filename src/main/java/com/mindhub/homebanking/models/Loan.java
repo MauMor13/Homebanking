@@ -20,7 +20,7 @@ public class Loan {
     @Column (name = "payment")
     private List<Integer> payments = new ArrayList<>();
     @OneToMany(mappedBy = "loan",fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoans = new HashSet<>();
+    private final Set<ClientLoan> clientLoans = new HashSet<>();
     public Loan(){}
     public Loan(String name, int maxAmount, List<Integer> payments) {
         this.name = name;

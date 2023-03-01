@@ -7,37 +7,34 @@ import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDateTime;
 import java.util.Random;
-
 public class Utilitis {
-    @Autowired
-    private static AccountRepository accountRepository;
-    public static String GenereteNumber(){
-        int number1=(int) (Math.random() * (99999999));
-        return "VIN-"+number1;
-    }
-    public static String Number(){
+
+    public static String GenereteNumber(AccountRepository accountRepository){
         String Number;
         boolean verifyNumber;
         do {
-            Number=GenereteNumber();
-            verifyNumber=accountRepository.existsAccountByNumber(Number);
+            Number = Number();
+            verifyNumber = accountRepository.existsAccountByNumber(Number);
         }while(verifyNumber);
         return Number;
     }
+    public static String Number(){
+        int number1 = (int) (Math.random() * (99999999));
+        return "VIN-"+number1;
+    }
     public static int returnCvvNumber(){
         int number;
-        number= (int) (Math.random() * (999 - 100) + 100);
+        number = (int) (Math.random() * (999 - 100) + 100);
         return number;
     }
     public static String randomNumberCard(CardRepository cardRepository){
         String codString;
         Boolean cardBoolean;
         do {
-            codString= randomString();
-            cardBoolean= cardRepository.existsCardByNumber(codString);
+            codString = randomString();
+            cardBoolean = cardRepository.existsCardByNumber(codString);
         }while(cardBoolean);
         return codString;
     }
@@ -54,9 +51,9 @@ public class Utilitis {
         TransactionType type;
         double amount;
         for (int i=0;i<cant;i++){
-            String description = "Description "+ Integer.toString(i);
-            amount = ((double) rand.nextInt(1000));
-            if(rand.nextInt(2)==0){
+            String description = "Description "+ i;
+            amount = rand.nextInt(1000);
+            if(rand.nextBoolean()){
                 type=TransactionType.DEBIT;
                 amount=((double) rand.nextInt(500))*-1;
             }

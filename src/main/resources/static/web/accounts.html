@@ -12,19 +12,12 @@
 </head>
 <body class="image_day">
     <div id="app" class="content">
-        <!-- <div class="wrapper">
-            <div class="search">
-                <span class="uil uil-search">
-                </span>
-                <input placeholder="Search" type="text" />
-            </div>
-        </div> -->
         <div class="d-flex container_select">
-            <input class="mb-1 am_pm" type="checkbox" @change="changeBackground">
             <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
         </div>
+        <button class="button-nav"><img class="icons" src="./images/icons/flecha.svg" alt="buttonNav"></button>
         <nav v-show="!navbar" class="sidebar">
-            <section class="ms-3">
+            <section class="ms-3 section-nav">
                 <div class="d-flex align-items-center p-1">
                     <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
                     <h5 class="ms-2 text-bottom">{{data.firstName}} {{data.lastName}}</h5>
@@ -64,10 +57,12 @@
             </ul>
         </nav>
         <main>
-            <div class="d-flex align-items-center p-2">
+            <section class="d-flex align-items-center p-2">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo"><h1 v-show="!title">Diamond Bank</h1>
-            </div>
-            <h2 class="m-3 text-center">Accounts</h2>
+            </section>
+            <section class="d-flex justify-content-evenly align-items-center">
+                <h2 class="m-3 text-center">Accounts</h2> <button class="" @click="newAccount">New Account</button>
+            </section>
             <div class="d-flex flex-wrap justify-content-evenly">
                 <template v-if="data">
                 <div class="account m-3 d-flex flex-column justify-content-evenly text-dark" v-for="account of data.accounts">
@@ -81,7 +76,6 @@
                         <a :href="'./account.html?id=' + account.id"><button class="btn btn-outline-primary">Transactions</button></a><button type="button" class="btn btn-outline-secondary">Investments</button>
                     </div>
                 </div>
-                <button class="btn btn-danger" @click="newAccount">+Account</button>
                 </template>
             </div>
             <div class="loans d-flex justify-content-center">

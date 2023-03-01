@@ -35,7 +35,7 @@ public class AccountController {
          if (client.getAccounts().size()>=3) {
             return new ResponseEntity<>("Missing data", HttpStatus.CONFLICT);
          }
-        Account newAccount = new Account(GenereteNumber(), LocalDateTime.now(),0);
+        Account newAccount = new Account(GenereteNumber(accountRepository), LocalDateTime.now(),0);
         client.addAccount(newAccount);
         accountRepository.save(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
