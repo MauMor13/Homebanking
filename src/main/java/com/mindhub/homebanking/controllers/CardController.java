@@ -1,4 +1,6 @@
 package com.mindhub.homebanking.controllers;
+import com.mindhub.homebanking.dtos.AccountDTO;
+import com.mindhub.homebanking.dtos.CardDTO;
 import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
@@ -10,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import static com.mindhub.homebanking.utils.Utilitis.randomNumberCard;
 import static com.mindhub.homebanking.utils.Utilitis.returnCvvNumber;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 @RequestMapping("/api")
@@ -22,6 +26,10 @@ public class CardController {
     public CardRepository cardRepository;
     @Autowired
     public ClientRepository clientRepository;
+    @RequestMapping("/clients/current/cards")
+    public List<CardDTO> getCurrentAccount(Authentication authentication){
+        return clientRepository.findByEmail(authentication.getName()).getCards().stream().map(card -> new CardDTO(card)).collect(toList());
+    }
     @RequestMapping(path = "/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> newCard(
             Authentication authentication,

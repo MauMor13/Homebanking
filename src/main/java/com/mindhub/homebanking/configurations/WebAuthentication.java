@@ -34,7 +34,9 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
                 }
             }
             else {
+
                 throw new UsernameNotFoundException("Unknown user: " + inputEmail);
+
             }
         });
     }

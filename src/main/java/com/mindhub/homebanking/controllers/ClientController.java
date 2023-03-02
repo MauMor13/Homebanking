@@ -28,7 +28,7 @@ public class ClientController {
         return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
     }
     @RequestMapping("clients/current")
-    public ClientDTO getAll(Authentication authentication) {
+    public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
     @RequestMapping("/clients/{id}")

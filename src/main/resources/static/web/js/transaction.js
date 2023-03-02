@@ -31,7 +31,9 @@ createApp({
                     .then(response => {
                         this.data = response.data;
                         this.data.accounts.sort((a, b) => a.id - b.id);
-                        this.account=this.data.accounts[id];
+                        console.log(this.id)
+                        this.account=this.data.accounts.filter(account=>account.id==this.id); 
+                        console.log(this.account)
                     })
                     .catch(err => console.log(err));
             },

@@ -29,11 +29,15 @@ public class AccountController {
     public AccountDTO getAccount(@PathVariable Long id){
         return accountRepository.findById(id).map(account -> new AccountDTO(account)).orElse(null);
     }
+    @RequestMapping("/clients/current/accounts")
+    public List<AccountDTO> getCurrentAccount(Authentication authentication){
+        return clientRepository.findByEmail(authentication.getName()).getAccounts().stream().map(account -> new AccountDTO(account)).collect(toList());
+    }
     @RequestMapping(path = "/clients/current/accounts", method = RequestMethod.POST)
     public ResponseEntity<Object> newAccount (Authentication authentication) {
         Client client=clientRepository.findByEmail(authentication.getName());
          if (client.getAccounts().size()>=3) {
-            return new ResponseEntity<>("Missing data", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("you have max account", HttpStatus.CONFLICT);
          }
         Account newAccount = new Account(GenereteNumber(accountRepository), LocalDateTime.now(),0);
         client.addAccount(newAccount);
