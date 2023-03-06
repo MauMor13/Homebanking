@@ -18,19 +18,19 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     ClientRepository clientRepository;
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
+
         auth.userDetailsService(inputEmail-> {
+
             Client client = clientRepository.findByEmail(inputEmail);
+
             if (client!=null) {
                 if (client.getEmail().equals("admin@gmail.com")){
 
-                    return new User(client.getEmail(), client.getPassword(),
-
-                            AuthorityUtils.createAuthorityList("ADMIN"));
+                    return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("ADMIN"));
                 }
                 else {
-                    return new User(client.getEmail(), client.getPassword(),
 
-                            AuthorityUtils.createAuthorityList("CLIENT"));
+                    return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("CLIENT"));
                 }
             }
             else {

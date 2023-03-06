@@ -38,18 +38,8 @@ createApp({
             this.title = window.innerWidth < 500;
             this.navbar = window.innerWidth < 750;
         },
-        beforeDestroy() {
+        beforeDestroy:function() {
             window.removeEventListener("resize", this.updateScreenSize);
-        },
-        changeBackground: function (events) {
-            if (events.target.checked) {
-                document.body.classList.remove('image_day');
-                document.body.classList.toggle('image_night');
-            }
-            else {
-                document.body.classList.remove('image_night');
-                document.body.classList.toggle('image_day');
-            }
         },
         colorCard: function (color) {
             if (color == "SILVER")
@@ -64,14 +54,7 @@ createApp({
         },
     },
     mounted() {
+        this.updateScreenSize();
         window.addEventListener("resize", this.updateScreenSize);
-        const checkbox = document.querySelector('.my-form input[type="checkbox"]');
-        const btns = document.querySelectorAll(".my-form button");
-        checkbox.addEventListener("change", function () {
-            const checked = this.checked;
-            for (const btn of btns) {
-                checked ? (btn.disabled = false) : (btn.disabled = true);
-            }
-        });
     },
 }).mount('#app');

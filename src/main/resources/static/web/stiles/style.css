@@ -25,9 +25,18 @@
     margin-right: 1rem;
     width: 2rem;
 }
+.icon-nav{
+    position: absolute;
+    top: 0;
+    margin: 1rem;
+    width: 3rem;
+}
 
 .icon_help {
     width: 2.6rem;
+}
+.icon_help:hover{
+    transform: scale(1.2);
 }
 
 .content {
@@ -54,19 +63,17 @@
     background-repeat: no-repeat;
 }
 
-/*button nav*/
-
-
 /*nav*/
 .sidebar {
     position: sticky;
     left: 0;
     top: 0;
     bottom: 0;
+    padding-top: .5rem;
     border-right: 1px solid var(--color-neutral);
     backdrop-filter: blur(10px);
     border-radius: 0rem 2rem 2rem 0rem;
-    max-width: 36vh;
+    min-width: 12rem;
     min-height: 35rem;
     height: 100vh;
 }
@@ -97,74 +104,22 @@
     color: var(--color-dark);
     background-color: #c0d0ef95;
     border-radius: 3rem;
-
-}
-.button-nav{
-    position: absolute;
-    top: 10rem;
-    left: 0;
-    height: 3rem;
-    width: 2rem;
-    border-radius: 2rem 2rem 2rem 2rem;
-    backdrop-filter: blur(10px);
 }
 
 /*bar options and search*/
 .container_select {
     position: absolute;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     border-bottom: 1px solid var(--color-light);
     border-radius: 2rem 2rem 2rem 2rem;
     backdrop-filter: blur(10px);
     top: 0;
     right: 0;
+    width: 4rem;
     margin-right: 1rem;
     margin-top: 1rem;
-    align-items: center;
-    width: 11rem;
-}
-
-input[type="checkbox"] {
-    position: relative;
-    width: 4rem;
-    height: 2rem;
-    appearance: none;
-    outline: none;
-    background-color: #ebebeb;
-    transition: .5s;
-    border-radius: 20px;
-}
-
-input:checked[type="checkbox"] {
-    background-color: #000000;
-    transition: 0.5s;
-}
-
-input[type="checkbox"]::before {
-    content: '☀️';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
-    top: 0;
-    left: 0;
-    background-color: #FFFFFF;
-    border-radius: 50px;
-    transform: scale(1.1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
-    transition: 0.5s;
-}
-
-input:checked[type="checkbox"]::before {
-    left: 2rem;
-    content: '🌜';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #555555;
+    
 }
 
 /*logo bank*/
@@ -172,8 +127,6 @@ input:checked[type="checkbox"]::before {
     width: 5rem;
     height: 5rem;
 }
-
-/*Nav Button*/
 
 /*div account*/
 .account {
@@ -188,11 +141,13 @@ input:checked[type="checkbox"]::before {
 /*------table transactions--------*/
 .table {
     max-width: 30rem;
+    background-color: #000000aa;
     backdrop-filter: blur(10px);
     border: 2px solid #000000;
-    border-radius: 10%;
 }
-
+td-type{
+    background-color: rgba(255, 255, 255, 0.596);
+}
 th {
     color: white;
 }

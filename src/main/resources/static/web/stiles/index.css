@@ -3,22 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
-header{
-  max-width: 25rem;
-  padding: .4rem;
-  margin: .5rem;
-  border-radius: 1rem 0rem 0rem 1rem;
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgba(9, 9, 121, 0.648) 12%, rgba(0,212,255,1) 74%, rgba(0,212,255,0) 100%);
-}
 
 .title {
-  max-width: 25rem;
-  margin-left: 0;
+  background-color: #10267033;
+  border-radius:0 0 20% 20%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
+}
+.info{
+  margin-top: 2rem;
+  justify-content:space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.info section{
+  margin: 1rem;
+  backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 30rem;
 }
 
 .title img {
@@ -26,22 +30,44 @@ header{
   width: 6rem;
   height: 6rem;
 }
-
+.text-form{
+  max-width: 20rem;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  backdrop-filter: blur(20px);
+}
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 body {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
   color: white;
   background-image:linear-gradient(90deg, rgba(148, 167, 171, 0.645) 11%, rgba(2,0,36,0.8521533613445378) 90%), url(../images/background/pexels-guilherme-rossi-1755693.jpg);
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  overflow-x: hidden;
 }
-
+.kodfun{
+  display: flex;
+  margin:1.5rem;
+  height: 20rem;
+  width: 40rem;
+  gap: 1rem;
+}
+.kodfun>div{
+  flex: 1;
+  border-radius: 1rem;
+  background-position:center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  transition: all .8s cubic-bezier(.25, .4, .45, 1.4);
+}
+.kodfun>div:hover{
+  flex: 5;
+}
+.nav-button{
+  border:1px solid black;
+  background-color: #c4c3ca;
+}
 a {
   cursor: pointer;
   transition: all 200ms linear;
@@ -85,13 +111,13 @@ h6 span {
 
 .card-3d-wrap {
   position: relative;
-  width: 440px;
+  margin: 1rem;
+  width: 420px;
   max-width: 100%;
-  height: 480px;
+  height: 400px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
-  margin-top: 60px;
 }
 
 .card-3d-wrapper {
@@ -128,8 +154,7 @@ h6 span {
 .card-back {
   transform: rotateY(180deg);
 }
-
-.checkbox:checked~.card-3d-wrap .card-3d-wrapper {
+.girarLogin{
   transform: rotateY(180deg);
 }
 

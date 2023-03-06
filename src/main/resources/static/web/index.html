@@ -14,87 +14,136 @@
 
 <body>
     <div id="app">
-        <header class="ms-2 title">
-            <img src="./images/icons/Logo.svg" alt="logo">
-            <h1 class="text-dark">Diamond Bank</h1>
+        <header>
+            <nav class="title navbar">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center">
+                        <img src="./images/icons/Logo.svg" alt="logo">
+                        <h1>Diamond Bank</h1>
+                    </div>
+                    <button class="navbar-toggler nav-button" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" @click="loginRegister('login')" href="#">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </header>
-        <div class="section">
-            <div class="container">
-                <div class="row full-height justify-content-center">
-                    <div class="col-12 text-center align-self-center">
-                        <div class="section pb-3 pt-sm-2 text-center">
-                            <p>Through this other form you can be a client of our bank.</p>
-                                <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-                                <label for="reg-log"></label>
-                                <p>Through this form you can access your accounts.</p>
-                            <div class="card-3d-wrap mx-auto">
-                                <div class="card-3d-wrapper">
-                                    <div class="card-front">
-                                        <div class="center-wrap">
-                                            <div class="section text-center">
-                                                <h2 class="mb-4 pb-3">Enter Your User Data</h2>
-                                                <div class="form-group">
-                                                    <input type="email" v-model="email" name="logemail" class="form-style"
-                                                        placeholder="Your Email" id="logemail" autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/email-svgrepo-com (1).svg" alt="">
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <input type="password" v-model="password" name="logpass" class="form-style"
-                                                        placeholder="Your Password" id="logpass" autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
-                                                        alt="">
-                                                </div>
-                                                <button @click="login" class="btn mt-4">Login</button>
-                                                <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
-                                                        password?</a></p>
-                                            </div>
-                                        </div>
+        <main>
+            <div class="info d-flex">
+                <div class="kodfun">
+                    <div style="background-image:url(./images/indexImage/pexels-ivan-samkov-7621140.jpg);">
+                    </div>
+                    <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
+                    </div>
+                    <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
+                    </div>
+                </div>
+                <section class="p-3">
+                    <p>At Banco Diamante, our priority is to offer exceptional banking services to our customers. With
+                        our
+                        savings accounts, credit cards, and personal loans, we help our clients achieve their financial
+                        goals. Additionally, our online and mobile banking makes it easy to access your accounts anytime
+                        and
+                        anywhere. Choose Banco Diamante as your bank and experience the exceptional service that sets us
+                        apart from the rest.</p>
+                </section>
+            </div>
+            <div v-show="form" class="flex-wrap d-flex justify-content-around align-items-center">
+                <div class="text-form">
+                    <p>If you are not a customer yet, you can click on the following button to register with your data</p>
+                    <button @click="loginRegister('register')" class="btn btn-dark mb-3 p-2">Click here to
+                        Register</button>
+                </div>
+                <div class="text-form">
+                    <p>If you are already one of our clients, you can enter by clicking on the following button</p>
+                    <button @click="loginRegister('login')" class="btn btn-dark mb-3 p-2">Click here to
+                        Login</button>
+                </div>
+                <div class="card-3d-wrap">
+                    <div class="card-3d-wrapper">
+                        <div class="card-front">
+                            <div class="center-wrap">
+                                <div class="section text-center">
+                                    <h4 class="mb-4 pb-3">Enter Your User Data</h4>
+                                    <div class="form-group">
+                                        <input type="email" v-model="email" name="logemail" class="form-style"
+                                            placeholder="Your Email" id="logemail" autocomplete="off">
+                                        <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg" alt="">
                                     </div>
-                                    <div class="card-back">
-                                        <div class="center-wrap">
-                                            <div class="section text-center">
-                                                <h2 class="mb-4 pb-3">Enter Your Data</h2>
-                                                <div class="form-group mt-2">
-                                                    <input type="text" class="form-style" v-model="firstName" placeholder="Your First Name"
-                                                        autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/user-svgrepo-com (1).svg" alt="firstName">
-                                                </div>
-                                                <div class="form-group mt-2">
-                                                    <input type="text" class="form-style" v-model="lastName" placeholder="Your Last Name"
-                                                        autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/user-svgrepo-com (1).svg" alt="lastName">
-                                                </div>
-                                                <div class="form-group mt-2">
-                                                    <input type="email" name="logemail" v-model="email" class="form-style"
-                                                        placeholder="Your Email" autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/email-svgrepo-com (1).svg" alt="email">
-                                                </div>
-                                                <div class="form-group mt-2">
-                                                    <input type="password" v-model="password" name="logpass" class="form-style"
-                                                        placeholder="Your Password" autocomplete="off">
-                                                    <img class="input-icon"
-                                                        src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
-                                                        alt="password">
-                                                </div>
-                                                <button @click="register" class="btn mt-4">Sign Up</button>
-                                            </div>
-                                        </div>
+                                    <div class="form-group mt-3">
+                                        <input type="password" v-model="password" name="logpass" class="form-style"
+                                            placeholder="Your Password" id="logpass" autocomplete="off">
+                                        <img class="input-icon"
+                                            src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
+                                            alt="">
                                     </div>
+                                    <button @click="login" class="btn mt-4">Login</button>
+                                    <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
+                                            password?</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="center-wrap">
+                                <div class="section text-center">
+                                    <h4 class="mb-4 pb-2">Enter Your Data</h4>
+                                    <div class="form-group mt-2">
+                                        <input type="text" class="form-style" v-model="firstName"
+                                            placeholder="Your First Name" autocomplete="off">
+                                        <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
+                                            alt="firstName">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <input type="text" class="form-style" v-model="lastName"
+                                            placeholder="Your Last Name" autocomplete="off">
+                                        <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
+                                            alt="lastName">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <input type="email" name="logemail" v-model="email" class="form-style"
+                                            placeholder="Your Email" autocomplete="off">
+                                        <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg"
+                                            alt="email">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <input type="password" v-model="password" name="logpass" class="form-style"
+                                            placeholder="Your Password" autocomplete="off">
+                                        <img class="input-icon"
+                                            src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
+                                            alt="password">
+                                    </div>
+                                    <button @click="register" class="btn mt-4">Sign Up</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-
+        </main>
+        <footer>
+        </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>

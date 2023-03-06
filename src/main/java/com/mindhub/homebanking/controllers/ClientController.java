@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import static com.mindhub.homebanking.utils.Utilitis.GenereteNumber;
 import static java.util.stream.Collectors.toList;
 @RequestMapping("/api")
@@ -32,8 +34,8 @@ public class ClientController {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
     @RequestMapping("/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){
-        return clientRepository.findById(id).map(client -> new ClientDTO(client)).orElse(null);
+    public Optional<ClientDTO> getClient(@PathVariable Long id){
+        return clientRepository.findById(id).map(client -> new ClientDTO(client));
     }
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(

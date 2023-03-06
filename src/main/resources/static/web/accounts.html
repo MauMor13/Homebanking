@@ -13,9 +13,9 @@
 <body class="image_day">
     <div id="app" class="content">
         <div class="d-flex container_select">
-            <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
+            <img @click="logout" class="icon_help mb-2" src="./images/icons/exit-exit-svgrepo-com.svg" alt="logout">
         </div>
-        <button class="button-nav"><img class="icons" src="./images/icons/flecha.svg" alt="buttonNav"></button>
+        <img class="icon-nav" src="./images/icons/flecha.svg" alt="buttonNav">
         <nav v-show="!navbar" class="sidebar">
             <section class="ms-3 section-nav">
                 <div class="d-flex align-items-center p-1">
@@ -34,8 +34,8 @@
                     <img class="icons" src="images/icons/credit-card.svg" alt="cards">
                     <span>Cards</span>
                 </li>
-                <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/finance.svg" alt="transactions">
+                <li onclick="location.href='./transfers.html'">
+                    <img class="icons" src="images/icons/finance.svg" alt="transfers">
                     <span>Transactions</span>
                 </li>
                 <li onclick="location.href='#'">
@@ -57,17 +57,19 @@
             </ul>
         </nav>
         <main>
-            <section class="d-flex align-items-center p-2">
-                <img class="logo" src="./images/icons/Logo.svg" alt="logo"><h1 v-show="!title">Diamond Bank</h1>
+            <section class="d-flex justify-content-center align-items-center p-2">
+                <img class="logo" src="./images/icons/Logo.svg" alt="logo">
+                <h1 class="ms-2" v-show="!title">Diamond Bank</h1>
             </section>
             <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Accounts</h2> <button class="" @click="newAccount">New Account</button>
+                <h2 class="m-3 text-center">Accounts</h2> 
+                <button v-show="data.accounts.length<3" class="btn btn-dark" @click="newAccount">New Account</button>
             </section>
             <div class="d-flex flex-wrap justify-content-evenly">
                 <template v-if="data">
                 <div class="account m-3 d-flex flex-column justify-content-evenly text-dark" v-for="account of data.accounts">
                     <div class="d-flex justify-content-between">
-                        <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 btn btn-outline-warning text-start"><img src="./images/icons/three-dots.svg" alt=""></button>
+                        <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 btn btn-dark text-start text-light"><img src="./images/icons/three-dots.svg" alt=""></button>
                     </div>
                     <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</h1>
                     <h5 class="ms-3">Account: {{account.number.toUpperCase()}}</h5>
@@ -79,7 +81,7 @@
                 </template>
             </div>
             <div class="loans d-flex justify-content-center">
-                <template v-if="data.loans">
+                <template v-if="data.loans.length>0">
                     <table class="table m-2">
                         <thead class="text-center">
                             <th>Loans Type</th>
@@ -102,10 +104,11 @@
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="./js/account.js"></script>
+    <script src="./js/accounts.js"></script>
 </body>
 
 </html>

@@ -39,16 +39,6 @@ createApp({
         beforeDestroy() {
             window.removeEventListener("resize", this.updateScreenSize);
         },
-        changeBackground: function (events) {
-            if (events.target.checked) {
-                document.body.classList.remove('image_day');
-                document.body.classList.toggle('image_night');
-            }
-            else {
-                document.body.classList.remove('image_night');
-                document.body.classList.toggle('image_day');
-            }
-        },
         newCard: function () {
             axios.post('/api/clients/current/cards',`type=${this.cardType}&color=${this.cardColor}`)
                 .then(response => {
@@ -59,5 +49,9 @@ createApp({
                     console.log(this.error)
                 });
         },
+    },
+    mounted(){
+        this.updateScreenSize();
+        window.addEventListener("resize", this.updateScreenSize);
     },
 }).mount('#app');

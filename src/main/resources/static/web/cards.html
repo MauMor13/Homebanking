@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>My Accounts | Diamond Bank</title>
 </head>
-
 <body class="image_day">
     <div id="app" class="content">
         <div class="d-flex container_select">
-            <input class="mb-1 am_pm" type="checkbox" @change="changeBackground">
-            <img @click="logout" class="icon_help me-2" src="./images/icons/logout-svgrepo-com.svg" alt="logout">
+            <img @click="logout" class="icon_help mb-2" src="./images/icons/exit-exit-svgrepo-com.svg" alt="logout">
         </div>
+        <img class="icon-nav" src="./images/icons/flecha.svg" alt="buttonNav">     
         <nav v-show="!navbar" class="sidebar">
-            <section class="ms-3">
+            <section class="ms-3 section-nav">
                 <div class="d-flex align-items-center p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg"
-                        alt="avatar">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
                     <h5 class="ms-2 text-bottom">{{data.firstName}} {{data.lastName}}</h5>
                 </div>
                 <p>{{data.email}}</p>
@@ -30,15 +26,15 @@
             </section>
             <ul>
                 <li onclick="location.href='./accounts.html'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='#'">
                     <img class="icons" src="images/icons/credit-card.svg" alt="cards">
                     <span>Cards</span>
                 </li>
-                <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/finance.svg" alt="transactions">
+                <li onclick="location.href='./transfers.html'">
+                    <img class="icons" src="images/icons/finance.svg" alt="transfers">
                     <span>Transactions</span>
                 </li>
                 <li onclick="location.href='#'">
@@ -60,12 +56,13 @@
             </ul>
         </nav>
         <main>
-            <section class="d-flex align-items-center p-2">
+            <section class="d-flex align-items-center justify-content-center p-2">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="!title">Diamond Bank</h1>
+                <h1 v-show="!title" class="ms-2">Diamond Bank</h1>
             </section>
             <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Cards</h2><button onclick="location.href='create-cards.html'">Cards +</button>
+                <h2 class="m-3 text-center">Cards</h2>
+                <button v-show="data.accounts.length<3" class="btn btn-dark" onclick="location.href='./create-cards.html'">New Card</button>
             </section>
             <div class="form-check ms-3">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
@@ -141,6 +138,7 @@
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -148,3 +146,5 @@
 </body>
 
 </html>
+
+

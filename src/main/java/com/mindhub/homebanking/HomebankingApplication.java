@@ -35,9 +35,9 @@ public class HomebankingApplication {
 			Client client=new Client("Jack", "Bauer","melba@mindhub.com",passwordEncoder.encode("12345"));
 			Client client2=new Client("Carl", "Ironman","ironman@mindhub.com",passwordEncoder.encode("67890"));
 			Client admin=new Client("Admin","Karl","adminkarl@gmail.com",passwordEncoder.encode("123456"));
-			Account vin001=new Account(GenereteNumber(accountRepository), LocalDateTime.now(),5000);
+			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000);
 			Account vin002=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),7500);
-			Account vin003=new Account(GenereteNumber(accountRepository), LocalDateTime.now(),1200);
+			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200);
 			Account vin004=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),300);
 
 			//utilizo método para generar transacciones aleatorias
