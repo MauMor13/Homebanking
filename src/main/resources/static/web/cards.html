@@ -62,7 +62,7 @@
             </section>
             <section class="d-flex justify-content-evenly align-items-center">
                 <h2 class="m-3 text-center">Cards</h2>
-                <button v-show="data.accounts.length<3" class="btn btn-dark" onclick="location.href='./create-cards.html'">New Card</button>
+                <button v-show="data.cards.length<6" class="btn btn-dark" onclick="location.href='./create-cards.html'">New Card</button>
             </section>
             <div class="form-check ms-3">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
@@ -84,7 +84,7 @@
                                 <div class="strip-bottom"></div>
                                 <div class="strip-top"></div>
                                 <img src="./images/icons/Logo.svg" class="logo-cards" alt="logo">
-                                <div class="investor">{{card.type}}</div>
+                                <div class="investor" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.color}}</div>
                                 <div class="chip">
                                     <div class="chip-line"></div>
                                     <div class="chip-line"></div>
@@ -105,11 +105,11 @@
                                     </path>
                                 </svg>
                                 <div class="card-number">
-                                    <div class="section1">{{card.number}}</div>
+                                    <div class="section1" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.number}}</div>
                                 </div>
                                 <div class="end"><span class="end-text">exp. end:</span><span
-                                        class="end-date">{{card.thruDate}}</span></div>
-                                <div class="card-holder">{{card.cardHolder}}</div>
+                                        class="end-date" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.thruDate}}</span></div>
+                                <div class="card-holder" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.cardHolder}}</div>
                             </div>
                             <div class="back">
                                 <div class="strip-black"></div>

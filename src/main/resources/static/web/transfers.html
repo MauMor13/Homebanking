@@ -5,21 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <title>My Accounts | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app" class="content">
         <div class="d-flex container_select">
             <img @click="logout" class="icon_help mb-2" src="./images/icons/exit-exit-svgrepo-com.svg" alt="logout">
         </div>
-        <img class="icon-nav" src="./images/icons/flecha.svg" alt="buttonNav">     
+        <img class="icon-nav" src="./images/icons/flecha.svg" alt="buttonNav">
         <nav v-show="!navbar" class="sidebar">
             <section class="ms-3 section-nav">
                 <div class="d-flex align-items-center p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg"
+                        alt="avatar">
                     <h5 class="ms-2 text-bottom">{{data.firstName}} {{data.lastName}}</h5>
                 </div>
                 <p>{{data.email}}</p>
@@ -27,7 +31,7 @@
             </section>
             <ul>
                 <li onclick="location.href='./accounts.html'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='./cards.html'">
@@ -62,12 +66,80 @@
                 <h1 v-show="!title" class="ms-2">Diamond Bank</h1>
             </section>
             <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Generate New Transfers</h2> 
+                <h2 class="m-3 text-center">Generate New Transfers</h2>
             </section>
-            
+
+            <div class="mt-4 d-flex justify-content-center">
+                <div class="form-transfer">
+                    <select  class="m-2 form-select form-select-sm" v-model="numAccountOrigin" aria-label=".form-select-sm example">
+                        <option selected>Select you account</option>
+                        <option v-for="account of data.accounts" :value="account.number">{{account.number}}</option>
+                    </select>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"  @click="show='own'" name="inputRadio"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Transfer to own account
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" @click="show='third'" name="inputRadio"
+                            id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Transfer to third party accounts
+                        </label>
+                    </div>
+                    <select v-show="show=='own'" class="m-2 form-select form-select-sm" v-model="numAccountDestini"  @click="filterAccounts" aria-label=".form-select-sm example">
+                        <option selected>Select account</option>
+                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                    </select>
+                    <div v-show="show=='third'" class=" row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Enter account</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="numAccountDestini" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="m-2 row">
+                        <label for="inputAmount" class="col-sm-2 col-form-label">Amount</label>
+                        <div class="col-sm-10">
+                            <input type="number" v-model="amount" class="form-control" id="inputAmount" >
+                        </div>
+                    </div>
+                    <p>Description</p>
+                    <div class="m-3 form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here"
+                            id="floatingTextarea" v-model="description"></textarea>
+                        <label for="floatingTextarea">Comments</label>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Transfer Money
+                    </button>{{amount}}{{description}}{{numAccountOrigin}}{{numAccountDestini}}
+                </div>
+            </div>
+
+            <!--modal-->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-dark">
+                            Are you sure to make the following transfer?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="newTransfer">Transfer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
