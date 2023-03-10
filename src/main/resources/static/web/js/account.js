@@ -3,22 +3,22 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            account:[],
+            account: [],
             data: [],
-            navbar:true,
-            title:true,
-            id:"",
+            navbar: false,
+            title: true,
+            id: "",
         }
     },
-    created(){
+    created() {
         let stringUrl = location.search;//lee la url actual para seccion mas detalles
-        let parameter= new URLSearchParams(stringUrl); 
+        let parameter = new URLSearchParams(stringUrl);
         this.id = parameter.get("id");
         this.loadData();
     },
-    methods:{
-        logout:function() {
-            axios.post('/api/logout') 
+    methods: {
+        logout: function () {
+            axios.post('/api/logout')
                 .then(response => {
                     window.location.href = '/web/index.html';
                 })
@@ -27,36 +27,29 @@ createApp({
                 });
         },
         loadData: function () {
-                axios.get('/api/clients/current')
-                    .then(response => {
-                        this.data = response.data;
-                        this.data.accounts.sort((a, b) => a.id - b.id);
-                        console.log(this.id)
-                        let account=this.data.accounts.filter(account=>account.id==this.id); 
-                        console.log(account[0].id)
-                        this.account=account[0];
-                    })
-                    .catch(err => console.log(err));
-            },
-        updateScreenSize:function() {
-            this.title = window.innerWidth < 500;
-            this.navbar = window.innerWidth < 750;
+            axios.get('/api/clients/current')
+                .then(response => {
+                    this.data = response.data;
+                    this.data.accounts.sort((a, b) => a.id - b.id);
+                    console.log(this.id)
+                    let account = this.data.accounts.filter(account => account.id == this.id);
+                    console.log(account[0].id)
+                    this.account = account[0];
+                })
+                .catch(err => console.log(err));
         },
-        changeBackground:function(events){
-            if(events.target.checked){
-            document.body.classList.remove('image_day');
-            document.body.classList.toggle('image_night');
-            }
-            else{
-            document.body.classList.remove('image_night');
-            document.body.classList.toggle('image_day');
-        }},
+        navShow: function (value) {
+            this.navbar = value;
+        },
+        beforeDestroy: function () {
+            window.removeEventListener("resize", this.updateScreenSize);
+        },
+        updateScreenSize: function () {
+            this.title = window.innerWidth > 500;
+        },
     },
-    mounted(){
+    mounted() {
         this.updateScreenSize();
         window.addEventListener("resize", this.updateScreenSize);
-    },
-        beforeDestroy() {
-        window.removeEventListener("resize", this.updateScreenSize);
     },
 }).mount('#app');

@@ -3,7 +3,7 @@ createApp({
     data() {
         return {
             data: [],
-            navbar: true,
+            navbar: false,
             title: true,
             cardType: "",
             cardColor:"",
@@ -32,13 +32,6 @@ createApp({
                     this.error = error.response.data.message;
                 });
         },
-        updateScreenSize: function () {
-            this.title = window.innerWidth < 500;
-            this.navbar = window.innerWidth < 750;
-        },
-        beforeDestroy() {
-            window.removeEventListener("resize", this.updateScreenSize);
-        },
         newCard: function () {
             axios.post('/api/clients/current/cards',`type=${this.cardType}&color=${this.cardColor}`)
                 .then(response => {
@@ -56,6 +49,15 @@ createApp({
                 return "url(https://i.pinimg.com/originals/96/36/3c/96363c9337b2d1aad24323b1d9efda72.jpg)";
             else
                 return "url(https://media.istockphoto.com/id/1320912181/vector/abstract-gray-gradient-metallic-texture.jpg?s=612x612&w=0&k=20&c=R04SBrq_5Li51HaGl3MCeObiLml0yRSeQfIiweRxmHQ=)";
+        },
+        navShow: function (value) {
+            this.navbar = value;
+        },
+        beforeDestroy: function () {
+            window.removeEventListener("resize", this.updateScreenSize);
+        },
+        updateScreenSize: function () {
+            this.title = window.innerWidth > 500;
         },
     },
     mounted(){

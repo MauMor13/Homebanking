@@ -3,7 +3,7 @@ createApp({
     data() {
         return {
             data: [],
-            navbar: true,
+            navbar: false,
             title: true,
             numAccountDestini:"",
             numAccountOrigin:"",
@@ -34,13 +34,6 @@ createApp({
                     this.error = error.response.data.message;
                 });
         },
-        updateScreenSize: function () {
-            this.title = window.innerWidth < 500;
-            this.navbar = window.innerWidth < 750;
-        },
-        beforeDestroy() {
-            window.removeEventListener("resize", this.updateScreenSize);
-        },
         newTransfer:function(){
             axios.post('/api/transactions',`amount=${this.amount}&description=${this.description}&numAccountOrigin=${this.numAccountOrigin}&numAccountDestini=${this.numAccountDestini}`)
             .then(response=>{
@@ -57,7 +50,16 @@ createApp({
         },
         filterAccounts:function(){
             this.accounts=this.data.accounts.filter(account=>account.number!=this.numAccountOrigin);
-        }
+        },
+        navShow: function (value) {
+            this.navbar = value;
+        },
+        beforeDestroy: function () {
+            window.removeEventListener("resize", this.updateScreenSize);
+        },
+        updateScreenSize: function () {
+            this.title = window.innerWidth > 500;
+        },
     },
     mounted(){
         this.updateScreenSize();

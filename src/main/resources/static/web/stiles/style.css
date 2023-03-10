@@ -15,16 +15,19 @@
     --color-dark: #0F1C30;
     --color-light: #C0D0EF;
 }
-main{
+
+main {
     min-height: 95vh;
 }
+
 /*footer*/
-footer{
+footer {
     background-color: #1026705f;
     min-height: 15vh;
-    border-top:1px solid #000;
+    border-top: 1px solid #000;
 }
-.icon-footer1{
+
+.icon-footer1 {
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -32,10 +35,11 @@ footer{
     width: 3rem;
     height: 3rem;
     background-color: white;
-    border:1px solid #000;
+    border: 1px solid #000;
     transition: all .3s;
 }
-.icon-footer2{
+
+.icon-footer2 {
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -43,10 +47,11 @@ footer{
     width: 3rem;
     height: 3rem;
     background-color: white;
-    border:1px solid #000;
+    border: 1px solid #000;
     transition: all .3s;
 }
-.icon-footer3{
+
+.icon-footer3 {
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -54,13 +59,14 @@ footer{
     width: 3rem;
     height: 3rem;
     background-color: white;
-    border:1px solid #000;
+    border: 1px solid #000;
     transition: all .3s;
 }
-.icon-footer4{
+
+.icon-footer4 {
     border-radius: 100%;
     display: flex;
-    border:1px solid #000;
+    border: 1px solid #000;
     align-items: center;
     justify-content: center;
     width: 3rem;
@@ -68,80 +74,95 @@ footer{
     background-color: white;
     transition: all .3s;
 }
-.icon-footer1:hover{
-    background-color:#0e76a8;
-    border:1px solid white;
+
+.icon-footer1:hover {
+    background-color: #0e76a8;
+    border: 1px solid white;
 }
-.icon-footer2:hover{
+
+.icon-footer2:hover {
     background-color: #868686;
-    border:1px solid white;
+    border: 1px solid white;
 }
-.icon-footer3:hover{
-    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); 
-    border:1px solid white;
+
+.icon-footer3:hover {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    border: 1px solid white;
 }
-.icon-footer4:hover{
-    background-color:  #3b5998;
-    border:1px solid white;
+
+.icon-footer4:hover {
+    background-color: #3b5998;
+    border: 1px solid white;
 }
+
 /*header*/
 header {
     background-color: #1026705f;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom:1px solid #000;
+    border-bottom: 1px solid #000;
     min-height: 5vh;
 }
-.title{
-    max-width:40rem ;
+
+.title {
+    max-width: 40rem;
 }
-.container_icon_exit{
+
+.container_icon_exit {
     justify-content: center;
     border-bottom: 1px solid var(--color-light);
     border-radius: 2rem 2rem 2rem 2rem;
     margin: 1rem;
     width: 4rem;
 }
-.container_icon_nav{
+
+.container_icon_nav {
     justify-content: center;
     margin: 1rem;
     width: 4rem;
 }
-.icon-nav{
+
+.icon-nav {
     position: sticky;
     top: 1rem;
     width: 3rem;
     transition: all .3s;
 }
-.icon-nav:hover{
+
+.icon-nav:hover {
     transform: scale(1.4);
     margin: .5rem;
 }
-.icon_exit{
+
+.icon_exit {
     position: sticky;
     top: 1rem;
     width: 3rem;
     transition: all .3s;
 }
-.icon_exit:hover{
+
+.icon_exit:hover {
     transform: scale(1.4);
     margin: .5rem;
 }
+
 /*** createCards***/
-.createCard{
+.createCard {
     margin: 2rem;
     padding: 1rem;
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     width: 20rem;
 }
+
 .image_night {
     background-image: url(../images/background/pexels-david-skyrius-2129796.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .image_day {
     background-image: url(../images/background/pexels-guilherme-rossi-1755693.jpg);
     background-size: cover;
@@ -151,31 +172,37 @@ header {
     min-height: 100vh;
     color: white;
 }
+
 /*form-transfer*/
-.form-transfer{
+.form-transfer {
     width: 40rem;
     max-width: 40rem;
-    border:1px solid #000;
+    border: 1px solid #000;
     border-radius: 1rem;
     backdrop-filter: blur(20px);
     padding: 1rem;
 }
+
 /*nav*/
-.icon-exit-nav{
+.icon-exit-nav {
     width: 3rem;
     transition: all .3s;
 }
-.icon-exit-nav:hover{
+
+.icon-exit-nav:hover {
     transform: rotate(180deg);
 }
+
 .avatar {
     width: 3rem;
 }
+
 .icons {
     margin-left: 1rem;
     margin-right: 1rem;
     width: 2rem;
 }
+
 .sidebar {
     position: absolute;
     left: 0;
@@ -184,7 +211,7 @@ header {
     z-index: 1000;
     padding-top: .5rem;
     border-right: 1px solid var(--color-neutral);
-    background-color: #102670de ;
+    background-color: #102670de;
     backdrop-filter: blur(10px);
     border-radius: 0rem 2rem 2rem 0rem;
     contain: content;
@@ -222,6 +249,7 @@ header {
     background-color: #c0d0ef95;
     border-radius: 3rem;
 }
+
 /*logo bank*/
 .logo {
     width: 5rem;
@@ -235,7 +263,7 @@ header {
     color: white;
     border: 2px solid #00000053;
     border-radius: 1rem;
-    background-color: #6969698d ;
+    background-color: #6969698d;
     box-shadow: .5rem .5rem black;
     -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
     text-shadow: 2px 2px 2px #000;
@@ -248,9 +276,11 @@ header {
     backdrop-filter: blur(10px);
     border: 2px solid #000000;
 }
-td-type{
+
+td-type {
     background-color: rgba(255, 255, 255, 0.596);
 }
+
 th {
     color: white;
 }
@@ -298,8 +328,8 @@ h2 {
 }
 
 .flip {
-    width: inherit;
-    height: inherit;
+    width: 25rem;
+    height: 15.5rem;
     transition: 0.7s;
     transform-style: preserve-3d;
     -webkit-animation: flip 2.5s ease;
@@ -531,4 +561,100 @@ h2 {
     }
 }
 
-/*---------------------form the card---------------------------*/
+/***********form de loans*************/
+.text-loans {
+    max-width: 30rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    border: 1px solid #000;
+    background-color: #9e9e9ec4;
+    color: white;
+    box-shadow: .5rem .5rem black;
+    -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
+}
+
+.text-loans span {
+    color: #000;
+}
+
+.form-loan {
+    max-width: 30rem;
+    width: 15rem;
+    min-height: 30rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    border: 1px solid #000;
+    background-color: #9e9e9ec4;
+    box-shadow: .5rem .5rem black;
+    -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
+}
+
+.button-form {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+}
+
+.button-form {
+    --primary-color: #111;
+    --hovered-color: #102670;
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    font-size: 20px;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.button-form p {
+    margin: 0;
+    position: relative;
+    font-size: 20px;
+    color: var(--primary-color);
+    transition: all .3s;
+}
+
+.button-form::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    bottom: -7px;
+    background: var(--hovered-color);
+    height: 2px;
+    transition: 0.3s ease-out;
+}
+
+.button-form p::before {
+    position: absolute;
+    content: "Apply for Loan";
+    width: 0%;
+    inset: 0;
+    color: var(--hovered-color);
+    overflow: hidden;
+    transition: 0.3s ease-out;
+}
+
+.button-form:hover::after {
+    width: 100%;
+}
+
+.button-form:hover p::before {
+    width: 100%;
+}
+
+.button-form:hover svg {
+    transform: translateX(4px);
+    color: var(--hovered-color)
+}
+
+.button-form svg {
+    color: var(--primary-color);
+    transition: 0.2s;
+    position: relative;
+    width: 15px;
+    transition-delay: 0.2s;
+}

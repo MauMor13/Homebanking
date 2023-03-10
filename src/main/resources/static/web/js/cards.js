@@ -5,7 +5,7 @@ createApp({
         return {
             data: [],
             cards: [],
-            navbar: true,
+            navbar: false,
             title: true,
             typeCard: "CREDIT",
             allCards: [],
@@ -34,13 +34,6 @@ createApp({
                     this.error = error.response.data.message;
                 });
         },
-        updateScreenSize: function () {
-            this.title = window.innerWidth < 500;
-            this.navbar = window.innerWidth < 750;
-        },
-        beforeDestroy:function() {
-            window.removeEventListener("resize", this.updateScreenSize);
-        },
         colorCard: function (color) {
             if (color == "SILVER")
                 return "url(https://media.istockphoto.com/id/1051466618/es/vector/fondo-de-tecnolog%C3%ADa-con-textura-metal.jpg?s=612x612&w=0&k=20&c=TNQ6UyN2SJH8jj2BkQfTzUp0Kxh0GBiAHz1lAevhpVA=)";
@@ -51,6 +44,15 @@ createApp({
         },
         cardType: function () {
             this.cards = this.allCards.filter(cards => cards.type.includes(this.typeCard));
+        },
+        navShow: function (value) {
+            this.navbar = value;
+        },
+        beforeDestroy: function () {
+            window.removeEventListener("resize", this.updateScreenSize);
+        },
+        updateScreenSize: function () {
+            this.title = window.innerWidth > 500;
         },
     },
     mounted() {

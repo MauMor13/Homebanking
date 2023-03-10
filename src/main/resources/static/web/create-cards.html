@@ -8,25 +8,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>My Accounts | Diamond Bank</title>
+    <title>Created New Card | Diamond Bank</title>
 </head>
 <body class="image_day">
-    <div id="app" class="content">
-        <div class="d-flex container_select">
-            <img @click="logout" class="icon_help mb-2" src="./images/icons/exit-exit-svgrepo-com.svg" alt="logout">
-        </div>
-        <img class="icon-nav" src="./images/icons/flecha.svg" alt="buttonNav">     
-        <nav v-show="!navbar" class="sidebar">
-            <section class="ms-3 section-nav">
-                <div class="d-flex align-items-center p-1">
+    <div id="app">
+        <header  class="p-2">
+            <div class="d-flex container_icon_nav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+            </div>
+            <div class="title d-flex align-items-center">
+                <img class="logo" src="./images/icons/Logo.svg" alt="logo">
+                <h1 v-show="title" class="ms-2">Diamond Bank</h1>
+            </div>
+            <div class="d-flex container_icon_exit">
+                <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
+            </div>
+        </header>
+        <nav v-show="navbar" class="sidebar">
+            <section class="ps-3">
+                <div class="d-flex align-items-center justify-content-between p-1">
                     <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
-                    <h5 class="ms-2 text-bottom">{{data.firstName}} {{data.lastName}}</h5>
+                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav" @click="navShow(false)">
                 </div>
-                <p>{{data.email}}</p>
-                <p>direccion</p>
+                <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
+                <p class="m-2">{{data.email}}</p>
             </section>
             <ul>
-                <li onclick="location.href='./accounts.html'">
+                <li onclick="location.href='#'">
                     <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
                     <span>Accounts</span>
                 </li>
@@ -38,7 +46,7 @@
                     <img class="icons" src="images/icons/finance.svg" alt="transfers">
                     <span>Transactions</span>
                 </li>
-                <li onclick="location.href='#'">
+                <li onclick="location.href='./loan-application.html'">
                     <img class="icons" src="images/icons/transaction.svg" alt="loans">
                     <span>Loans</span>
                 </li>
@@ -57,10 +65,6 @@
             </ul>
         </nav>
         <main>
-            <section class="d-flex justify-content-center align-items-center p-2">
-                <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="!title" class="ms-2">Diamond Bank</h1>
-            </section>
             <section class="d-flex justify-content-evenly align-items-center">
                 <h2 class="m-3 text-center">Generate New Card</h2> 
             </section>
@@ -83,7 +87,7 @@
                         <option value="TITANIUM">Titanium</option>
                     </select>
                     <button type="button" @click="newCard" class="btn btn-primary">New Card</button>
-                </div>
+                </div> 
                 <div class="card m-3">
                     <div class="flip">
                         <div class="front" :style="'background-image:' + colorCard(cardColor)">
@@ -137,12 +141,42 @@
                 </div>
             </div>
         </main>
+        <footer>
+            <div class="ps-4 pe-4 pt-2 d-flex justify-content-between align-items-center flex-wrap">
+                <section>
+                    <h5>Contact:</h5>
+                    <ul>
+                        <li>Number Phone: +00111518</li>
+                        <li>Email: </li>
+                        <li>Direction:</li>
+                        <li></li>
+                    </ul>
+                </section>
+                <section>
+                    <h5>Contact:</h5>
+                    <ul>
+                        <il></il>
+                        <il></il>
+                        <il></il>
+                        <il></il>
+                    </ul>
+                </section>
+            </div>
+            <hr class="m-0">
+            <div class="flex-wrap d-flex justify-content-between align-items-center ps-4 pe-4">
+                <h6>Developer: Mauricio Mores</h6> 
+                <div class="d-flex justify-content-evenly">
+                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons" src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons" src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
+                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons" src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
+                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons" src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+                </div>
+            </div>
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="./js/create-cards.js"></script>
 </body>
 </html>
-

@@ -8,7 +8,7 @@ createApp({
             navbar:false,
             title:true,
             id:0,
-            amount:0,
+            amount:"",
             payments:0,
             numberAccountDestini:"",
         }
@@ -22,6 +22,7 @@ createApp({
             axios.get("/api/clients/current")
                 .then(response => {
                     this.data = response.data;
+                    console.log(this.data);
                 })
                 .catch(err => console.log(err));
         },
@@ -34,9 +35,14 @@ createApp({
         newLoan:function(){
             axios.post("/api/loans",{"id":this.id,"amount":this.amount,"payments":this.payments,"numberAccountDestini":this.numberAccountDestini})
         .then(response=>{
-            
+            Swal.fire('Successful Loan Application')
         }).catch(err=>{
             console.log(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data,
+            })
         })
         },
         logout:function() {

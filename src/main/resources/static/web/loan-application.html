@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>My Accounts | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app">
-        <header  class="p-2">
+        <header class="p-2">
             <div class="d-flex container_icon_nav">
-                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)"
+                    alt="buttonNav">
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
@@ -27,15 +30,17 @@
         <nav v-show="navbar" class="sidebar">
             <section class="ps-3">
                 <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav" @click="navShow(false)">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg"
+                        alt="avatar">
+                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                        @click="navShow(false)">
                 </div>
                 <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
                 <p class="m-2">{{data.email}}</p>
             </section>
             <ul>
-                <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                <li onclick="location.href='./accounts.html'">
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='./cards.html'">
@@ -64,11 +69,81 @@
                 </li>
             </ul>
         </nav>
-        <main>
-            
+        <main class="d-flex justify-content-evenly align-items-center m-4 flex-wrap">
+
+            <div class="form-loan text-dark">
+                <h3>Form Loans</h3>
+                <fieldset>Loan Type
+                    <select class="form-select mt-1" aria-label="Default select example" v-model="id" required="id>0">
+                        <option v-for="loan of loans" value="loan.id">{{loan.name}}</option>
+                    </select>
+                </fieldset>
+                <fieldset class="mt-2">Loan Payments
+                    <select class="form-select mt-1" aria-label="Default select example" v-model="payments" required="payments>0">
+                        <option v-for="payment of loans[1].payments">{{payment}}</option>
+                    </select>
+                </fieldset>
+                <fieldset class="mt-2">Destination Account
+                    <select class="form-select mt-1" aria-label="Default select example" v-model="numberAccountDestini" required="numberAccountDestini">
+                        <option v-for="account of data.accounts">{{account.number}}</option>
+                    </select>
+                </fieldset>
+                <fieldset class="mt-2">Amount to Request
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                    <p v-show="amount>0">{{payments}}  installments of ${{(amount*1.2)/payments}}</p>
+                </fieldset>
+                <button class="button-form" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <p>Apply for Loan</p>
+                    <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-dark">
+                            Are you sure to apply for this loan?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="newLoan">Apply for Loan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-loans">
+                <p>We have three types of loans available: auto, personal, and mortgage. Here's a brief explanation of
+                    each:
+                </p>
+                <p>
+                    <span>Auto loans:</span> If you're looking to finance the purchase of a new or used car, this is the loan for
+                    you. Auto loans can help you cover the total cost of the vehicle or a portion of it. We offer
+                    competitive interest rates and flexible terms so you can pay your loan comfortably and conveniently.
+                </p>
+                <p>
+                    <span>Personal loans:</span> Need money to make improvements to your home, consolidate debt, or finance an
+                    important event in your life? A personal loan could be the solution you're looking for. Our personal
+                    loans have competitive interest rates and can be used for a variety of purposes. We also offer
+                    flexible terms and payment options to fit your budget.
+                </p>
+                <p>
+                    <span>Mortgage loans:</span> If you're looking to buy a home, a mortgage loan could be the way to go. We offer
+                    fixed and variable-rate mortgage loans, as well as competitive interest rates and flexible terms.
+                    Our team of mortgage loan experts will be happy to help you find the best loan option for you.
+                </p>
+            </div>
         </main>
         <footer>
-            <div class="ps-4 pe-4 d-flex justify-content-between align-items-center flex-wrap">
+            <div class="ps-4 pe-4 pt-2 d-flex justify-content-between align-items-center flex-wrap">
                 <section>
                     <h5>Contact:</h5>
                     <ul>
@@ -88,20 +163,32 @@
                     </ul>
                 </section>
             </div>
-            <hr>
-            <div class="d-flex justify-content-between align-items-center ps-4 pe-4">
-                <h6 class="">Developer: Mauricio Mores</h6> 
+            <hr class="m-0">
+            <div class="flex-wrap d-flex justify-content-between align-items-center ps-4 pe-4">
+                <h6>Developer: Mauricio Mores</h6>
                 <div class="d-flex justify-content-evenly">
-                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons" src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
-                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons" src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
-                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons" src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
-                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons" src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
+                            src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
+                            src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
+                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
+                            src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
+                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
+                            src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
                 </div>
             </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/loan-application.js"></script>
 </body>
+
 </html>
+<!-- Un campo para elegir el tipo de préstamo
+Un campo para indicar los pagos disponibles del tipo de crédito seleccionado
+Un campo para indicar el monto a solicitar
+Un campo para indicar la cuenta de destino
+Alguna manera de ver el monto de cada cuota (recuerda sumar la tasa de interes seleccionada) -->
