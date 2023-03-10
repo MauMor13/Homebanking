@@ -1,5 +1,4 @@
 package com.mindhub.homebanking.dtos;
-import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.Client;
 import java.util.Set;
 import static java.util.stream.Collectors.toSet;

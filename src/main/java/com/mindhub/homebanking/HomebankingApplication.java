@@ -50,10 +50,10 @@ public class HomebankingApplication {
 			Loan loan2=new Loan("Personal",100000, List.of(6,12,24));
 			Loan loan3=new Loan("Automotive",300000, List.of(6,12,24,36));
 
-			ClientLoan pres1=new ClientLoan( 400000, 60);
-			ClientLoan pres2=new ClientLoan( 50000, 12);
-			ClientLoan pres3=new ClientLoan( 100000, 24 );
-			ClientLoan pres4=new ClientLoan(  200000, 36);
+			ClientLoan pres1=new ClientLoan(400000.0, 60);
+			ClientLoan pres2=new ClientLoan(50000.0, 12);
+			ClientLoan pres3=new ClientLoan(100000.0, 24 );
+			ClientLoan pres4=new ClientLoan(200000.0, 36);
 
 			Card card1=new Card(client, CREDIT, GOLD,randomNumberCard(cardRepository), returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
 			Card card2=new Card(client, CREDIT, SILVER,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));

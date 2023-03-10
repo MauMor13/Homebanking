@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +14,7 @@
 <body>
     <div id="app">
         <header>
-            <nav class="title navbar">
+            <nav class="title navbar p-0">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center">
                         <img src="./images/icons/Logo.svg" alt="logo">
@@ -68,7 +67,8 @@
             </div>
             <div v-show="form" class="flex-wrap d-flex justify-content-around align-items-center">
                 <div class="text-form">
-                    <p>If you are not a customer yet, you can click on the following button to register with your data</p>
+                    <p>If you are not a customer yet, you can click on the following button to register with your data
+                    </p>
                     <button @click="loginRegister('register')" class="btn btn-dark mb-3 p-2">Click here to
                         Register</button>
                 </div>
@@ -138,8 +138,6 @@
                 </div>
             </div>
         </main>
-        <footer>
-        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

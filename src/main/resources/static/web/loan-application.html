@@ -65,47 +65,7 @@
             </ul>
         </nav>
         <main>
-            <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Accounts</h2> 
-                <button v-show="data.accounts.length<3" class="btn btn-dark" @click="newAccount">New Account</button>
-            </section>
-            <div class="d-flex flex-wrap justify-content-evenly">
-                <template v-if="data">
-                <div class="account m-3 d-flex flex-column justify-content-evenly" v-for="account of data.accounts">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 button_form"><img src="./images/icons/three-dots.svg" alt=""></button>
-                    </div>
-                    <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</h1>
-                    <h5 class="ms-3">Account: {{account.number.toUpperCase()}}</h5>
-                    <h5 class="ms-3">Created: {{account.creationDate.split("T")[0]}}</h5>
-                    <div class="d-flex justify-content-evenly">
-                        <a :href="'./account.html?id=' + account.id"><button class="button_transaction">Transactions</button></a><button type="button" class="button_invest">Investments</button>
-                    </div>
-                </div>
-                </template>
-            </div>
-            <div class="loans d-flex justify-content-center">
-                <template v-if="data.loans.length>0">
-                    <table class="table m-2">
-                        <thead class="text-center">
-                            <th>Loans Type</th>
-                            <th>N° Payments</th>
-                            <th>Amount</th>
-                        </thead>
-                        <tbody>
-                            <tr v-for="loan in data.loans" class="text-light text-center">
-                                <td>{{loan.name}}</td>
-                                <td>{{loan.payments}}</td>
-                                <td>{{loan.amount.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </template>
-                <div v-else class="text_loans d-flex flex-column align-items-center justify-content-center container m-2">   
-                    <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by clicking on the following button.</h5>
-                    <button type="button" class="btn btn-dark">Loans</button>
-                </div>
-            </div>
+            
         </main>
         <footer>
             <div class="ps-4 pe-4 d-flex justify-content-between align-items-center flex-wrap">
@@ -142,6 +102,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./js/accounts.js"></script>
+    <script src="./js/loan-application.js"></script>
 </body>
 </html>

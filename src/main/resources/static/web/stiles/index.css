@@ -6,7 +6,6 @@
 
 .title {
   background-color: #10267033;
-  border-radius:0 0 20% 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,7 +139,7 @@ h6 span {
   background-repeat: no-repeat;
   background-size: 300%;
   position: absolute;
-  border-radius: 20%;
+  border-radius: 2rem;
   left: 0;
   top: 0;
   -webkit-transform-style: preserve-3d;
@@ -308,4 +307,3 @@ h6 span {
   background-color: #102770;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }
-

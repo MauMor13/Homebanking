@@ -3,50 +3,41 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            data: [],
+            data: {},
+            loans:{},
             navbar:false,
             title:true,
+            id:0,
+            amount:0,
+            payments:0,
+            numberAccountDestini:"",
         }
     },
     created() {
         this.loadData();
+        this.loansExist();
     },
     methods: {
         loadData: function () {
             axios.get("/api/clients/current")
                 .then(response => {
                     this.data = response.data;
-                    this.data.accounts.sort((a, b) => a.id - b.id);
                 })
                 .catch(err => console.log(err));
         },
-        grapicAccount: function (account) {
-            let options = {
-                chart: {
-                    type: 'line'
-                },
-                series: [{
-                    name: 'sales',
-                    data:account.transaction.map(transaction=>transaction.amount),
-                }],
-                xaxis: {
-                    categories: account.transaction.map(transaction=>transaction.date.split("T")[0]),
-                }
-            }
-            let elementId=document.getElementById("grapic" + account.id);
-            if(!elementId) return;
-            elementId.innerHTML="";
-            let chart = new ApexCharts(elementId, options);
-            chart.render();
-        }, 
-        newAccount:function() {
-            axios.post('/api/clients/current/accounts') 
-                .then(response => {
-                    this.loadData();
-                })
-                .catch(error => {
-                    this.error = error.response.data.message;
-                });
+        loansExist:function(){
+            axios.get("/api/loans")
+            .then(response=>{
+                this.loans=response.data;
+            }).catch(err=>console.log(err));
+        },
+        newLoan:function(){
+            axios.post("/api/loans",{"id":this.id,"amount":this.amount,"payments":this.payments,"numberAccountDestini":this.numberAccountDestini})
+        .then(response=>{
+            
+        }).catch(err=>{
+            console.log(err);
+        })
         },
         logout:function() {
             axios.post('/api/logout') 

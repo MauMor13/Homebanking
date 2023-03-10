@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 import static com.mindhub.homebanking.utils.Utilitis.GenereteNumber;
 import static java.util.stream.Collectors.toList;
 @RequestMapping("/api")
@@ -25,19 +24,19 @@ public class ClientController {
     private ClientRepository clientRepository;
     @Autowired
     private AccountRepository accountRepository;
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients(){
         return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
     }
-    @RequestMapping("clients/current")
+    @GetMapping("clients/current")
     public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public Optional<ClientDTO> getClient(@PathVariable Long id){
         return clientRepository.findById(id).map(client -> new ClientDTO(client));
     }
-    @RequestMapping(path = "/clients", method = RequestMethod.POST)
+    @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName,
             @RequestParam String lastName,

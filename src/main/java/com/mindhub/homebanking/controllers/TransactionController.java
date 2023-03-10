@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import static com.mindhub.homebanking.models.TransactionType.CREDIT;
 import static com.mindhub.homebanking.models.TransactionType.DEBIT;
@@ -28,15 +25,15 @@ public class TransactionController {
     @Autowired
     ClientRepository clientRepository;
     @Transactional
-    @RequestMapping(path = "/transactions",method = RequestMethod.POST)
+    @PostMapping("/transactions")
     public ResponseEntity<Object> newTransactions(
             Authentication authentication,
-            @RequestParam Double amount,
+            @RequestParam(required = false) Double amount,
             @RequestParam String description,
             @RequestParam String numAccountOrigin,
             @RequestParam String numAccountDestini){
         Client clientAuthen = clientRepository.findByEmail(authentication.getName());
-        if(amount.isNaN() || amount == 0)
+        if(amount == null || amount == 0)
             return new ResponseEntity<>("Missing amount",HttpStatus.BAD_REQUEST);
         if(description.isEmpty())
             return new ResponseEntity<>("Missing description",HttpStatus.BAD_REQUEST);

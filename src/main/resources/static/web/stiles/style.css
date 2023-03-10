@@ -15,39 +15,120 @@
     --color-dark: #0F1C30;
     --color-light: #C0D0EF;
 }
-
-.avatar {
-    width: 3rem;
+main{
+    min-height: 95vh;
 }
-
-.icons {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    width: 2rem;
+/*footer*/
+footer{
+    background-color: #1026705f;
+    min-height: 15vh;
+    border-top:1px solid #000;
+}
+.icon-footer1{
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border:1px solid #000;
+    transition: all .3s;
+}
+.icon-footer2{
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border:1px solid #000;
+    transition: all .3s;
+}
+.icon-footer3{
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border:1px solid #000;
+    transition: all .3s;
+}
+.icon-footer4{
+    border-radius: 100%;
+    display: flex;
+    border:1px solid #000;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    transition: all .3s;
+}
+.icon-footer1:hover{
+    background-color:#0e76a8;
+    border:1px solid white;
+}
+.icon-footer2:hover{
+    background-color: #868686;
+    border:1px solid white;
+}
+.icon-footer3:hover{
+    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); 
+    border:1px solid white;
+}
+.icon-footer4:hover{
+    background-color:  #3b5998;
+    border:1px solid white;
+}
+/*header*/
+header {
+    background-color: #1026705f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid #000;
+    min-height: 5vh;
+}
+.title{
+    max-width:40rem ;
+}
+.container_icon_exit{
+    justify-content: center;
+    border-bottom: 1px solid var(--color-light);
+    border-radius: 2rem 2rem 2rem 2rem;
+    margin: 1rem;
+    width: 4rem;
+}
+.container_icon_nav{
+    justify-content: center;
+    margin: 1rem;
+    width: 4rem;
 }
 .icon-nav{
-    position: absolute;
-    top: 0;
-    margin: 1rem;
+    position: sticky;
+    top: 1rem;
     width: 3rem;
+    transition: all .3s;
 }
-
-.icon_help {
-    width: 2.6rem;
+.icon-nav:hover{
+    transform: scale(1.4);
+    margin: .5rem;
 }
-.icon_help:hover{
-    transform: scale(1.2);
+.icon_exit{
+    position: sticky;
+    top: 1rem;
+    width: 3rem;
+    transition: all .3s;
 }
-
-.content {
-    font-family: "Hind Vadodara", -apple-system, BlinkMacSystemFont, Segoe UI,
-        Helvetica Neue, Arial, sans-serif;
-    min-height: 100vh;
-    max-width: 100vw;
-    color: white;
-    display: grid;
-    grid-template-columns: 36vh auto;
+.icon_exit:hover{
+    transform: scale(1.4);
+    margin: .5rem;
 }
+/*** createCards***/
 .createCard{
     margin: 2rem;
     padding: 1rem;
@@ -56,17 +137,19 @@
     width: 20rem;
 }
 .image_night {
-    background-image: linear-gradient(90deg, rgba(148, 167, 171, 0.645) 11%, rgba(2,0,36,0.8521533613445378) 90%), url(../images/background/pexels-david-skyrius-2129796.jpg);
+    background-image: url(../images/background/pexels-david-skyrius-2129796.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .image_day {
-    background-image: linear-gradient(90deg, rgba(148, 167, 171, 0.645) 11%, rgba(2,0,36,0.8521533613445378) 90%), url(../images/background/pexels-guilherme-rossi-1755693.jpg);
+    background-image: url(../images/background/pexels-guilherme-rossi-1755693.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+    min-height: 100vh;
+    color: white;
 }
 /*form-transfer*/
 .form-transfer{
@@ -78,16 +161,34 @@
     padding: 1rem;
 }
 /*nav*/
+.icon-exit-nav{
+    width: 3rem;
+    transition: all .3s;
+}
+.icon-exit-nav:hover{
+    transform: rotate(180deg);
+}
+.avatar {
+    width: 3rem;
+}
+.icons {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 2rem;
+}
 .sidebar {
-    position: sticky;
+    position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
+    z-index: 1000;
     padding-top: .5rem;
     border-right: 1px solid var(--color-neutral);
+    background-color: #102670de ;
     backdrop-filter: blur(10px);
     border-radius: 0rem 2rem 2rem 0rem;
-    min-width: 12rem;
+    contain: content;
+    min-width: 14rem;
     min-height: 35rem;
     height: 100vh;
 }
@@ -101,6 +202,7 @@
 }
 
 .sidebar section {
+
     border-bottom: 1px solid var(--color-neutral);
 }
 
@@ -108,6 +210,7 @@
     padding: .3rem;
     margin-top: 1.2rem;
     width: 90%;
+    transition: all .3s;
 }
 
 .sidebar span {
@@ -119,23 +222,6 @@
     background-color: #c0d0ef95;
     border-radius: 3rem;
 }
-
-/*bar options and search*/
-.container_select {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid var(--color-light);
-    border-radius: 2rem 2rem 2rem 2rem;
-    backdrop-filter: blur(10px);
-    top: 0;
-    right: 0;
-    width: 4rem;
-    margin-right: 1rem;
-    margin-top: 1rem;
-    
-}
-
 /*logo bank*/
 .logo {
     width: 5rem;
@@ -146,10 +232,13 @@
 .account {
     width: 15rem;
     height: 15rem;
-    border: 2px solid #000000;
-    border-radius: 10%;
-    background-color: rgba(255, 255, 255, 0.644);
-    box-shadow: .5rem .5rem #00000051;
+    color: white;
+    border: 2px solid #00000053;
+    border-radius: 1rem;
+    background-color: #6969698d ;
+    box-shadow: .5rem .5rem black;
+    -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
+    text-shadow: 2px 2px 2px #000;
 }
 
 /*------table transactions--------*/

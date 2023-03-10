@@ -1,11 +1,9 @@
 package com.mindhub.homebanking.dtos;
-
 import com.mindhub.homebanking.models.ClientLoan;
-
 public class ClientLoanDTO {
 
     private final long id;
-    private final int amount;
+    private final double amount;
     private final int payments;
     private final Long Loans_id;
     private final String name;
@@ -26,7 +24,7 @@ public class ClientLoanDTO {
         return id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
