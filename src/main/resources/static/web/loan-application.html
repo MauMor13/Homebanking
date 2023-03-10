@@ -75,12 +75,12 @@
                 <h3>Form Loans</h3>
                 <fieldset>Loan Type
                     <select class="form-select mt-1" aria-label="Default select example" v-model="id" required="id>0">
-                        <option v-for="loan of loans" value="loan.id">{{loan.name}}</option>
+                        <option v-for="loan of loans" :value="loan.id">{{loan.name}}</option>
                     </select>
                 </fieldset>
                 <fieldset class="mt-2">Loan Payments
                     <select class="form-select mt-1" aria-label="Default select example" v-model="payments" required="payments>0">
-                        <option v-for="payment of loans[1].payments">{{payment}}</option>
+                        <option v-for="payment of filterLoans()">{{payment}}</option>
                     </select>
                 </fieldset>
                 <fieldset class="mt-2">Destination Account
@@ -187,8 +187,3 @@
 </body>
 
 </html>
-<!-- Un campo para elegir el tipo de préstamo
-Un campo para indicar los pagos disponibles del tipo de crédito seleccionado
-Un campo para indicar el monto a solicitar
-Un campo para indicar la cuenta de destino
-Alguna manera de ver el monto de cada cuota (recuerda sumar la tasa de interes seleccionada) -->

@@ -70,7 +70,7 @@
                 <table class="table">
                     <thead>
                         <th>Type</th>
-                        <th v-show="!title">Description</th>
+                        <th v-show="title">Description</th>
                         <th>Date</th>
                         <th>Amount</th>
                     </thead>
@@ -79,7 +79,7 @@
                             <tr v-for="transaction in account.transaction">
                                 <td :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
                                     {{transaction.type}}</td>
-                                <td v-show="!title" class="text-light">{{transaction.description}}</td>
+                                <td v-show="title" class="text-light">{{transaction.description}}</td>
                                 <td class="text-light">{{transaction.date.split("T")[0]}}</td>
                                 <td class="text-light">$ {{transaction.amount.toLocaleString('de-DE', { style:
                                     'currency', currency: 'USD' })}}</td>

@@ -4,7 +4,7 @@ createApp({
     data() {
         return {
             data: {},
-            loans:{},
+            loans:[],
             navbar:false,
             title:true,
             id:0,
@@ -31,6 +31,9 @@ createApp({
             .then(response=>{
                 this.loans=response.data;
             }).catch(err=>console.log(err));
+        },
+        filterLoans:function(){
+            return this.loans.filter(loan=>loan.id==this.id)[0]?.payments;
         },
         newLoan:function(){
             axios.post("/api/loans",{"id":this.id,"amount":this.amount,"payments":this.payments,"numberAccountDestini":this.numberAccountDestini})
