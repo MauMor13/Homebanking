@@ -21,8 +21,12 @@ createApp({
                     window.location.href = '/web/accounts.html';
                 })
                 .catch(error => {
-                    console.log(error);
                     this.error = error.response.data.message;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'I entered a wrong parameter',
+                    })
                 });
         },
         register:function() {
@@ -36,18 +40,24 @@ createApp({
                     this.lastName= '';
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log(error)
                     this.error = error.response.data.message;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data,
+                    })
                 });
         },
         loginRegister:function(value){
+            this.form=true;
             let form=document.querySelector('.card-3d-wrapper');
             if (value=='register'){
-            this.form=true;
-            form.classList.add('girarLogin');}
+            form.classList.add('girarLogin');
+            }
             else if(value=='login'){
             form.classList.remove('girarLogin');
-            this.form=true;}
+            }
         },
     },
 }).mount('#app')

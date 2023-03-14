@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,48 +15,141 @@
 <body>
     <div id="app">
         <header>
-            <nav class="title navbar p-0">
+            <nav class="title navbar p-0 navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center">
                         <img src="./images/icons/Logo.svg" alt="logo">
                         <h1>Diamond Bank</h1>
                     </div>
-                    <button class="navbar-toggler nav-button" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" @click="loginRegister('login')" href="#">Login</a>
-                                </li>
-                            </ul>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" href="#about">About Us</a>
+                            <a class="nav-link" href="#contact">Contact</a>
+                            <a class="nav-link" @click="loginRegister('login')">Login</a>
+                            <a class="nav-link" @click="loginRegister('register')">Register</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
         <main>
-            <div class="info d-flex">
-                <div class="kodfun">
-                    <div style="background-image:url(./images/indexImage/pexels-ivan-samkov-7621140.jpg);">
+            <template v-if="form">
+                <div class="flex-wrap mt-4 d-flex justify-content-around align-items-center">
+                    <div class="text-form">
+                        <p>If you are not a customer yet, you can click on the following button to register with your
+                            data
+                        </p>
+                        <button @click="loginRegister('register')" class="btn btn-dark mb-3 p-2">Click here to
+                            Register</button>
                     </div>
-                    <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
+                    <div class="text-form">
+                        <p>If you are already one of our clients, you can enter by clicking on the following button</p>
+                        <button @click="loginRegister('login')" class="btn btn-dark mb-3 p-2">Click here to
+                            Login</button>
                     </div>
-                    <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
+                    <div class="card-3d-wrap" id="login">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Enter Your User Data</h4>
+                                        <div class="form-group">
+                                            <input type="email" v-model="email" name="logemail" class="form-style"
+                                                placeholder="Your Email" id="logemail" autocomplete="off">
+                                            <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg"
+                                                alt="">
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <input type="password" v-model="password" name="logpass" class="form-style"
+                                                placeholder="Your Password" id="logpass" autocomplete="off">
+                                            <img class="input-icon"
+                                                src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
+                                                alt="">
+                                        </div>
+                                        <button @click="login" class="btn mt-4">Login</button>
+                                        <!-- <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
+                                                password?</a></p> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-2">Enter Your Data</h4>
+                                        <div class="form-group mt-2">
+                                            <input type="text" class="form-style" v-model="firstName"
+                                                placeholder="Your First Name" autocomplete="off">
+                                            <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
+                                                alt="firstName">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input type="text" class="form-style" v-model="lastName"
+                                                placeholder="Your Last Name" autocomplete="off">
+                                            <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
+                                                alt="lastName">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input type="email" name="logemail" v-model="email" class="form-style"
+                                                placeholder="Your Email" autocomplete="off">
+                                            <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg"
+                                                alt="email">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input type="password" v-model="password" name="logpass" class="form-style"
+                                                placeholder="Your Password" autocomplete="off">
+                                            <img class="input-icon"
+                                                src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
+                                                alt="password">
+                                        </div>
+                                        <button @click="register" class="btn mt-4">Sign Up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <section class="p-3">
+                <hr class="division">
+            </template>
+            <div class="info d-flex">
+                <div class="kodfun">
+                    <div style="background-image:url(./images/indexImage/campaign-creators-pypeCEaJeZY-unsplash.jpg);">
+                        <span class="span-1 text-center">
+                            <h3 class="mb-2">Transactions</h3>
+                            <p>At Diamante Bank, you'll also find secure and efficient transaction services, such as
+                                electronic transfers and online payments. With these options, you can manage your
+                                finances from the comfort of your home. The bank ensures that all transactions are
+                                conducted safely and reliably, so you can have peace of mind knowing that your finances
+                                are protected.</p>
+                        </span>
+                    </div>
+                    <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
+                        <span class="span-1 text-center">
+                            <h3 class="mb-2">Loans</h3>
+                            <p>At Diamante Bank, you'll find a wide range of loan options to help you achieve your
+                                financial goals. From personal loans to mortgages, the bank can offer solutions to
+                                finance your projects. With competitive interest rates and flexible terms, the
+                                application process is easy and quick. Get the money you need to achieve your goals with
+                                Diamante Bank loans!</p>
+                        </span>
+                    </div>
+                    <div style="background-image:url(./images/indexImage/blake-wisz-q3o_8MteFM0-unsplash.jpg);">
+                        <span class="span-1 text-center">
+                            <h3 class="mb-2">Bank cards</h3>
+                            <p>At Diamante Bank, you'll also find secure and efficient transaction services, such as
+                                electronic transfers and online payments. With these options, you can manage your
+                                finances from the comfort of your home. The bank ensures that all transactions are
+                                conducted safely and reliably, so you can have peace of mind knowing that your finances
+                                are protected.</p>
+                        </span>
+                    </div>
+                </div>
+                <section class="p-3 text-center" id="about">
+                    <h2 class="m-2">About Us</h2>
                     <p>At Banco Diamante, our priority is to offer exceptional banking services to our customers. With
                         our
                         savings accounts, credit cards, and personal loans, we help our clients achieve their financial
@@ -65,86 +159,109 @@
                         apart from the rest.</p>
                 </section>
             </div>
-            <div v-show="form" class="flex-wrap d-flex justify-content-around align-items-center">
-                <div class="text-form">
-                    <p>If you are not a customer yet, you can click on the following button to register with your data
-                    </p>
-                    <button @click="loginRegister('register')" class="btn btn-dark mb-3 p-2">Click here to
-                        Register</button>
-                </div>
-                <div class="text-form">
-                    <p>If you are already one of our clients, you can enter by clicking on the following button</p>
-                    <button @click="loginRegister('login')" class="btn btn-dark mb-3 p-2">Click here to
-                        Login</button>
-                </div>
-                <div class="card-3d-wrap">
-                    <div class="card-3d-wrapper">
-                        <div class="card-front">
-                            <div class="center-wrap">
-                                <div class="section text-center">
-                                    <h4 class="mb-4 pb-3">Enter Your User Data</h4>
-                                    <div class="form-group">
-                                        <input type="email" v-model="email" name="logemail" class="form-style"
-                                            placeholder="Your Email" id="logemail" autocomplete="off">
-                                        <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg" alt="">
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <input type="password" v-model="password" name="logpass" class="form-style"
-                                            placeholder="Your Password" id="logpass" autocomplete="off">
-                                        <img class="input-icon"
-                                            src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
-                                            alt="">
-                                    </div>
-                                    <button @click="login" class="btn mt-4">Login</button>
-                                    <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
-                                            password?</a></p>
-                                </div>
-                            </div>
+            <hr class="division">
+            <div class="info1 d-flex">
+                <section class="p-3 privacy">
+                    <h2 class="m-2">Privacy Policy</h2>
+                    <ul>
+                        <li>
+                            <h6>Information We Collect:</h6>We collect personal information, such as your name, address,
+                            phone number, and email address, when you open an account or use our services. We may also
+                            collect information about your financial transactions and activities.
+                        </li>
+                        <li>
+                            <h6>How We Use Your Information</h6>We use the information collected to provide and improve
+                            our services, communicate with you, and comply with our legal and regulatory obligations. We
+                            do not share your information with third parties unless it is necessary to provide the
+                            services you have requested or as required by law.
+                        </li>
+                        <li>
+                            <h6>How We Protect Your Information</h6>We take reasonable measures to protect your personal
+                            information, including the use of encryption technology and physical and administrative
+                            security measures.
+                        </li>
+                        <li>
+                            <h6>Accessing and Updating Your Personal Information</h6>You can access and update your
+                            personal information at any time through your online account or by contacting our customer
+                            service team.
+                        </li>
+                        <li>
+                            <h6>Notification of Changes to This Policy</h6>Any changes to this policy will be posted on
+                            our website. If changes are significant, you will be notified by email or other appropriate
+                            means.
+                        </li>
+                    </ul>
+                </section>
+                <div id="carouselExampleSlidesOnly" class="carousel img-carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./images/indexImage/towfiqu-barbhuiya-HNPrWOH2Z8U-unsplash.jpg" class="d-block w-100 rounded" alt="indexImage">
                         </div>
-                        <div class="card-back">
-                            <div class="center-wrap">
-                                <div class="section text-center">
-                                    <h4 class="mb-4 pb-2">Enter Your Data</h4>
-                                    <div class="form-group mt-2">
-                                        <input type="text" class="form-style" v-model="firstName"
-                                            placeholder="Your First Name" autocomplete="off">
-                                        <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
-                                            alt="firstName">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <input type="text" class="form-style" v-model="lastName"
-                                            placeholder="Your Last Name" autocomplete="off">
-                                        <img class="input-icon" src="./images/icons/user-svgrepo-com (1).svg"
-                                            alt="lastName">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <input type="email" name="logemail" v-model="email" class="form-style"
-                                            placeholder="Your Email" autocomplete="off">
-                                        <img class="input-icon" src="./images/icons/email-svgrepo-com (1).svg"
-                                            alt="email">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <input type="password" v-model="password" name="logpass" class="form-style"
-                                            placeholder="Your Password" autocomplete="off">
-                                        <img class="input-icon"
-                                            src="./images/icons/lock-security-protection-secure-safety-password-svgrepo-com.svg"
-                                            alt="password">
-                                    </div>
-                                    <button @click="register" class="btn mt-4">Sign Up</button>
-                                </div>
-                            </div>
+                        <div class="carousel-item">
+                            <img src="./images/indexImage/pexels-ivan-samkov-7621140.jpg" class="d-block w-100 rounded" alt="indexImage">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./images/indexImage/pexels-andrea-piacquadio-3760069.jpg" class="d-block w-100 rounded" alt="indexImage">
                         </div>
                     </div>
                 </div>
             </div>
+            <hr class="division">
+            <div class="info">
+            </div>
         </main>
+        <footer>
+            <div class="ps-4 pe-4 pt-2 d-flex justify-content-around  flex-wrap">
+                <section id="contact">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
+                        <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
+                        <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h5>Social Networks</h5>
+                    <ul>
+                        <li>Facebook: <a class="enlace" href="https://es-la.facebook.com/">Diamond Bank</a></li>
+                        <li>Twitter: <a class="enlace" href="https://twitter.com/?lang=es">@DiamondBank_</a></li>
+                        <li>Instagram: <a class="enlace" href="https://www.instagram.com/">@diamondbank</a></li>
+                        <li>LinkedIn: <a class="enlace" href="https://ar.linkedin.com/">Diamond Bank</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h5>Join Us</h5>
+                    <ul>
+                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Credit Analyst</a></li>
+                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Investment Specialist</a></li>
+                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Compliance Officer</a></li>
+                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Financial Data Analyst</a></li>
+                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Risk Analyst</a></li>
+                    </ul>
+                </section>
+            </div>
+            <hr class="m-0">
+            <div class="flex-wrap d-flex justify-content-between align-items-center ps-4 pe-4">
+                <h6>Developer: Mauricio Mores</h6>
+                <div class="d-flex justify-content-evenly">
+                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
+                            src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
+                            src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
+                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
+                            src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
+                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
+                            src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+                </div>
+            </div>
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="./js/index.js"></script>
 </body>
 

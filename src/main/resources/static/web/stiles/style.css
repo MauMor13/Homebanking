@@ -16,17 +16,30 @@
     --color-light: #C0D0EF;
 }
 
+:root {
+    --color1: #f2f2f2;
+    --color2: #348e91;
+    --color3: #1c5052;
+    --color4: #213635;
+    --color5: #102670;
+    --footer: #21363587;
+}
+
 main {
     min-height: 95vh;
 }
 
 /*footer*/
 footer {
-    background-color: #1026705f;
+    background-color: var(--footer);
     min-height: 15vh;
     border-top: 1px solid #000;
+    margin-top: 2rem;
 }
-
+.enlace{
+    color: white;
+    text-decoration: none;
+}
 .icon-footer1 {
     border-radius: 100%;
     display: flex;
