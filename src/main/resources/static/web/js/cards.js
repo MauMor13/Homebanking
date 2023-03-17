@@ -13,6 +13,7 @@ createApp({
     },
     created() {
         this.loadData();
+        this.loadCards();
     },
     methods: {
         loadData: function () {
@@ -20,7 +21,14 @@ createApp({
                 .then(response => {
                     this.data = response.data;
                     this.data.accounts.sort((a, b) => a.id - b.id);
-                    this.allCards = this.data.cards;
+                })
+                .catch(err => console.log(err));
+        },
+        loadCards: function () {
+            axios.get("/api/clients/current/cards")
+                .then(response => {
+                    console.log(response.data);
+                    this.allCards = response.data;
                     this.cardType()
                 })
                 .catch(err => console.log(err));

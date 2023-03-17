@@ -61,7 +61,7 @@ public class Utilitis {
             else{
                 type=TransactionType.CREDIT;
             }
-            Transaction trans = new Transaction(type,amount,description, LocalDateTime.now());
+            Transaction trans = new Transaction(type,amount,description, LocalDateTime.now(),amount);
             trans.setDate(LocalDateTime.now().plusMonths(rand.nextInt(9)).plusDays(rand.nextInt(10)));
             account.addTransaction(trans);
         }

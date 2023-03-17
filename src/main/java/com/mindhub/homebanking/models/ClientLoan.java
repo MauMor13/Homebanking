@@ -19,9 +19,8 @@ public class ClientLoan {
     private Loan loan;
     public ClientLoan(){}
 
-    public ClientLoan(Double amount, Integer payments) {
+    public ClientLoan(double amount, Integer payments) {
         this.amount = amount;
-
         this.payments = payments;
     }
     public long getId() {

@@ -94,7 +94,7 @@
                         <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-text">.00</span>
                     </div>
-                    <p v-show="amount>0">{{payments}}  installments of ${{(amount*1.2)/payments}}</p>
+                    <p v-show="amount>0">{{payments}}  installments of ${{(amount*loan.id.percentage/payments}}</p>
                 </fieldset>
                 <button class="button-form" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <p>Apply for Loan</p>

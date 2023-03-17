@@ -1,19 +1,27 @@
 package com.mindhub.homebanking.controllers;
+import com.mindhub.homebanking.dtos.TransactionDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
+import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import static com.mindhub.homebanking.models.TransactionType.CREDIT;
 import static com.mindhub.homebanking.models.TransactionType.DEBIT;
+import static java.util.stream.Collectors.toList;
 
 @RequestMapping("/api")
 @RestController
@@ -52,8 +60,8 @@ public class TransactionController {
 
         Account accountOrigin = accountRepository.findByNumber(numAccountOrigin);
         Account accountDestini = accountRepository.findByNumber(numAccountDestini);
-        Transaction transactionOrigin = new Transaction(DEBIT,amount,description, LocalDateTime.now());
-        Transaction transactionDestini = new Transaction(CREDIT,amount,description,LocalDateTime.now());
+        Transaction transactionOrigin = new Transaction(DEBIT,amount*-1,description.concat(accountDestini.getNumber()), LocalDateTime.now(),accountOrigin.getBalance()-amount);
+        Transaction transactionDestini = new Transaction(CREDIT,amount,description.concat(accountOrigin.getNumber()),LocalDateTime.now(),accountDestini.getBalance()+amount);
         accountOrigin.addTransaction(transactionOrigin);
         accountDestini.addTransaction(transactionDestini);
         accountOrigin.setBalance(accountOrigin.getBalance()-amount);
@@ -63,5 +71,39 @@ public class TransactionController {
         transactionRepository.save(transactionOrigin);
         transactionRepository.save(transactionDestini);
         return new ResponseEntity<>( "successful transaction", HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/filter-transactions")//nuevo servlet
+    public ResponseEntity<?> filterTransactions(@RequestParam String fromAccount,
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+                                                   @RequestParam (required = false) String description, @RequestParam (required = false) Double maxAmount,
+                                                   @RequestParam (required = false) Double minAmount,
+                                                   @RequestParam (required = false) TransactionType type ,
+                                                   Authentication authentication){
+        Client client = clientRepository.findByEmail(authentication.getName());
+        Account currentAccount = accountRepository.findByNumber(fromAccount);
+        Set<Transaction> transaccionesFiltradas = currentAccount.getTransactions();
+        if (startDate.isEqual(endDate))
+            return new ResponseEntity<>("dates can't be the same" , HttpStatus.BAD_REQUEST);
+        if (startDate == null && endDate != null){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getDate().isBefore(endDate) || transaction.getDate().equals(endDate) ).collect(Collectors.toSet()); }
+        if (startDate != null && endDate == null){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getDate().isAfter(startDate) || transaction.getDate().equals(startDate) ).collect(Collectors.toSet()); }
+        if (startDate != null && endDate != null && startDate.isBefore(endDate)){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getDate().isAfter(startDate) && transaction.getDate().isBefore(endDate) || transaction.getDate().equals(endDate)  || transaction.getDate().equals(startDate) ).collect(Collectors.toSet()); }
+        if (description != null && !description.isEmpty()){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getDescription().contains(description)).collect(Collectors.toSet()); }
+        if(maxAmount != null && !maxAmount.isNaN() && minAmount == null){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getAmount() <= maxAmount).collect(Collectors.toSet()); }
+        if(minAmount != null && !minAmount.isNaN() && maxAmount == null){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getAmount() >= minAmount).collect(Collectors.toSet()); }
+        if(maxAmount != null && !maxAmount.isNaN() && minAmount != null && !minAmount.isNaN()){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getAmount() >= minAmount && transaction.getAmount() <= maxAmount).collect(Collectors.toSet()); }
+        if(type == TransactionType.CREDIT){
+            transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getType() == TransactionType.CREDIT).collect(Collectors.toSet()); }
+        if (type == TransactionType.DEBIT){
+            transaccionesFiltradas =transaccionesFiltradas.stream().filter(transaction -> transaction.getType() == TransactionType.DEBIT).collect(Collectors.toSet()); }
+
+        return ResponseEntity.ok(transaccionesFiltradas.stream().map(TransactionDTO::new).sorted((a,b)->b.getDate().compareTo(a.getDate())).collect(toList())) ;
     }
 }

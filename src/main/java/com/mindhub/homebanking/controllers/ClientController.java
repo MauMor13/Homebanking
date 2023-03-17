@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import static com.mindhub.homebanking.models.AccountType.SAVING;
 import static com.mindhub.homebanking.utils.Utilitis.GenereteNumber;
 import static java.util.stream.Collectors.toList;
 @RequestMapping("/api")
@@ -26,7 +28,7 @@ public class ClientController {
     private AccountRepository accountRepository;
     @GetMapping("/clients")
     public List<ClientDTO> getClients(){
-        return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
+        return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
     }
     @GetMapping("clients/current")
     public ClientDTO getCurrentClient(Authentication authentication) {
@@ -34,7 +36,7 @@ public class ClientController {
     }
     @GetMapping("/clients/{id}")
     public Optional<ClientDTO> getClient(@PathVariable Long id){
-        return clientRepository.findById(id).map(client -> new ClientDTO(client));
+        return clientRepository.findById(id).map(ClientDTO::new);
     }
     @PostMapping("/clients")
     public ResponseEntity<Object> register(
@@ -52,7 +54,7 @@ public class ClientController {
             return new ResponseEntity<>("Missing password", HttpStatus.BAD_REQUEST);
         if (clientRepository.findByEmail(email) !=  null)
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
-        Account newAccount=new Account(GenereteNumber(accountRepository), LocalDateTime.now(),0);
+        Account newAccount=new Account(GenereteNumber(accountRepository), LocalDateTime.now(),0,SAVING);
         Client newClient=new Client(firstName, lastName, email, passwordEncoder.encode(password));
         newClient.addAccount(newAccount);
         clientRepository.save(newClient);

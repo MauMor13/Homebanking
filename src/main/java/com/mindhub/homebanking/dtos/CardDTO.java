@@ -12,6 +12,7 @@ public class CardDTO {
     private LocalDate fromDate;
     private LocalDate thruDate;
     private String cardHolder;
+    private Boolean active;
     public CardDTO() {}
     public CardDTO(Card card) {
         this.id = card.getId();
@@ -29,8 +30,9 @@ public class CardDTO {
         this.thruDate = card.getThruDate();
 
         this.cardHolder = card.getCardHolder();
-    }
 
+        this.active = card.getActive();
+    }
     public Long getId() {
         return id;
     }
@@ -53,4 +55,5 @@ public class CardDTO {
     public String getCardHolder() {
         return cardHolder;
     }
+    public Boolean getActive() { return active; }
 }

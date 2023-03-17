@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.toList;
 @Entity
 public class Client {
@@ -44,6 +46,8 @@ public class Client {
         clientLoan.setClient(this);
         clientLoans.add(clientLoan);
     }
+    public Set<Account> getAccountsActive() { return accounts.stream().filter(Account::getActive).collect(Collectors.toSet()); }
+    public Set<Card> getCardsActive() { return cards.stream().filter(Card::getActive).collect(Collectors.toSet()); }
     public long getId(){
         return id;
     }
@@ -71,9 +75,7 @@ public class Client {
         this.email = email;
     }
     @JsonIgnore
-    public List<Loan> getLoans() {
-        return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(toList());
-    }
+    public List<Loan> getLoans() { return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(toList()); }
     @Override
     public  String toString(){
         return firstName+" "+lastName+" "+email;

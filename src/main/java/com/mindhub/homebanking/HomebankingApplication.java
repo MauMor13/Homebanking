@@ -10,7 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import static com.mindhub.homebanking.models.AccountType.CURRENT;
+import static com.mindhub.homebanking.models.AccountType.SAVING;
 import static com.mindhub.homebanking.models.CardColor.*;
 import static com.mindhub.homebanking.models.CardType.CREDIT;
 import static com.mindhub.homebanking.models.CardType.DEBIT;
@@ -35,10 +36,10 @@ public class HomebankingApplication {
 			Client client=new Client("Jack", "Bauer","melba@mindhub.com",passwordEncoder.encode("12345"));
 			Client client2=new Client("Carl", "Ironman","ironman@mindhub.com",passwordEncoder.encode("67890"));
 			Client admin=new Client("Admin","Karl","adminkarl@gmail.com",passwordEncoder.encode("123456"));
-			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000);
-			Account vin002=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),7500);
-			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200);
-			Account vin004=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),300);
+			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000,SAVING);
+			Account vin002=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),7500,CURRENT);
+			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200,SAVING);
+			Account vin004=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),300,CURRENT);
 
 			//utilizo método para generar transacciones aleatorias
 			generateRandomTransactions(vin001,15);
@@ -46,9 +47,9 @@ public class HomebankingApplication {
 			generateRandomTransactions(vin003,15);
 			generateRandomTransactions(vin004,15);
 
-			Loan loan1=new Loan("Mortgage",500000, List.of(12,24,36,48,60));
-			Loan loan2=new Loan("Personal",100000, List.of(6,12,24));
-			Loan loan3=new Loan("Automotive",300000, List.of(6,12,24,36));
+			Loan loan1=new Loan("Mortgage",500000, List.of(12,24,36,48,60),0.3F);
+			Loan loan2=new Loan("Personal",100000, List.of(6,12,24),1.56F);
+			Loan loan3=new Loan("Automotive",300000, List.of(6,12,24,36),0.2F);
 
 			ClientLoan pres1=new ClientLoan(400000.0, 60);
 			ClientLoan pres2=new ClientLoan(50000.0, 12);
