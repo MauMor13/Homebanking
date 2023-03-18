@@ -59,7 +59,7 @@ public class CardController {
         cardService.save(card);
         return new ResponseEntity<>("Card created successfully",HttpStatus.CREATED);
     }
-    @PatchMapping ("/card-delete")//nuevo servlet
+    @PatchMapping ("/card-delete")//nuevo servlet-
     public ResponseEntity<Object> deleteCard(
             Authentication authentication,
             @RequestParam String numberCard){
@@ -74,8 +74,8 @@ public class CardController {
         cardService.save(card);
         return new ResponseEntity<>("Card removed successfully",HttpStatus.ACCEPTED);
     }
-    @Transactional
-    @PostMapping("/pay")//nuevo servlet
+
+    @PostMapping("/pay-pay")//nuevo servlet-
     public ResponseEntity <Object> payCards(
             @RequestBody NewPayDTO newPayDTO){
         Card card = cardService.findByNumber(newPayDTO.getNumber());

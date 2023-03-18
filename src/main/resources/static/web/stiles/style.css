@@ -26,6 +26,8 @@
 }
 
 main {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     min-height: 95vh;
 }
 
@@ -36,10 +38,12 @@ footer {
     border-top: 1px solid #000;
     margin-top: 2rem;
 }
-.enlace{
+
+.enlace {
     color: white;
     text-decoration: none;
 }
+
 .icon-footer1 {
     border-radius: 100%;
     display: flex;
@@ -124,8 +128,6 @@ header {
 
 .container_icon_exit {
     justify-content: center;
-    border-bottom: 1px solid var(--color-light);
-    border-radius: 2rem 2rem 2rem 2rem;
     margin: 1rem;
     width: 4rem;
 }
@@ -137,8 +139,9 @@ header {
 }
 
 .icon-nav {
-    position: sticky;
+    position: absolute;
     top: 1rem;
+    left: 1rem;
     width: 3rem;
     transition: all .3s;
 }
@@ -149,7 +152,8 @@ header {
 }
 
 .icon_exit {
-    position: sticky;
+    position: absolute;
+    right: 1rem;
     top: 1rem;
     width: 3rem;
     transition: all .3s;
@@ -216,6 +220,43 @@ header {
     width: 2rem;
 }
 
+.icons-delete {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 2rem;
+    transition: all .3s;
+}
+
+.icons-delete:hover{
+    animation: vibrate 0.5s linear infinite;
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    20% {
+        transform: translate(-2px, -2px);
+    }
+
+    40% {
+        transform: translate(2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(-2px, 2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
 .sidebar {
     position: absolute;
     left: 0;
@@ -271,8 +312,21 @@ header {
 
 /*div account*/
 .account {
-    width: 15rem;
+    width: 20rem;
     height: 15rem;
+    color: white;
+    border: 2px solid #00000053;
+    border-radius: 1rem;
+    background-color: #6969698d;
+    box-shadow: .5rem .5rem black;
+    -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
+    text-shadow: 2px 2px 2px #000;
+}
+
+.account-type {
+    max-width: 20rem;
+    width: 20rem;
+    min-height: 15rem;
     color: white;
     border: 2px solid #00000053;
     border-radius: 1rem;
@@ -670,4 +724,29 @@ h2 {
     position: relative;
     width: 15px;
     transition-delay: 0.2s;
+}
+
+/************Botones***************/
+.btn {
+    border-radius: 4px;
+    background-color: var(--color3);
+    border: 1px solid black;
+    color: white;
+}
+
+.a-button {
+    text-decoration: none;
+    color: white;
+}
+
+.btn:active,
+.btn:focus {
+    border: 1px solid black;
+    background-color: var(--color2);
+}
+
+.btn:hover {
+    border: 1px solid black;
+    background-color: var(--color4);
+    box-shadow: 0 8px 24px 0 var(--color1);
 }

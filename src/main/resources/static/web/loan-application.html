@@ -94,7 +94,7 @@
                         <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-text">.00</span>
                     </div>
-                    <p v-show="amount>0">{{payments}}  installments of ${{(amount*loan.id.percentage/payments}}</p>
+                    <p v-show="amount>0">{{payments}}  installments of ${{amount*loan.id.percentage/payments}}</p>
                 </fieldset>
                 <button class="button-form" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <p>Apply for Loan</p>
@@ -142,48 +142,52 @@
                 </p>
             </div>
         </main>
-        <footer>
-            <div class="ps-4 pe-4 pt-2 d-flex justify-content-around  flex-wrap">
-                <section id="contact">
-                    <h5>Contact</h5>
-                    <ul>
-                        <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                        <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                        <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h5>Social Networks</h5>
-                    <ul>
-                        <li>Facebook: <a class="enlace" href="https://es-la.facebook.com/">Diamond Bank</a></li>
-                        <li>Twitter: <a class="enlace" href="https://twitter.com/?lang=es">@DiamondBank_</a></li>
-                        <li>Instagram: <a class="enlace" href="https://www.instagram.com/">@diamondbank</a></li>
-                        <li>LinkedIn: <a class="enlace" href="https://ar.linkedin.com/">Diamond Bank</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h5>Join Us</h5>
-                    <ul>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Credit Analyst</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Investment Specialist</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Compliance Officer</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Financial Data Analyst</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Risk Analyst</a></li>
-                    </ul>
-                </section>
+        <footer >
+            <div class="container">
+                <div class="ps-4 pt-4 pe-4 row justify-content-center">
+                    <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
+                        <h5>Contact</h5>
+                        <ul>
+                            <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                        </ul>
+                    </section>
+                    <section class="col-md-4 col-lg-4 col-sm-6">
+                        <h5>Social Networks</h5>
+                        <ul>
+                            <li>Facebook: <a class="enlace" href="https://es-la.facebook.com/">Diamond Bank</a></li>
+                            <li>Twitter: <a class="enlace" href="https://twitter.com/?lang=es">@DiamondBank_</a></li>
+                            <li>Instagram: <a class="enlace" href="https://www.instagram.com/">@diamondbank</a></li>
+                            <li>LinkedIn: <a class="enlace" href="https://ar.linkedin.com/">Diamond Bank</a></li>
+                        </ul>
+                    </section>
+                    <section class="col-md-4 col-lg-4 col-sm-6">
+                        <h5>Join Us</h5>
+                        <ul>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Credit Analyst</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Investment Specialist</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Compliance Officer</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Financial Data Analyst</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Risk Analyst</a></li>
+                        </ul>
+                    </section>
+                </div>
             </div>
             <hr class="m-0">
-            <div class="flex-wrap d-flex justify-content-between align-items-center ps-4 pe-4">
-                <h6>Developer: Mauricio Mores</h6>
-                <div class="d-flex justify-content-evenly">
-                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
-                            src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
-                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
-                            src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
-                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
-                            src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
-                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
-                            src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+            <div class="container">
+                <div class="row justify-content-between align-items-center ps-4 pe-4">
+                    <h6 class="col text-center">Developer: Mauricio Mores</h6>
+                    <div class="col d-flex justify-content-evenly">
+                        <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
+                                src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+                        <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
+                                src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
+                        <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
+                                src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
+                        <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
+                                src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+                    </div>
                 </div>
             </div>
         </footer>

@@ -75,7 +75,7 @@ public class LoanController {
         accountService.save(accountDestini);
         return new ResponseEntity<>("Create Loan", HttpStatus.CREATED);
     }
-    @PostMapping("/new-loan")//nuevo servlet
+    @PostMapping("/new-loan")//nuevo servlet-
     public ResponseEntity<Object> newLoan(
             @RequestBody(required = false) NewLoanDTO newLoan){
         if (newLoan.getName().isEmpty())

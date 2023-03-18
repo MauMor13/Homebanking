@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>My Accounts | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app">
-        <header  class="p-2">
+        <header class="p-2">
             <div class="d-flex container_icon_nav">
-                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)"
+                    alt="buttonNav">
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="title" class="ms-2">Diamond Bank</h1>
+                <h1 v-show="title" class="ms-2">Diamond Bank | Accounts</h1>
             </div>
             <div class="d-flex container_icon_exit">
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
@@ -27,15 +30,17 @@
         <nav v-show="navbar" class="sidebar">
             <section class="ps-3">
                 <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav" @click="navShow(false)">
+                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg"
+                        alt="avatar">
+                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                        @click="navShow(false)">
                 </div>
                 <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
                 <p class="m-2">{{data.email}}</p>
             </section>
             <ul>
                 <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='./cards.html'">
@@ -51,10 +56,6 @@
                     <span>Loans</span>
                 </li>
                 <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/money.svg" alt="invertments">
-                    <span>Invertments</span>
-                </li>
-                <li onclick="location.href='#'">
                     <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
                 </li>
@@ -65,27 +66,45 @@
             </ul>
         </nav>
         <main>
-            <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Accounts</h2> 
-                <button v-show="data.accounts.length<3" class="btn btn-dark" @click="newAccount">New Account</button>
-            </section>
-            <div class="d-flex flex-wrap justify-content-evenly">
-                <template v-if="data">
-                <div class="account m-3 d-flex flex-column justify-content-evenly" v-for="account of data.accounts">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="ms-3 mt-3">My Balance:</h6><button type="button" class="me-3 button_form"><img src="./images/icons/three-dots.svg" alt=""></button>
+            <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                <template v-if="accounts">
+                    <div class="account m-3 d-flex flex-column justify-content-evenly" v-for="account of accounts">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="ms-3 mt-3">My Balance:</h5><img class="icons-delete"
+                                @click="deleteAccount(account.number)" src="./images/icons/delete.svg"
+                                alt="deleteAccount">
+                        </div>
+                        <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency:
+                            'USD' })}}</h1>
+                        <h5 class="ms-3">Account {{account.accountType=='SAVING'? 'Saving':'Current'}}:
+                            {{account.number.toUpperCase()}}</h5>
+                        <h5 class="ms-3">Created: {{account.creationDate.split("T")[0]}}</h5>
+                        <div class="d-flex justify-content-evenly">
+                            <a class="a-button" :href="'./account.html?id=' + account.id"><button class="btn">Your
+                                    Account Movements</button></a>
+                        </div>
                     </div>
-                    <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</h1>
-                    <h5 class="ms-3">Account: {{account.number.toUpperCase()}}</h5>
-                    <h5 class="ms-3">Created: {{account.creationDate.split("T")[0]}}</h5>
-                    <div class="d-flex justify-content-evenly">
-                        <a :href="'./account.html?id=' + account.id"><button class="button_transaction">Transactions</button></a><button type="button" class="button_invest">Investments</button>
+                </template>{{numAccounts}}
+                <template v-show="numAccounts<3">
+                    <div class="account-type m-3 d-flex flex-column justify-content-evenly">
+                        <h4 class=" text-center">Create Your New Account Now!</h4>
+                        <p class="text-center">Don't miss the opportunity to open an account with us and enjoy a
+                            worry-free banking experience. Click on the "New Account" button now to get started!</p>
+                        <fieldset class="mt-2 p-2">Type Account:
+                            <select class="form-select mt-1" aria-label="Default select example" v-model="accountType"
+                                required="accountTypes">
+                                <option value="CURRENT">Current</option>
+                                <option value="SAVING">Saving</option>
+                            </select>
+                        </fieldset>
+                        <div class="d-flex justify-content-evenly">
+                            <button class="btn p-2 m-2" @click="newAccount">New Account</button>
+                        </div>
                     </div>
-                </div>
                 </template>
             </div>
             <div class="loans d-flex justify-content-center">
-                <template v-if="data.loans.length>0">
+                <template v-if="numLoans>0">
                     <table class="table m-2">
                         <thead class="text-center">
                             <th>Loans Type</th>
@@ -101,54 +120,62 @@
                         </tbody>
                     </table>
                 </template>
-                <div v-else class="text_loans d-flex flex-column align-items-center justify-content-center container m-2">   
-                    <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by clicking on the following button.</h5>
+                <div v-else
+                    class="text_loans d-flex flex-column align-items-center justify-content-center container m-2">
+                    <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by
+                        clicking on the following button.</h5>
                     <button type="button" class="btn btn-dark">Loans</button>
                 </div>
             </div>
         </main>
         <footer>
-            <div class="ps-4 pe-4 pt-2 d-flex justify-content-around  flex-wrap">
-                <section id="contact">
-                    <h5>Contact</h5>
-                    <ul>
-                        <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                        <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                        <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h5>Social Networks</h5>
-                    <ul>
-                        <li>Facebook: <a class="enlace" href="https://es-la.facebook.com/">Diamond Bank</a></li>
-                        <li>Twitter: <a class="enlace" href="https://twitter.com/?lang=es">@DiamondBank_</a></li>
-                        <li>Instagram: <a class="enlace" href="https://www.instagram.com/">@diamondbank</a></li>
-                        <li>LinkedIn: <a class="enlace" href="https://ar.linkedin.com/">Diamond Bank</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h5>Join Us</h5>
-                    <ul>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Credit Analyst</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Investment Specialist</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Compliance Officer</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Financial Data Analyst</a></li>
-                        <li><a class="enlace" href="mailto:diamonBank@gmail.com">Risk Analyst</a></li>
-                    </ul>
-                </section>
+            <div class="container">
+                <div class="ps-4 pt-4 pe-4 row justify-content-center">
+                    <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
+                        <h5>Contact</h5>
+                        <ul>
+                            <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a>
+                            </li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte
+                                    1185, Bs. As.</a></li>
+                        </ul>
+                    </section>
+                    <section class="col-md-4 col-lg-4 col-sm-6">
+                        <h5>Social Networks</h5>
+                        <ul>
+                            <li>Facebook: <a class="enlace" href="https://es-la.facebook.com/">Diamond Bank</a></li>
+                            <li>Twitter: <a class="enlace" href="https://twitter.com/?lang=es">@DiamondBank_</a></li>
+                            <li>Instagram: <a class="enlace" href="https://www.instagram.com/">@diamondbank</a></li>
+                            <li>LinkedIn: <a class="enlace" href="https://ar.linkedin.com/">Diamond Bank</a></li>
+                        </ul>
+                    </section>
+                    <section class="col-md-4 col-lg-4 col-sm-6">
+                        <h5>Join Us</h5>
+                        <ul>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Credit Analyst</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Investment Specialist</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Compliance Officer</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Financial Data Analyst</a></li>
+                            <li><a class="enlace" href="mailto:diamonBank@gmail.com">Risk Analyst</a></li>
+                        </ul>
+                    </section>
+                </div>
             </div>
             <hr class="m-0">
-            <div class="flex-wrap d-flex justify-content-between align-items-center ps-4 pe-4">
-                <h6>Developer: Mauricio Mores</h6>
-                <div class="d-flex justify-content-evenly">
-                    <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
-                            src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
-                    <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
-                            src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
-                    <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
-                            src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
-                    <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
-                            src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+            <div class="container">
+                <div class="row justify-content-between align-items-center ps-4 pe-4">
+                    <h6 class="col text-center">Developer: Mauricio Mores</h6>
+                    <div class="col d-flex justify-content-evenly">
+                        <a class="icon-footer1 m-2" href="https://ar.linkedin.com/"><img class="icons"
+                                src="./images/iconsPAg/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+                        <a class="icon-footer2 m-2" href="https://github.com/MauMor13"><img class="icons"
+                                src="./images/iconsPAg/github-svgrepo-com.svg" alt="github"></a>
+                        <a class="icon-footer3 m-2" href="https://www.instagram.com/"><img class="icons"
+                                src="./images/iconsPAg/instagram-svgrepo-com.svg" alt="instagram"></a>
+                        <a class="icon-footer4 m-2" href="https://es-la.facebook.com/"><img class="icons"
+                                src="./images/iconsPAg/facebook-svgrepo-com.svg" alt="facebook"></a>
+                    </div>
                 </div>
             </div>
         </footer>
@@ -158,4 +185,5 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/accounts.js"></script>
 </body>
+
 </html>

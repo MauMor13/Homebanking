@@ -62,17 +62,34 @@ createApp({
         },
     },
     mounted() {
-        const icons = document.querySelectorAll('.icons2');
+        const icons =[
+            document.getElementById('icon1'),
+            document.getElementById('icon2'),
+            document.getElementById('icon3'),
+            document.getElementById('icon4'),
+            document.getElementById('icon5'),
+            document.getElementById('icon6'),
+            document.getElementById('icon7'),
+            document.getElementById('icon8'),
+            document.getElementById('icon9'),
+            document.getElementById('icon10'),
+            document.getElementById('icon11'),
+            document.getElementById('icon12'),
+            document.getElementById('icon13'),
+            document.getElementById('icon14'),
+            document.getElementById('icon15')] ;
         setInterval(() => {
-            const random = Math.round(Math.random());
-            icons.forEach((icon) => {
-                if (random === 0) {
-                    icon.classList.remove('vibra');
-                } else {
-                    icon.classList.add('vibra');
+            let random;
+            for(let i=0;i<15;i++){
+                random=  Math.round(Math.random());
+                if (random == 0) {
+                    icons[i].classList.remove('vibra');
                 }
-            });
-        }, 5000);
+                else {
+                    icons[i].classList.add('vibra');
+                }
+            }
+        },500);
     },
 }).mount('#app')
 

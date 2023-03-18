@@ -6,46 +6,61 @@ createApp({
             data: [],
             navbar:false,
             title:true,
+            accountType:"",
+            accounts:[],
+            numAccounts:[],
+            numLoans:[],
         }
     },
     created() {
         this.loadData();
+        this.loadAccounts();
     },
     methods: {
         loadData: function () {
             axios.get("/api/clients/current")
                 .then(response => {
                     this.data = response.data;
-                    this.data.accounts.sort((a, b) => a.id - b.id);
+                    this.numLoans=this.data.loans.length;
                 })
                 .catch(err => console.log(err));
         },
-        grapicAccount: function (account) {
-            let options = {
-                chart: {
-                    type: 'line'
-                },
-                series: [{
-                    name: 'sales',
-                    data:account.transaction.map(transaction=>transaction.amount),
-                }],
-                xaxis: {
-                    categories: account.transaction.map(transaction=>transaction.date.split("T")[0]),
-                }
-            }
-            let elementId=document.getElementById("grapic" + account.id);
-            if(!elementId) return;
-            elementId.innerHTML="";
-            let chart = new ApexCharts(elementId, options);
-            chart.render();
-        }, 
+        loadAccounts: function (){
+            axios.get("/api/clients/current/accounts")
+            .then(response => {
+                this.accounts=response.data;
+                this.numAccounts=this.accounts.length;
+                this.accounts.sort((a, b) => a.id - b.id);
+            })
+            .catch(err => console.log(err));
+        },
+        deleteAccount: function (number){
+            axios.patch("/api/account-delete",`numberAccount=${number}`)
+            .then(response => {
+                this.loadAccounts();
+                Swal.fire('Account Delete Successfully');
+            })
+            .catch(error => {
+                console.log(error.data);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                })
+            });
+        },
         newAccount:function() {
-            axios.post('/api/clients/current/accounts') 
+            axios.post('/api/clients/current/accounts',`accountType=${this.accountType}`) 
                 .then(response => {
-                    this.loadData();
+                    this.loadAccounts();
+                    Swal.fire('Account Created Successfully');
                 })
                 .catch(error => {
-                    this.error = error.response.data.message;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data,
+                    })
                 });
         },
         logout:function() {

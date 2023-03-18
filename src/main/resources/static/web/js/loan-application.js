@@ -40,7 +40,6 @@ createApp({
         .then(response=>{
             Swal.fire('Successful Loan Application')
         }).catch(err=>{
-            console.log(err);
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

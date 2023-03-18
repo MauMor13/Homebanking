@@ -39,7 +39,7 @@ public class AccountController {
     public List<AccountDTO> getCurrentAccount(Authentication authentication){
         return clientService.findByEmail(authentication.getName()).getAccountsActive().stream().map(AccountDTO::new).collect(toList());
     }
-    @PostMapping("/clients/current/accounts")//probar servlet
+    @PostMapping("/clients/current/accounts")
     public ResponseEntity<Object> newAccount (
             Authentication authentication,
             @RequestParam AccountType accountType) {
@@ -52,7 +52,7 @@ public class AccountController {
         accountService.save(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PatchMapping ("/accounts-delete")//nuevo servlet
+    @PatchMapping ("/account-delete")
     public ResponseEntity<Object> deleteAccounts(
             Authentication authentication,
             @RequestParam String numberAccount){
