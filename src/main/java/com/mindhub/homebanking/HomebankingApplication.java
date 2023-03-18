@@ -1,6 +1,8 @@
 package com.mindhub.homebanking;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +29,8 @@ public class HomebankingApplication {
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository,
 									  AccountRepository accountRepository,
+									  AccountService accountService,
+									  CardService cardService,
 									  TransactionRepository transactionRepository,
 									  LoanRepository loanRepository,
 									  ClientLoanRepository clientLoanRepository,
@@ -37,9 +41,9 @@ public class HomebankingApplication {
 			Client client2=new Client("Carl", "Ironman","ironman@mindhub.com",passwordEncoder.encode("67890"));
 			Client admin=new Client("Admin","Karl","adminkarl@gmail.com",passwordEncoder.encode("123456"));
 			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000,SAVING);
-			Account vin002=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),7500,CURRENT);
+			Account vin002=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),7500,CURRENT);
 			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200,SAVING);
-			Account vin004=new Account(GenereteNumber(accountRepository), LocalDateTime.now().plusDays(1),300,CURRENT);
+			Account vin004=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),300,CURRENT);
 
 			//utilizo método para generar transacciones aleatorias
 			generateRandomTransactions(vin001,15);
@@ -56,12 +60,12 @@ public class HomebankingApplication {
 			ClientLoan pres3=new ClientLoan(100000.0, 24 );
 			ClientLoan pres4=new ClientLoan(200000.0, 36);
 
-			Card card1=new Card(client, CREDIT, GOLD,randomNumberCard(cardRepository), returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card2=new Card(client, CREDIT, SILVER,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card3=new Card(client, CREDIT, TITANIUM,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card4=new Card(client, DEBIT, GOLD,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card5=new Card(client, DEBIT, SILVER,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card6=new Card(client, DEBIT, TITANIUM,randomNumberCard(cardRepository) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card1=new Card(client, CREDIT, GOLD,randomNumberCard(cardService), returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card2=new Card(client, CREDIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card3=new Card(client, CREDIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card4=new Card(client, DEBIT, GOLD,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card5=new Card(client, DEBIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card6=new Card(client, DEBIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
 
 			//método add
 			client.addAccount(vin001);

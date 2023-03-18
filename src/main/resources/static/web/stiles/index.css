@@ -76,7 +76,45 @@
 .privacy::-webkit-scrollbar-thumb:hover {
   background-color: #555; 
 }
-
+.icons-move{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: baseline;
+  align-items: baseline;
+  margin: 1rem;
+  border-radius: 1rem;
+  max-width: 30rem;
+  min-height: 20rem;
+}
+.icons2{
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 4rem;
+  transition: all .3s;
+}
+.vibra{
+  animation: vibrate 0.5s linear infinite;
+}
+@keyframes vibrate {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-6px, -6px);
+  }
+  40% {
+    transform: translate(6px, -6px);
+  }
+  60% {
+    transform: translate(6px, 6px);
+  }
+  80% {
+    transform: translate(-6px, 6px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
 .title img {
   padding: 1rem;
   width: 6rem;

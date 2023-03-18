@@ -6,6 +6,8 @@ import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,47 +24,47 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class AccountController {
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @GetMapping("/accounts")
     public List<AccountDTO> getAccounts(){
-        return accountRepository.findAll().stream().map(AccountDTO::new).collect(toList());
+        return accountService.findAll().stream().map(AccountDTO::new).collect(toList());
     }
     @GetMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
-        return accountRepository.findById(id).map(AccountDTO::new).orElse(null);
+        return accountService.findById(id).map(AccountDTO::new).orElse(null);
     }
     @GetMapping("/clients/current/accounts")
     public List<AccountDTO> getCurrentAccount(Authentication authentication){
-        return clientRepository.findByEmail(authentication.getName()).getAccountsActive().stream().map(AccountDTO::new).collect(toList());
+        return clientService.findByEmail(authentication.getName()).getAccountsActive().stream().map(AccountDTO::new).collect(toList());
     }
     @PostMapping("/clients/current/accounts")//probar servlet
     public ResponseEntity<Object> newAccount (
             Authentication authentication,
             @RequestParam AccountType accountType) {
-        Client client=clientRepository.findByEmail(authentication.getName());
+        Client client=clientService.findByEmail(authentication.getName());
          if (client.getAccounts().size()>=3) {
             return new ResponseEntity<>("you have max account", HttpStatus.CONFLICT);
          }
-        Account newAccount = new Account(GenereteNumber(accountRepository),LocalDateTime.now(),0,accountType);
+        Account newAccount = new Account(GenereteNumber(accountService),LocalDateTime.now(),0,accountType);
         client.addAccount(newAccount);
-        accountRepository.save(newAccount);
+        accountService.save(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PatchMapping ("/accounts-delete")//nuevo servlet
     public ResponseEntity<Object> deleteAccounts(
             Authentication authentication,
             @RequestParam String numberAccount){
-        Client clientauth=clientRepository.findByEmail(authentication.getName());
-        if (!accountRepository.existsAccountByNumber(numberAccount))
+        Client clientauth=clientService.findByEmail(authentication.getName());
+        if (!accountService.existsAccountByNumber(numberAccount))
             return new ResponseEntity<>("The account number does not exist",HttpStatus.BAD_REQUEST);
         if (clientauth.getAccountsActive().stream().noneMatch(account -> account.getNumber().equals(numberAccount)))
             return new ResponseEntity<>("The account does not belong to the customer",HttpStatus.BAD_REQUEST);
 
-        Account account = accountRepository.findByNumber(numberAccount);
+        Account account = accountService.findByNumber(numberAccount);
         account.setActive(false);
-        accountRepository.save(account);
+        accountService.save(account);
         return new ResponseEntity<>("Account removed successfully",HttpStatus.ACCEPTED);
     }
 }

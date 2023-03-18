@@ -6,20 +6,22 @@ import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.Random;
 public class Utilitis {
 
-    public static String GenereteNumber(AccountRepository accountRepository){
-        String Number;
+    public static String GenereteNumber(AccountService accountService){
+        String number;
         boolean verifyNumber;
         do {
-            Number = Number();
-            verifyNumber = accountRepository.existsAccountByNumber(Number);
+            number = Number();
+            verifyNumber = accountService.existsAccountByNumber(number);
         }while(verifyNumber);
-        return Number;
+        return number;
     }
     public static String Number(){
         int number1 = (int) (Math.random() * (99999999));
@@ -30,12 +32,12 @@ public class Utilitis {
         number = (int) (Math.random() * (999 - 100) + 100);
         return number;
     }
-    public static String randomNumberCard(CardRepository cardRepository){
+    public static String randomNumberCard(CardService cardService){
         String codString;
         Boolean cardBoolean;
         do {
             codString = randomString();
-            cardBoolean = cardRepository.existsCardByNumber(codString);
+            cardBoolean = cardService.existsCardByNumber(codString);
         }while(cardBoolean);
         return codString;
     }

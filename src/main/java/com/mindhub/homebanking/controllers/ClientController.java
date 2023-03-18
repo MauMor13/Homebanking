@@ -4,6 +4,8 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +25,20 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
     @GetMapping("/clients")
     public List<ClientDTO> getClients(){
-        return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
+        return clientService.findAll().stream().map(ClientDTO::new).collect(toList());
     }
     @GetMapping("clients/current")
     public ClientDTO getCurrentClient(Authentication authentication) {
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+        return new ClientDTO(clientService.findByEmail(authentication.getName()));
     }
     @GetMapping("/clients/{id}")
     public Optional<ClientDTO> getClient(@PathVariable Long id){
-        return clientRepository.findById(id).map(ClientDTO::new);
+        return clientService.findById(id).map(ClientDTO::new);
     }
     @PostMapping("/clients")
     public ResponseEntity<Object> register(
@@ -52,13 +54,13 @@ public class ClientController {
             return new ResponseEntity<>("Missing email", HttpStatus.BAD_REQUEST);
         else if (password.isEmpty())
             return new ResponseEntity<>("Missing password", HttpStatus.BAD_REQUEST);
-        if (clientRepository.findByEmail(email) !=  null)
+        if (clientService.findByEmail(email) !=  null)
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
-        Account newAccount=new Account(GenereteNumber(accountRepository), LocalDateTime.now(),0,SAVING);
+        Account newAccount=new Account(GenereteNumber(accountService), LocalDateTime.now(),0,SAVING);
         Client newClient=new Client(firstName, lastName, email, passwordEncoder.encode(password));
         newClient.addAccount(newAccount);
-        clientRepository.save(newClient);
-        accountRepository.save(newAccount);
+        clientService.save(newClient);
+        accountService.save(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -6,18 +6,18 @@ createApp({
             email: '',
             password: '',
             error: '',
-            errorNumber:'',
+            errorNumber: '',
             firstName: '',
             lastName: '',
-            form:false,
+            form: false,
         }
     },
     methods: {
-        login:function() {
-            axios.post('/api/login',`email=${this.email}&password=${this.password}`)
+        login: function () {
+            axios.post('/api/login', `email=${this.email}&password=${this.password}`)
                 .then(response => {
-                    this.email= '';
-                    this.password= '';
+                    this.email = '';
+                    this.password = '';
                     window.location.href = '/web/accounts.html';
                 })
                 .catch(error => {
@@ -29,15 +29,16 @@ createApp({
                     })
                 });
         },
-        register:function() {
+        register: function () {
             axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`)
-                .then(response => {this.login();
-                    this.email= '';
-                    this.password= '';
-                    this.error= '';
-                    this.errorNumber='';
-                    this.firstName= '';
-                    this.lastName= '';
+                .then(response => {
+                    this.login();
+                    this.email = '';
+                    this.password = '';
+                    this.error = '';
+                    this.errorNumber = '';
+                    this.firstName = '';
+                    this.lastName = '';
                 })
                 .catch(error => {
                     console.log(error)
@@ -49,16 +50,29 @@ createApp({
                     })
                 });
         },
-        loginRegister:function(value){
-            this.form=true;
-            let form=document.querySelector('.card-3d-wrapper');
-            if (value=='register'){
-            form.classList.add('girarLogin');
+        loginRegister: function (value) {
+            this.form = true;
+            let form = document.querySelector('.card-3d-wrapper');
+            if (value == 'register') {
+                form.classList.add('girarLogin');
             }
-            else if(value=='login'){
-            form.classList.remove('girarLogin');
+            else if (value == 'login') {
+                form.classList.remove('girarLogin');
             }
         },
+    },
+    mounted() {
+        const icons = document.querySelectorAll('.icons2');
+        setInterval(() => {
+            const random = Math.round(Math.random());
+            icons.forEach((icon) => {
+                if (random === 0) {
+                    icon.classList.remove('vibra');
+                } else {
+                    icon.classList.add('vibra');
+                }
+            });
+        }, 5000);
     },
 }).mount('#app')
 
