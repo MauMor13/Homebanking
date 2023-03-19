@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>My Movements | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app">
-        <header  class="p-2">
+        <header class="p-2">
             <div class="d-flex container_icon_nav">
-                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)"
+                    alt="buttonNav">
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="title" class="ms-2">Diamond Bank</h1>
+                <h1 v-show="title" class="ms-2">Diamond Bank | Transactions</h1>
             </div>
             <div class="d-flex container_icon_exit">
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
@@ -27,15 +30,16 @@
         <nav v-show="navbar" class="sidebar">
             <section class="ps-3">
                 <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav" @click="navShow(false)">
+                    <img class="avatar" src="./images/clientsimages/avatar1.svg" alt="avatar">
+                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                        @click="navShow(false)">
                 </div>
                 <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
                 <p class="m-2">{{data.email}}</p>
             </section>
             <ul>
                 <li onclick="location.href='./accounts.html'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='./cards.html'">
@@ -51,10 +55,6 @@
                     <span>Loans</span>
                 </li>
                 <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/money.svg" alt="invertments">
-                    <span>Invertments</span>
-                </li>
-                <li onclick="location.href='#'">
                     <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
                 </li>
@@ -65,39 +65,110 @@
             </ul>
         </nav>
         <main>
-            <h2 class="text-center">Transactions</h2>
-            <div class="p-4 d-flex justify-content-center text-light">
-                <table class="table">
-                    <thead>
-                        <th>Type</th>
-                        <th v-show="title">Description</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                    </thead>
-                    <tbody>
-                        <template v-if="account">
-                            <tr v-for="transaction in account.transaction">
-                                <td :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
-                                    {{transaction.type}}</td>
-                                <td v-show="title" class="text-light">{{transaction.description}}</td>
-                                <td class="text-light">{{transaction.date.split("T")[0]}}</td>
-                                <td class="text-light">$ {{transaction.amount.toLocaleString('de-DE', { style:
-                                    'currency', currency: 'USD' })}}</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
+            <div class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
+                <template v-if="fromAccount">
+                    <div class="contain-table">
+                        <table class="table">
+                            <thead>
+                                <th>Type</th>
+                                <th v-show="title">Description</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th v-show="title">Balance</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="transaction in transactions">
+                                    <td :class="[transaction.type === 'CREDIT' ? 'text-success' : 'text-danger']">
+                                        {{transaction.type}}</td>
+                                    <td v-show="title" class="text-light">{{transaction.description}}</td>
+                                    <td class="text-light">{{transaction.date.split("T")[0]}}</td>
+                                    <td class="text-light">{{transaction.amount.toLocaleString('de-DE', { style:
+                                        'currency', currency: 'USD' })}}</td>
+                                    <td v-show="title" class="text-light">
+                                        {{transaction.amountAccount.toLocaleString('de-DE', { style:
+                                        'currency', currency: 'USD' })}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-loans d-flex flex-column align-items-left justify-content-center container m-2">
+                        <h4>Transaction Filter</h4>
+                        <p>Through the following entries you can filter the transactions and also download a pdf of them</p>
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <fieldset class="mt-2">Your account
+                                    <select class="form-select mt-1 input-filter" aria-label="Default select example" v-model="fromAccount">
+                                        <option v-for="account of data.accounts" :value="account.number">{{account.number}}</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="mt-2">Type Transaction
+                                    <select class="form-select mt-1 input-filter" aria-label="Default select example" v-model="type">
+                                        <option value="DEBIT">Debit</option>
+                                        <option value="CREDIT">Credit</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="d-flex justify-content-between flex-wrap">
+                            <fieldset class="mt-2">Filter start date
+                                <div class="input-group mb-3 input-filter">
+                                    <label>
+                                        <input type="datetime-local" v-model="startDate">
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <fieldset class="mt-2">Filter end date
+                                <div class="input-group mb-3 input-filter">
+                                    <label>
+                                        <input type="datetime-local" v-model="endDate">
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <fieldset class="mt-2">Minimum amount to filter
+                                <div class="input-group mb-3 input-filter">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" v-model="minAmount" aria-label="Amount (to the nearest dollar)">
+                                </div>
+                            </fieldset>
+                            <fieldset class="mt-2">Maximum amount to filter
+                                <div class="input-group mb-3 input-filter">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" v-model="maxAmount" aria-label="Amount (to the nearest dollar)">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <fieldset class="mt-2">Description to filter
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control" v-model="description" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </fieldset>
+                        <div class="d-flex justify-content-evenly flex-wrap">
+                            <button type="button" class="btn" @click=" loadTransactions()">Apply Filters</button>
+                            <button type="button" class="btn">Download PDF</button>
+                        </div>
+                    </div>
+                </template>
+                <div v-else class="text-loans d-flex flex-column align-items-center justify-content-center container m-2">
+                    <h5 class="text-center p-2">Dear customer:</h5>
+                    <p>We would like to remind you that we have not received any bank transfer from you yet. To
+                        facilitate the process, we have created a button that will allow you to access the banking
+                        transfer platform directly. Once there, you just need to follow the indicated steps to complete
+                        the transaction.</p>
+                        <button type="button" class="btn" onclick="location.href='./loan-application.html'">Make a new Transaction</button>
+                </div>
             </div>
         </main>
-        <footer >
+        <footer>
             <div class="container">
                 <div class="ps-4 pt-4 pe-4 row justify-content-center">
                     <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
                         <h5>Contact</h5>
                         <ul>
                             <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a>
+                            </li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte
+                                    1185, Bs. As.</a></li>
                         </ul>
                     </section>
                     <section class="col-md-4 col-lg-4 col-sm-6">
@@ -143,4 +214,5 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/account.js"></script>
 </body>
+
 </html>

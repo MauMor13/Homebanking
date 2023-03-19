@@ -3,11 +3,18 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            account: [],
             data: [],
+            transactions: [],
             navbar: false,
             title: true,
             id: "",
+            fromAccount: "VIN-001",
+            startDate: null,
+            endDate: null,
+            description: null,
+            maxAmount: null,
+            minAmount: null,
+            type: null,
         }
     },
     created() {
@@ -30,12 +37,25 @@ createApp({
             axios.get('/api/clients/current')
                 .then(response => {
                     this.data = response.data;
-                    this.data.accounts.sort((a, b) => a.id - b.id);
-                    console.log(this.id)
-                    let account = this.data.accounts.filter(account => account.id == this.id);
-                    console.log(account[0].id)
-                    this.account = account[0];
+                    this.fromAccount = this.data.accounts.filter(account => account.id == this.id)[0].number;
+                    this.loadTransactions();
                 })
+                .catch(err => console.log(err));
+        },
+        loadTransactions: function () {
+            axios.get('/api/filter-transactions', {
+                params: {
+                    fromAccount: this.fromAccount,
+                    startDate: this.startDate,
+                    endDate: this.endDate,
+                    description: this.description,
+                    maxAmount: this.maxAmount,
+                    minAmount: this.minAmount,
+                    type: this.type
+                }
+            }).then(response => {
+                this.transactions = response.data;
+            })
                 .catch(err => console.log(err));
         },
         navShow: function (value) {

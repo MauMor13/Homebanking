@@ -105,20 +105,20 @@
             </div>
             <div class="loans d-flex flex-wrap justify-content-evenly align-items-center">
                 <template v-if="numLoans>0" >
-                    <table class="table m-2">
-                        <thead class="text-center">
-                            <th>Loans Type</th>
-                            <th>N° Payments</th>
-                            <th>Amount</th>
-                        </thead>
-                        <tbody>
-                            <tr v-for="loan in data.loans" class="text-light text-center">
-                                <td>{{loan.name}}</td>
-                                <td>{{loan.payments}}</td>
-                                <td>{{loan.amount.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table m-2">
+                            <thead class="text-center">
+                                <th>Loans Type</th>
+                                <th>N° Payments</th>
+                                <th>Amount</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="loan in data.loans" class="text-light text-center">
+                                    <td>{{loan.name}}</td>
+                                    <td>{{loan.payments}}</td>
+                                    <td>{{loan.amount.toLocaleString('de-DE', { style: 'currency', currency: 'USD' })}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </template>
                 <div v-else
                     class="text-loans d-flex flex-column align-items-center justify-content-center container m-2">

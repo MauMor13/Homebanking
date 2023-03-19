@@ -74,7 +74,8 @@ public class TransactionController {
     public ResponseEntity<?> filterTransactions(@RequestParam String fromAccount,
                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-                                                @RequestParam (required = false) String description, @RequestParam (required = false) Double maxAmount,
+                                                @RequestParam (required = false) String description,
+                                                @RequestParam (required = false) Double maxAmount,
                                                 @RequestParam (required = false) Double minAmount,
                                                 @RequestParam (required = false) TransactionType type ){
         Account currentAccount = accountService.findByNumber(fromAccount);

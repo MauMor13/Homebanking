@@ -33,6 +33,21 @@ createApp({
                 })
                 .catch(err => console.log(err));
         },
+        deleteCard: function (number){
+            axios.patch("/api/card-delete",`numberCard=${number}`)
+            .then(response => {
+                this.loadCards();
+                Swal.fire('Account Delete Successfully');
+            })
+            .catch(error => {
+                console.log(error.data);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                })
+            });
+        },
         logout: function () {
             axios.post('/api/logout')
                 .then(response => {

@@ -22,6 +22,8 @@ createApp({
                 })
                 .catch(error => {
                     this.error = error.response.data.message;
+                    this.email= '';
+                    this.password= '';
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
