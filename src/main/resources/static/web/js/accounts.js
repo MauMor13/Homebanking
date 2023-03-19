@@ -8,8 +8,8 @@ createApp({
             title:true,
             accountType:"",
             accounts:[],
-            numAccounts:[],
-            numLoans:[],
+            numAccounts:0,
+            numLoans:0,
         }
     },
     created() {

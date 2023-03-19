@@ -3,7 +3,6 @@ import com.mindhub.homebanking.models.Client;
 import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
-
 public class ClientDTO {
     private final long id;
     private final String firstName;

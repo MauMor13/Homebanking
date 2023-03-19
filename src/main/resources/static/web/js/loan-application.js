@@ -3,14 +3,15 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            data: {},
-            loans:[],
+            data: "",
+            loans:"",
             navbar:false,
             title:true,
             id:0,
-            amount:"",
-            payments:0,
+            amount:0,
+            payments:"",
             numberAccountDestini:"",
+            paymentsFilter:""
         }
     },
     created() {
@@ -22,14 +23,15 @@ createApp({
             axios.get("/api/clients/current")
                 .then(response => {
                     this.data = response.data;
-                    console.log(this.data);
                 })
                 .catch(err => console.log(err));
         },
         loansExist:function(){
             axios.get("/api/loans")
             .then(response=>{
+                console.log(response.data);
                 this.loans=response.data;
+                this.paymentsFilter=this.filterLoans();
             }).catch(err=>console.log(err));
         },
         filterLoans:function(){

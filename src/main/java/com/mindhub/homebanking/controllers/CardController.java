@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -74,12 +75,12 @@ public class CardController {
         cardService.save(card);
         return new ResponseEntity<>("Card removed successfully",HttpStatus.ACCEPTED);
     }
-
-    @PostMapping("/pay-pay")//nuevo servlet-
+    @Transactional
+    @CrossOrigin
+    @PostMapping("/pay")//nuevo servlet-
     public ResponseEntity <Object> payCards(
-            @RequestBody NewPayDTO newPayDTO){
+            @RequestBody(required = false) NewPayDTO newPayDTO){
         Card card = cardService.findByNumber(newPayDTO.getNumber());
-        Account account = card.getClient().getAccounts().stream().iterator().next();
         if (newPayDTO.getNumber().isEmpty())
             return new ResponseEntity<>("The card number is missing",HttpStatus.BAD_REQUEST);
         if (newPayDTO.getAmount() == null && newPayDTO.getAmount()>0)
@@ -96,6 +97,7 @@ public class CardController {
             return new ResponseEntity<>("The card is not debit",HttpStatus.BAD_REQUEST);
         if (card.getThruDate().isBefore(LocalDate.now()))
             return new ResponseEntity<>("The card has expired",HttpStatus.BAD_REQUEST);
+        Account account = card.getClient().getAccounts().stream().max(Comparator.comparing(Account::getBalance)).get();
         if (account == null)
             return new ResponseEntity<>("There is no associated account",HttpStatus.BAD_REQUEST);
         if (!account.getActive())

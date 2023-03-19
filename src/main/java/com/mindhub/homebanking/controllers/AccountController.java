@@ -44,7 +44,7 @@ public class AccountController {
             Authentication authentication,
             @RequestParam AccountType accountType) {
         Client client=clientService.findByEmail(authentication.getName());
-         if (client.getAccounts().size()>=3) {
+         if (client.getAccountsActive().size()>=3) {
             return new ResponseEntity<>("you have max account", HttpStatus.CONFLICT);
          }
         Account newAccount = new Account(GenereteNumber(accountService),LocalDateTime.now(),0,accountType);

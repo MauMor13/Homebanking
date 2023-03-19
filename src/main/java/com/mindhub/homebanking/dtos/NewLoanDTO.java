@@ -5,14 +5,11 @@ public class NewLoanDTO {
     private Double maxAmount;
     private ArrayList<Integer> payments;
     private float percentage;
-    public NewLoanDTO(NewLoanDTO newLoanDTO) {
-        this.name = newLoanDTO.getName();
-
-        this.maxAmount = newLoanDTO.getMaxAmount();
-
-        this.payments = newLoanDTO.getPayments();
-
-        this.percentage = newLoanDTO.getPercentage();
+    public NewLoanDTO(String name, Double maxAmount, ArrayList<Integer> payments, float percentage) {
+        this.name = name;
+        this.maxAmount = maxAmount;
+        this.payments = payments;
+        this.percentage = percentage;
     }
     public String getName() { return name; }
     public double getMaxAmount() { return maxAmount; }

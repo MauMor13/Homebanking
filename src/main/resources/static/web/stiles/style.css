@@ -116,13 +116,14 @@ footer {
 header {
     background-color: #1026705f;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-bottom: 1px solid #000;
     min-height: 5vh;
 }
 
 .title {
+    text-align: center;
     max-width: 40rem;
 }
 
@@ -335,7 +336,49 @@ header {
     -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
     text-shadow: 2px 2px 2px #000;
 }
-
+/************Carrusel loans*****************/
+.carousel {
+    display: flex;
+    vertical-align: middle;
+    max-width: 30rem;
+    min-height: 15rem;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: .3rem;
+    padding: .5rem;
+    color: white;
+}
+.loan1{
+    background-image: url("../images/background/pexels-guilherme-rossi-1755693.jpg");
+    background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: .5rem;
+    min-height: 16rem;
+}
+.loan2{
+    background-image: url("../images/background/pexels-guilherme-rossi-1755693.jpg");
+    background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: .5rem;
+    min-height: 16rem;
+}
+.loan3{
+    background-image: url("../images/background/pexels-guilherme-rossi-1755693.jpg");
+    background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: .5rem;
+    min-height: 16rem;
+}
+/***************************/
 /*------table transactions--------*/
 .table {
     max-width: 30rem;

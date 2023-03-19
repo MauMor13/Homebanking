@@ -84,8 +84,8 @@
                                     Account Movements</button></a>
                         </div>
                     </div>
-                </template>{{numAccounts}}
-                <template v-show="numAccounts<3">
+                </template>
+                <template v-if="numAccounts<3">
                     <div class="account-type m-3 d-flex flex-column justify-content-evenly">
                         <h4 class=" text-center">Create Your New Account Now!</h4>
                         <p class="text-center">Don't miss the opportunity to open an account with us and enjoy a
@@ -103,8 +103,8 @@
                     </div>
                 </template>
             </div>
-            <div class="loans d-flex justify-content-center">
-                <template v-if="numLoans>0">
+            <div class="loans d-flex flex-wrap justify-content-evenly align-items-center">
+                <template v-if="numLoans>0" >
                     <table class="table m-2">
                         <thead class="text-center">
                             <th>Loans Type</th>
@@ -121,10 +121,53 @@
                     </table>
                 </template>
                 <div v-else
-                    class="text_loans d-flex flex-column align-items-center justify-content-center container m-2">
+                    class="text-loans d-flex flex-column align-items-center justify-content-center container m-2">
                     <h5 class="text-center pt-4">You do not have attached loans, if you want you can make the request by
                         clicking on the following button.</h5>
-                    <button type="button" class="btn btn-dark">Loans</button>
+                    <button type="button" class="btn" onclick="location.href='./loan-application.html'">New
+                        Loans</button>
+                </div>
+                <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active loan1 ps-4 pe-4">
+                            <h4 class="m-2">Auto loans:</h4>
+                            <p>
+                                If you're looking to finance the purchase of a new or used car, this is the loan for
+                                you. Auto loans can help you cover the total cost of the vehicle or a portion of it. We offer
+                                competitive interest rates and flexible terms so you can pay your loan comfortably and conveniently.
+                            </p>
+                            <button v-show="numLoans>0" type="button" class="btn m-2" onclick="location.href='./loan-application.html'">New
+                                Loans</button>
+                        </div>
+                        <div class="carousel-item loan2 ps-4 pe-4">
+                            <h4 class="m-2">Personal loans:</h4>
+                            <p>
+                                Need money to make improvements to your home, consolidate debt, or finance an
+                                important event in your life? A personal loan could be the solution you're looking for. Our personal
+                                loans have competitive interest rates and can be used for a variety of purposes. 
+                            </p>
+                            <button v-show="numLoans>0" type="button" class="btn m-2" onclick="location.href='./loan-application.html'">New
+                                Loans</button>
+                        </div>
+                        <div class="carousel-item loan3 ps-4 pe-4">
+                            <h4 class="m-2">Mortgage loans:</h4>
+                            <p>
+                                If you're looking to buy a home, a mortgage loan could be the way to go. We offer
+                                fixed and variable-rate mortgage loans, as well as competitive interest rates and flexible terms.
+                                Our team of mortgage loan experts will be happy to help you find the best loan option for you.
+                            </p>
+                            <button v-show="numLoans>0" type="button" class="btn m-2" onclick="location.href='./loan-application.html'">New
+                                Loans</button>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </main>
@@ -180,6 +223,9 @@
             </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

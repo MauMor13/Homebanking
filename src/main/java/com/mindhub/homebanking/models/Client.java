@@ -59,9 +59,7 @@ public class Client {
     public String getEmail(){
         return email;
     }
-    public Set <Account> getAccounts(){
-        return accounts;
-    }
+    public Set <Account> getAccounts(){ return accounts; }
     public Set<ClientLoan> getClientLoans() {
         return clientLoans;
     }
