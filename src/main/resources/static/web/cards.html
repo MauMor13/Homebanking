@@ -27,15 +27,16 @@
         <nav v-show="navbar" class="sidebar">
             <section class="ps-3">
                 <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/account-avatar-profile-user-8-svgrepo-com.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav" @click="navShow(false)">
+                    <img class="avatar" src="./images/clientsimages/avatar2.svg" alt="avatar">
+                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                        @click="navShow(false)">
                 </div>
                 <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
                 <p class="m-2">{{data.email}}</p>
             </section>
             <ul>
                 <li onclick="location.href='./accounts.html'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts"> 
+                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
                     <span>Accounts</span>
                 </li>
                 <li onclick="location.href='#'">
@@ -50,11 +51,11 @@
                     <img class="icons" src="images/icons/transaction.svg" alt="loans">
                     <span>Loans</span>
                 </li>
-                <li onclick="location.href='#'">
+                <li onclick="location.href='./setting.html'">
                     <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
                 </li>
-                <li onclick="location.href='#'">
+                <li onclick="location.href='./help.html'">
                     <img class="icons" src="images/icons/help.svg" alt="help">
                     <span>Help</span>
                 </li>

@@ -58,6 +58,14 @@ createApp({
             })
                 .catch(err => console.log(err));
         },
+        printPdf:function(){
+            const elem=document.querySelector(".print-content");
+            let opt = {
+                margin:[15,0],
+                filename:`Invoice-${("0000"+(Math.random()*9999)).slice(-4)}.pdf`,
+            };
+            html2pdf().set(opt).from(elem).save();
+        },
         navShow: function (value) {
             this.navbar = value;
         },

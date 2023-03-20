@@ -72,14 +72,20 @@ public class TransactionController {
     }
     @GetMapping("/filter-transactions")//nuevo servlet-
     public ResponseEntity<?> filterTransactions(@RequestParam String fromAccount,
-                                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-                                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+                                                @RequestParam (required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+                                                @RequestParam (required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
                                                 @RequestParam (required = false) String description,
                                                 @RequestParam (required = false) Double maxAmount,
                                                 @RequestParam (required = false) Double minAmount,
-                                                @RequestParam (required = false) TransactionType type ){
+                                                @RequestParam (required = false) TransactionType type,
+                                                Authentication authentication){
         Account currentAccount = accountService.findByNumber(fromAccount);
+        Client client = clientService.findByEmail(authentication.getName());
         Set<Transaction> transaccionesFiltradas = currentAccount.getTransactions();
+        if (client.getAccounts().stream().noneMatch(account -> account.getId() == currentAccount.getId()))
+            return new ResponseEntity<>("the account does not belong to the authenticated client",HttpStatus.BAD_REQUEST);
+        if (!currentAccount.getActive())
+            return new ResponseEntity<>("Account not active",HttpStatus.BAD_REQUEST);
         if (startDate == null && endDate != null){
             transaccionesFiltradas = transaccionesFiltradas.stream().filter(transaction -> transaction.getDate().isBefore(endDate) || transaction.getDate().equals(endDate) ).collect(Collectors.toSet()); }
         if (startDate != null && endDate == null){

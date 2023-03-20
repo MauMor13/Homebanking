@@ -9,7 +9,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>New Loans | Diamond Bank</title>
+    <title>My Movements | Diamond Bank</title>
 </head>
 
 <body class="image_day">
@@ -21,7 +21,7 @@
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="title" class="ms-2">Diamond Bank | New Loan</h1>
+                <h1 v-show="title" class="ms-2">Diamond Bank | Transactions</h1>
             </div>
             <div class="d-flex container_icon_exit">
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
@@ -50,7 +50,7 @@
                     <img class="icons" src="images/icons/finance.svg" alt="transfers">
                     <span>Transactions</span>
                 </li>
-                <li onclick="location.href='#'">
+                <li onclick="location.href='./loan-application.html'">
                     <img class="icons" src="images/icons/transaction.svg" alt="loans">
                     <span>Loans</span>
                 </li>
@@ -58,93 +58,26 @@
                     <img class="icons" src="images/icons/settings.svg" alt="settings">
                     <span>Setting</span>
                 </li>
-                <li onclick="location.href='./help.html'">
+                <li onclick="location.href='#'">
                     <img class="icons" src="images/icons/help.svg" alt="help">
                     <span>Help</span>
                 </li>
             </ul>
         </nav>
-        <main class="d-flex justify-content-evenly align-items-center m-4 flex-wrap">
-                <div class="form-loan text-dark">
-                    <h3>Form Loans</h3>
-                    <fieldset>Loan Type
-                        <select class="form-select mt-1" aria-label="Default select example" v-model="id">
-                            <option v-for="loan of loans" :value="loan.id">{{loan.name}}</option>
-                        </select>
-                    </fieldset>
-                    <fieldset class="mt-2">Loan Payments
-                        <select class="form-select mt-1" aria-label="Default select example" v-model="payments">
-                            <option v-for="payment of filterLoans()">{{payment}}</option>
-                        </select>
-                    </fieldset> 
-                    <fieldset class="mt-2">Destination Account
-                        <select class="form-select mt-1" aria-label="Default select example" v-model="numberAccountDestini">
-                            <option v-for="account of data.accounts">{{account.number}}</option>
-                        </select>
-                    </fieldset>
-                    <fieldset class="mt-2">Amount to Request
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-text">.00</span>
-                        </div>
-                        <p v-if="amount>0">{{payments}}  installments of ${{amount*filterLoans().percentage/payments}}</p>
-                    </fieldset>
-                    <button class="button-form" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <p>Apply for Loan</p>
-                        <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
-                        </svg>
-                    </button>
-                </div> 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-dark">
-                            Are you sure to apply for this loan?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="newLoan">Apply for Loan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-loans">
-                <p>We have three types of loans available: auto, personal, and mortgage. Here's a brief explanation of
-                    each:
-                </p>
-                <p>
-                    <span>Auto loans:</span> If you're looking to finance the purchase of a new or used car, this is the loan for
-                    you. Auto loans can help you cover the total cost of the vehicle or a portion of it. We offer
-                    competitive interest rates and flexible terms so you can pay your loan comfortably and conveniently.
-                </p>
-                <p>
-                    <span>Personal loans:</span> Need money to make improvements to your home, consolidate debt, or finance an
-                    important event in your life? A personal loan could be the solution you're looking for. Our personal
-                    loans have competitive interest rates and can be used for a variety of purposes. We also offer
-                    flexible terms and payment options to fit your budget.
-                </p>
-                <p>
-                    <span>Mortgage loans:</span> If you're looking to buy a home, a mortgage loan could be the way to go. We offer
-                    fixed and variable-rate mortgage loans, as well as competitive interest rates and flexible terms.
-                    Our team of mortgage loan experts will be happy to help you find the best loan option for you.
-                </p>
-            </div>
+        <main class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
+            
         </main>
-        <footer >
+        <footer>
             <div class="container">
                 <div class="ps-4 pt-4 pe-4 row justify-content-center">
                     <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
                         <h5>Contact</h5>
                         <ul>
                             <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a>
+                            </li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte
+                                    1185, Bs. As.</a></li>
                         </ul>
                     </section>
                     <section class="col-md-4 col-lg-4 col-sm-6">
@@ -186,11 +119,9 @@
             </div>
         </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./js/loan-application.js"></script>
+    <script src="./js/help.js"></script>
 </body>
 
 </html>

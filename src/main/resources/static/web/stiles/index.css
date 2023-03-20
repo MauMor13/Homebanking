@@ -16,7 +16,7 @@
   margin-right: 3rem;
 }
 .title {
-  background-color: #10267033;
+  background-color: var(--footer);
   display: flex;
   justify-content: center;
   align-items: center;
