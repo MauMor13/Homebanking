@@ -20,7 +20,7 @@ public class LoanServiceImpl implements LoanService {
         return loanRepository.findById(id);
     }
     @Override
-    public void save(Loan loan) {
-        loanRepository.save(loan);
-    }
+    public void save(Loan loan) { loanRepository.save(loan); }
+    @Override
+    public boolean existsByName(String name) { return loanRepository.existsLoanByName(name); }
 }

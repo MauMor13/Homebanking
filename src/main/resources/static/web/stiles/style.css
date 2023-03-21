@@ -207,7 +207,6 @@ header {
 
 /*form-transfer*/
 .form-transfer {
-    width: 40rem;
     max-width: 40rem;
     border: 1px solid #000;
     border-radius: 1rem;
@@ -221,7 +220,7 @@ header {
 }
 
 .text-avatar {
-    width: 80%;
+    width: 90%;
     padding: 1rem;
     margin: 1rem;
     border-radius: .5rem;
@@ -502,7 +501,20 @@ h2 {
 
 
 /*--------------------------------------section Cards------------------------------------*/
-
+.text-card{
+    max-width: 25rem;
+    width: 25rem;
+    min-height: 15.5rem;
+    border-radius: 1rem;
+    padding: .5rem;
+    margin: 1rem;
+    border: 1px solid #000;
+    backdrop-filter: blur(200px);
+    background-color: var(--color4);
+    color: white;
+    box-shadow: .5rem .5rem black;
+    -webkit-box-shadow: 10px 10px 5px -3px rgb(0 0 0 /82%);
+}
 
 .strip-top {
     width: calc(50vw + 5.6);

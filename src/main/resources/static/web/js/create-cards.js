@@ -6,12 +6,12 @@ createApp({
             navbar: false,
             title: true,
             cardType: "",
-            cardColor:"",
-            avatarImg:1
+            cardColor: "",
+            avatarImg: 1
         }
     },
     created() {
-        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
+        this.avatarImg = localStorage.getItem("myAvatar") ? localStorage.getItem("myAvatar") : 1;
         this.loadData();
     },
     methods: {
@@ -44,14 +44,28 @@ createApp({
             })
         },
         newCard: function () {
-            axios.post('/api/clients/current/cards',`type=${this.cardType}&color=${this.cardColor}`)
-                .then(response => {
-                    window.location.href = '/web/cards.html';
-                })
-                .catch(error => {
-                    this.error = error.response.data
-                    console.log(this.error)
-                });
+            Swal.fire({
+                title: 'Are you sure to create your new card?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/clients/current/cards', `type=${this.cardType}&color=${this.cardColor}`)
+                    .then(response => {
+                        Swal.fire('Create Card Successfully');
+                        window.location.href = '/web/cards.html';
+                    })
+                    .catch(error => {
+                        this.error = error.response.data;
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error.response.data,
+                        })
+                    });
+                }
+            })
         },
         colorCard: function (color) {
             if (color == "SILVER")
@@ -71,7 +85,7 @@ createApp({
             this.title = window.innerWidth > 500;
         },
     },
-    mounted(){
+    mounted() {
         this.updateScreenSize();
         window.addEventListener("resize", this.updateScreenSize);
     },

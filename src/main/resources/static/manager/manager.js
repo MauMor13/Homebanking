@@ -15,9 +15,7 @@ createApp({
         maxAmount:"",
         percentage:"",
         payments:"",
-        totalPayments:[
-            [3,6,9,12,18],[12,18,24],[18,42,68],[3,6,9,12,18,24]
-        ]
+        totalPayments:new Array([3,6,9,12,18],[12,18,24],[18,42,68],[3,6,9,12,18,24])
     }
     },
     created(){
@@ -41,11 +39,10 @@ createApp({
         .catch(err=>console.log(err));
         },
         createNewLoan:function(){
-            axios.post("/api/new-loan",{"name":this.name,"maxAmount":this.maxAmount,"payments":this.payments,"percentage":this.percentage})
+            axios.post("/api/new-loan",`name=${this.name}&maxAmount=${this.maxAmount}&payment=${this.payments}&percentage=${this.percentage}`)
             .then(response=>{
                 console.log(response);
             }).catch(error=>console.log(error))
-            //
         },
         deleteClient:function(){
             axios.delete(this.modiClient._links.self.href)
@@ -64,3 +61,5 @@ createApp({
         }
     }
 }).mount('#app');
+
+

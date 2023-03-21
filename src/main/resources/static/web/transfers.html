@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>Generate New Transfers | Diamond Bank</title>
+    <title>Generate New Transaction | Diamond Bank</title>
 </head>
 <body class="image_day">
     <div id="app">
@@ -18,7 +18,7 @@
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="title" class="ms-2">Diamond Bank | New Transfers</h1>
+                <h1 v-show="title" class="ms-2">Diamond Bank | New Transaction</h1>
             </div>
             <div class="d-flex container_icon_exit">
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
@@ -56,79 +56,82 @@
                         <img class="icons" src="images/icons/settings.svg" alt="settings">
                         <span>Setting</span>
                     </li>
-                    <li onclick="location.href='./help.html'">
+                    <!-- <li onclick="location.href='./help.html'">
                         <img class="icons" src="images/icons/help.svg" alt="help">
                         <span>Help</span>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </template>
         <main class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
-            <div class="mt-4 d-flex justify-content-center">
-                <div class="form-transfer">
-                    <select  class="m-2 form-select form-select-sm" v-model="numAccountOrigin" aria-label=".form-select-sm example">
-                        <option selected>Select you account</option>
-                        <option v-for="account of data.accounts" :value="account.number">{{account.number}}</option>
-                    </select>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio"  @click="show='own'" name="inputRadio"
-                            id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Transfer to own account
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" @click="show='third'" name="inputRadio"
-                            id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Transfer to third party accounts
-                        </label>
-                    </div>
-                    <select v-show="show=='own'" class="m-2 form-select form-select-sm" v-model="numAccountDestini"  @click="filterAccounts" aria-label=".form-select-sm example">
-                        <option selected>Select account</option>
-                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
-                    </select>
-                    <div v-show="show=='third'" class=" row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Enter account</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="numAccountDestini" id="inputPassword">
-                        </div>
-                    </div>
-                    <div class="m-2 row">
-                        <label for="inputAmount" class="col-sm-2 col-form-label">Amount</label>
-                        <div class="col-sm-10">
-                            <input type="number" v-model="amount" class="form-control" id="inputAmount" >
-                        </div>
-                    </div>
-                    <p>Description</p>
-                    <div class="m-3 form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here"
-                            id="floatingTextarea" v-model="description"></textarea>
-                        <label for="floatingTextarea">Comments</label>
-                    </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                        Transfer Money
-                    </button>
+            <div class="mt-4 text-avatar d-flex flex-column justify-content-center align-items-center">
+                <div>
+                    <h4 class="text-center"> To make a quick and easy transfer on our platform, simply fill out the following fields with the following parameters:</h4>
+                    <ul class="m-3" v-show="title">
+                        <li>Customer account: enter the customer's account number who will receive the transfer.</li>
+                        <li>Select own or third-party destination account: choose whether the destination account is yours or someone else's.</li>
+                        <li>If it's a third-party account, enter the account: if the destination account belongs to someone else, enter their account number.</li>
+                        <li>Enter an amount: enter the amount you want to transfer.</li>
+                        <li>And finally, a brief description, if you wish: add a brief description of the transfer if you'd like.</li>
+                    </ul>
                 </div>
-            </div>
-            <!--modal-->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="form-transfer row">
+                    <div class="m-2 col align-items-center justify-content-between">
+                        <fieldset>Select you account:
+                            <select  class="mt-2 form-select form-select-sm input-filter" v-model="numAccountOrigin" aria-label=".form-select-sm example">
+                                <option selected>Select you account</option>
+                                <option v-for="account of data.accounts" :value="account.number">{{account.number}}</option>
+                            </select>
+                        </fieldset>
+                        <fieldset v-show="show=='own'">Select account destini:
+                            <select  class="mt-2 form-select form-select-sm input-filter" v-model="numAccountDestini"  @click="filterAccounts" aria-label=".form-select-sm example">
+                                <option selected>Select account</option>
+                                <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                            </select>
+                        </fieldset>
+                        <div v-show="show=='third'">Enter account
+                            <label for="inputPassword" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-filter" v-model="numAccountDestini" id="inputPassword">
+                            </div>
                         </div>
-                        <div class="modal-body text-dark">
-                            Are you sure to make the following transfer?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="newTransfer">Transfer</button>
-                        </div>
+                        <fieldset>Description
+                            <div class="form-floating">
+                                <textarea class="form-control mt-2" placeholder="Leave a comment here"
+                                    id="floatingTextarea" v-model="description" style="max-width:12rem ;"></textarea>
+                                <label for="floatingTextarea">Comments</label>
+                            </div>
+                        </fieldset>
                     </div>
+                    <div class="m-2 col align-items-center justify-content-between">
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" checked  @click="show='own'" name="inputRadio"
+                                    id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Transfer to own account
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" @click="show='third'" name="inputRadio"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Transfer to third party accounts
+                                </label>
+                            </div>
+                        </div>
+                        <fieldset class="mt-2">Amount to Request
+                            <div class="input-group mb-3 input-filter">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
+                            </div>
+                        </fieldset>
+                        <button type="button" class="btn" @click="newTransfer()">Transfer Money</button>
+                    </div>
+                        
                 </div>
+                <p class="text-center mt-2">We strive to provide a seamless banking experience and are here to assist you in case of any issues. Feel free to contact our support team at any time for help with your transfer or any other questions you may have.
+                    Thank you for choosing Diamond Bank for your banking needs. We look forward to continuing to be your bank of choice!</p>
             </div>
         </main>
         <footer >

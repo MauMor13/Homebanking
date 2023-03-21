@@ -9,11 +9,13 @@ createApp({
             title: true,
             typeCard: "CREDIT",
             allCards: [],
-            avatarImg:1
+            cuantiCards:10,
+            numberCard: "",
+            avatarImg: 1
         }
     },
     created() {
-        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
+        this.avatarImg = localStorage.getItem("myAvatar") ? localStorage.getItem("myAvatar") : 1;
         this.loadData();
         this.loadCards();
     },
@@ -29,26 +31,34 @@ createApp({
         loadCards: function () {
             axios.get("/api/clients/current/cards")
                 .then(response => {
-                    console.log(response.data);
                     this.allCards = response.data;
+                    this.cuantiCards=this.allCards.length;
                     this.cardType()
                 })
                 .catch(err => console.log(err));
         },
-        deleteCard: function (number){
-            axios.patch("/api/card-delete",`numberCard=${number}`)
-            .then(response => {
-                this.loadCards();
-                Swal.fire('Account Delete Successfully');
-            })
-            .catch(error => {
-                console.log(error.data);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.response.data,
+        deleteCard: function () {
+            Swal.fire({
+                title: 'Are you sure you want to delete the card?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.patch("/api/card-delete", `numberCard=${this.numberCard}`)
+                .then(response => {
+                    this.loadCards();
+                    Swal.fire('Account Delete Successfully');
                 })
-            });
+                .catch(error => {
+                    console.log(error.data);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data,
+                    })
+                });
+                }
+            })
         },
         logout: function () {
             Swal.fire({

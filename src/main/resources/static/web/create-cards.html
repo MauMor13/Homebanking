@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>Created New Card | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app">
-        <header  class="p-2">
+        <header class="p-2">
             <div class="d-flex container_icon_nav">
-                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)"
+                    alt="buttonNav">
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
@@ -56,44 +59,53 @@
                         <img class="icons" src="images/icons/settings.svg" alt="settings">
                         <span>Setting</span>
                     </li>
-                    <li onclick="location.href='./help.html'">
+                    <!-- <li onclick="location.href='./help.html'">
                         <img class="icons" src="images/icons/help.svg" alt="help">
                         <span>Help</span>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
-        </template >
-        <main>
-            <section class="d-flex justify-content-evenly align-items-center">
-                <h2 class="m-3 text-center">Generate New Card</h2> 
-            </section>
+        </template>
+        <main class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
             <div class="d-flex justify-content-evenly flex-wrap m-3">
-                <div class="createCard">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" v-model="cardType" value="DEBIT">Debit
-                        </label>
+                <div class="text-card text-center">
+                    <h2 class="m-2 text-center">Generate New Card</h2>
+                    <p class="m-1">Through this simple form you can create a new card with the benefits that you can see
+                        below according to your color type selection</p>
+                    <div class="d-flex justify-content-evenly flex-wrap align-items-end m-3">
+                        <div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        v-model="cardType" value="DEBIT">Debit
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        v-model="cardType" value="CREDIT">Credit
+                                </label>
+                            </div>
+                        </div>
+                        <fieldset>Select type color card:
+                            <select class="mt-2 input-filter form-select form-select-sm"
+                                aria-label=".form-select-sm example" v-model="cardColor">
+                                <option value="GOLD">Gold</option>
+                                <option value="SILVER">Silver</option>
+                                <option value="TITANIUM">Titanium</option>
+                            </select>
+                        </fieldset>
                     </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" v-model="cardType" value="CREDIT">Credit
-                        </label>
-                    </div>
-                    <select class="m-3 form-select form-select-sm" aria-label=".form-select-sm example" v-model="cardColor">
-                        <option selected>Select color of card</option>
-                        <option value="GOLD">Gold</option>
-                        <option value="SILVER">Silver</option>
-                        <option value="TITANIUM">Titanium</option>
-                    </select>
-                    <button type="button" @click="newCard" class="btn btn-primary">New Card</button>
-                </div> 
+                    <button type="button mt-3 text-center" @click="newCard" class="btn">Create New Card</button>
+                </div>
                 <div class="card m-3">
                     <div class="flip">
                         <div class="front" :style="'background-image:' + colorCard(cardColor)">
                             <div class="strip-bottom"></div>
                             <div class="strip-top"></div>
                             <img src="./images/icons/Logo.svg" class="logo-cards" alt="logo">
-                            <div class="investor" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">{{cardColor}}</div>
+                            <div class="investor" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">
+                                {{cardColor}}</div>
                             <div class="chip">
                                 <div class="chip-line"></div>
                                 <div class="chip-line"></div>
@@ -114,11 +126,13 @@
                                 </path>
                             </svg>
                             <div class="card-number">
-                                <div class="section1" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">5245 3625 9545 7598</div>
+                                <div class="section1" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">5245
+                                    3625 9545 7598</div>
                             </div>
-                            <div class="end"><span class="end-text">exp. end:</span><span
-                                    class="end-date" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">**/**</span></div>
-                            <div class="card-holder" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">**/**</div>
+                            <div class="end"><span class="end-text">exp. end:</span><span class="end-date"
+                                    :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">**/**</span></div>
+                            <div class="card-holder" :style="cardColor=='TITANIUM'?'color:white;':'color:dark;'">**/**
+                            </div>
                         </div>
                         <div class="back">
                             <div class="strip-black"></div>
@@ -139,16 +153,47 @@
                     </div>
                 </div>
             </div>
+            <section class="text-avatar" v-show="cardColor=='TITANIUM'">
+                <h4>Titanium Card:</h4>
+                <p>The Titanium Card from Diamond Bank is the most luxurious and exclusive credit card we offer. With a
+                    credit limit of $500,000, this card is designed for customers seeking the very best. Enjoy a range
+                    of exclusive benefits, including access to VIP lounges in international airports, personalized
+                    assistance at all times, and the opportunity to earn reward points that can be redeemed for luxury
+                    items. Additionally, the Titanium Card comes with fraud protection and extended warranties on
+                    purchases, ensuring peace of mind for our most valuable customers.</p>
+            </section>
+            <section class="text-avatar" v-show="cardColor=='GOLD'">
+                <h4>Golden Card:</h4>
+                <p>The Golden Card from Diamond Bank is an excellent option for customers seeking a high-level credit
+                    card without paying an excessive fee. With a credit limit of $250,000, the Golden Card offers many
+                    of the same exclusive benefits as the Titanium Card, such as personalized assistance and the ability
+                    to earn reward points. In addition, Golden Cardholders can enjoy exclusive discounts on a variety of
+                    high-end products and services, from restaurants and spas to hotels and clothing stores. With fraud
+                    protection and extended warranties on purchases, our customers can be assured that their experience
+                    with the Golden Card will be unparalleled.</p>
+            </section>
+            <section class="text-avatar" v-show="cardColor=='SILVER'">
+                <h4>Silver Card:</h4>
+                <p>The Silver Card from Diamond Bank is the perfect choice for customers seeking a basic but
+                    high-quality credit card. With a credit limit of $100,000, this card offers a range of standard
+                    benefits, such as fraud protection and extended warranties on purchases. In addition, Silver
+                    Cardholders can enjoy discounts on a variety of products and services, including fast food,
+                    transportation, and lodging. While this card does not offer the same exclusive benefits as the
+                    Golden and Titanium cards, it is still an excellent option for those seeking a reliable and
+                    affordable choice.</p>
+            </section>
         </main>
-        <footer >
+        <footer>
             <div class="container">
                 <div class="ps-4 pt-4 pe-4 row justify-content-center">
                     <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
                         <h5>Contact</h5>
                         <ul>
                             <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a>
+                            </li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte
+                                    1185, Bs. As.</a></li>
                         </ul>
                     </section>
                     <section class="col-md-4 col-lg-4 col-sm-6">
@@ -195,4 +240,5 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/create-cards.js"></script>
 </body>
+
 </html>

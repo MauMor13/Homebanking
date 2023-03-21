@@ -10,6 +10,7 @@ createApp({
             firstName: '',
             lastName: '',
             form: false,
+            title: true,
         }
     },
     methods: {
@@ -81,8 +82,16 @@ createApp({
                 form.classList.remove('girarLogin');
             }
         },
+        beforeDestroy: function () {
+            window.removeEventListener("resize", this.updateScreenSize);
+        },
+        updateScreenSize: function () {
+            this.title = window.innerWidth > 500;
+        },
     },
     mounted() {
+        this.updateScreenSize();
+        window.addEventListener("resize", this.updateScreenSize);
         const icons = [
             document.getElementById('icon1'),
             document.getElementById('icon2'),

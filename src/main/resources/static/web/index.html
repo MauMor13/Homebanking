@@ -117,8 +117,8 @@
             </template>
             <div class="info d-flex">
                 <div class="kodfun">
-                    <div style="background-image:url(./images/indexImage/campaign-creators-pypeCEaJeZY-unsplash.jpg);">
-                        <span class="span-1 text-center">
+                    <div v-show="title" style="background-image:url(./images/indexImage/campaign-creators-pypeCEaJeZY-unsplash.jpg);">
+                        <span v-show="title" class="span-1 text-center">
                             <h3 class="mb-2">Transactions</h3>
                             <p>At Diamante Bank, you'll also find secure and efficient transaction services, such as
                                 electronic transfers and online payments. With these options, you can manage your
@@ -128,7 +128,7 @@
                         </span>
                     </div>
                     <div style="background-image:url(./images/indexImage/pexels-cup-of-couple-6634170.jpg);">
-                        <span class="span-1 text-center">
+                        <span v-show="title" class="span-1 text-center">
                             <h3 class="mb-2">Loans</h3>
                             <p>At Diamante Bank, you'll find a wide range of loan options to help you achieve your
                                 financial goals. From personal loans to mortgages, the bank can offer solutions to
@@ -138,7 +138,7 @@
                         </span>
                     </div>
                     <div style="background-image:url(./images/indexImage/blake-wisz-q3o_8MteFM0-unsplash.jpg);">
-                        <span class="span-1 text-center">
+                        <span v-show="title" class="span-1 text-center">
                             <h3 class="mb-2">Bank cards</h3>
                             <p>At Diamante Bank, you'll also find secure and efficient transaction services, such as
                                 electronic transfers and online payments. With these options, you can manage your

@@ -7,4 +7,5 @@ public interface LoanService {
     List<Loan> findAll();
     Optional<Loan> findById(Long id);
     void save(Loan loan);
+    boolean existsByName(String name);
 }

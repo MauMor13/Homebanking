@@ -1,9 +1,7 @@
 package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
-import com.mindhub.homebanking.dtos.NewLoanDTO;
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.*;
 import com.mindhub.homebanking.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import static com.mindhub.homebanking.models.TransactionType.CREDIT;
 import static java.util.stream.Collectors.toList;
@@ -76,19 +72,29 @@ public class LoanController {
         return new ResponseEntity<>("Create Loan", HttpStatus.CREATED);
     }
     @PostMapping("/new-loan")
-    public ResponseEntity<Object> newLoan(
-            @RequestBody(required = false) NewLoanDTO newLoan){
-        if (newLoan.getName().isEmpty())
-            return new ResponseEntity<>("the name of the loan is missing",HttpStatus.FORBIDDEN);
-        if (Double.isNaN(newLoan.getMaxAmount()))
-            return new ResponseEntity<>("the max amount of the loan is missing",HttpStatus.FORBIDDEN);
-        if (newLoan.getPayments().isEmpty())
-            return new ResponseEntity<>("the payments of the loan is missing",HttpStatus.FORBIDDEN);
-        if (Float.isNaN(newLoan.getPercentage()))
-            return new ResponseEntity<>("the percentege of the loan is missing",HttpStatus.FORBIDDEN);
-
-        Loan newloan = new Loan(newLoan.getName(),newLoan.getMaxAmount(),newLoan.getPayments(),newLoan.getPercentage());
-        loanService.save(newloan);
-        return new ResponseEntity<>("Create Loan", HttpStatus.CREATED);
+    public ResponseEntity<Object> newLoan(Authentication authentication,
+                                          @RequestParam (required = false) Integer maxAmount,
+                                          @RequestParam (required = false) List<Integer> payment,
+                                          @RequestParam (required = false) String name,
+                                          @RequestParam (required = false) Float percentage){
+        Client admin= clientService.findByEmail(authentication.getName());
+        if (percentage.isNaN()||percentage==null){
+            return new ResponseEntity<>("Missing fees", HttpStatus.BAD_REQUEST);
+        }
+        if (maxAmount<1){
+            return new ResponseEntity<>("Missing amount", HttpStatus.BAD_REQUEST);
+        }
+        if (payment==null){
+            return new ResponseEntity<>("Missing payment", HttpStatus.BAD_REQUEST);
+        }
+        if (name.isEmpty()){
+            return new ResponseEntity<>("Missing name", HttpStatus.BAD_REQUEST);
+        }
+        if(loanService.existsByName(name)){
+            return new ResponseEntity<>("that loan already exists", HttpStatus.BAD_REQUEST);
+        }
+        Loan loan=new Loan(name,maxAmount,payment,percentage);
+        loanService.save(loan);
+        return new ResponseEntity<>("Loan created correctly",HttpStatus.CREATED);
     }
 }

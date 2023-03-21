@@ -5,17 +5,17 @@ createApp({
             data: [],
             navbar: false,
             title: true,
-            numAccountDestini:"",
-            numAccountOrigin:"",
-            description:"",
-            amount:"",
-            show:"",
-            accounts:[],
-            avatarImg:1,
+            numAccountDestini: "",
+            numAccountOrigin: "",
+            description: "",
+            amount: "",
+            show: "own",
+            accounts: [],
+            avatarImg: 1,
         }
     },
     created() {
-        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
+        this.avatarImg = localStorage.getItem("myAvatar") ? localStorage.getItem("myAvatar") : 1;
         this.loadData();
     },
     methods: {
@@ -45,21 +45,29 @@ createApp({
                 }
             })
         },
-        newTransfer:function(){
-            axios.post('/api/transactions',`amount=${this.amount}&description=${this.description}&numAccountOrigin=${this.numAccountOrigin}&numAccountDestini=${this.numAccountDestini}`)
-            .then(response=>{
-                Swal.fire('Successful Transfer')
-            })
-            .catch(error=>{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.response.data,
+        newTransfer: function () {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/transactions', `amount=${this.amount}&description=${this.description}&numAccountOrigin=${this.numAccountOrigin}&numAccountDestini=${this.numAccountDestini}`)
+                .then(response => {
+                    Swal.fire('Successful Transfer')
                 })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data,
+                    })
+                })
+                }
             })
         },
-        filterAccounts:function(){
-            this.accounts=this.data.accounts.filter(account=>account.number!=this.numAccountOrigin);
+        filterAccounts: function () {
+            this.accounts = this.data.accounts.filter(account => account.number != this.numAccountOrigin);
         },
         navShow: function (value) {
             this.navbar = value;
@@ -71,7 +79,7 @@ createApp({
             this.title = window.innerWidth > 500;
         },
     },
-    mounted(){
+    mounted() {
         this.updateScreenSize();
         window.addEventListener("resize", this.updateScreenSize);
     },

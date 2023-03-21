@@ -56,30 +56,43 @@
                         <img class="icons" src="images/icons/settings.svg" alt="settings">
                         <span>Setting</span>
                     </li>
-                    <li onclick="location.href='./help.html'">
+                    <!-- <li onclick="location.href='./help.html'">
                         <img class="icons" src="images/icons/help.svg" alt="help">
                         <span>Help</span>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </template >
         <main>
-            <section class="d-flex justify-content-evenly align-items-center">
-                <button v-show="data.cards.length<6" class="btn m-2" onclick="location.href='./create-cards.html'">New Card</button>
-            </section>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Debit
-                </label>
-            </div>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="CREDIT" checked @change="cardType()" v-model="typeCard">
-                <label class="form-check-label" for="flexRadioDefault2">
-                    Credit
-                </label>
-            </div>
             <div class="mt-4 d-flex flex-wrap justify-content-evenly">
+                <div class="text-card text-center">
+                    <h4 class="text-center">{{typeCard=="DEBIT"?"Debit":"Credit"}} Cards</h4>
+                    <p>Here you can filter your cards by type and number, as well as delete the filtered card</p>
+                    <div class="d-flex justify-content-evenly flex-wrap align-items-end">
+                        <div>
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Debit
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="CREDIT" checked @change="cardType()" v-model="typeCard">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Credit
+                                </label>
+                            </div>
+                        </div>
+                        <fieldset>Number Card
+                            <select class="form-select mt-1 input-filter" aria-label="Default select example"
+                                v-model="numberCard">
+                                <option v-for="card of cards">{{card.number}}</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <button class="btn mt-2" @click="deleteCard()">Delete Card</button>
+                    <button v-show="cuantiCards<6" class="btn m-2" onclick="location.href='./create-cards.html'">You can get a new card by clicking here!</button>
+                </div>
                 <template v-if="data">
                     <div class="card m-3" v-for="card of cards">
                         <div class="flip">
@@ -133,11 +146,6 @@
                         </div>
                     </div>
                 </template>
-                <div v-else>
-                    <p>
-                        It does not have cards, to obtain it you just have to press the button 
-                    </p>
-                </div>
             </div>
         </main>
         <footer >

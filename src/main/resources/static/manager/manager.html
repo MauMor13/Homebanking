@@ -46,16 +46,15 @@
                         placeholder="400000">
                 </div>
                 <fieldset class="mb-3">Payment
-                    <select class="form-select" aria-label="Default select example"
-                        v-model="payments">
-                        <option class="text-dark" v-for="payment of totalPayments">{{payment}}</option>
+                    <select class="form-select" v-model="payments">
+                        <option class="text-dark" v-for="payment of totalPayments" :value="payment">{{payment}}</option>
                     </select>
                 </fieldset>
                 <div class="mb-3">
                     <label class="form-label" form="input4">Percentage:</label>
                     <input v-model="percentage" type="number" id="input4" class="form-control"
                         placeholder="0.3">
-                </div>{{name}} {{maxAmount}} {{percentage}} {{payments}}
+                </div>
                 <button type="submit" class="p-1 buttonAdd" @click="createNewLoan()">Create New Loan</button>
             </div>
             <h3 class="p-3 text-center">Client List</h3>
