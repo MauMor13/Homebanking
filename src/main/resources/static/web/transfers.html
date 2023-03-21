@@ -75,8 +75,8 @@
                         <li>And finally, a brief description, if you wish: add a brief description of the transfer if you'd like.</li>
                     </ul>
                 </div>
-                <div class="form-transfer row">
-                    <div class="m-2 col align-items-center justify-content-between">
+                <div class="form-transfer row container">
+                    <div class="m-2 col flex-column align-items-center justify-content-center">
                         <fieldset>Select you account:
                             <select  class="mt-2 form-select form-select-sm input-filter" v-model="numAccountOrigin" aria-label=".form-select-sm example">
                                 <option selected>Select you account</option>
@@ -103,7 +103,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="m-2 col align-items-center justify-content-between">
+                    <div class="m-2 col flex-column align-items-center justify-content-center">
                         <div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" checked  @click="show='own'" name="inputRadio"
@@ -126,7 +126,7 @@
                                 <input type="text" class="form-control" v-model="amount" aria-label="Amount (to the nearest dollar)">
                             </div>
                         </fieldset>
-                        <button type="button" class="btn" @click="newTransfer()">Transfer Money</button>
+                        <button type="button" class="btn text-center" @click="newTransfer()">Transfer Money</button>
                     </div>
                         
                 </div>

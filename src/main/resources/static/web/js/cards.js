@@ -9,9 +9,9 @@ createApp({
             title: true,
             typeCard: "CREDIT",
             allCards: [],
-            cuantiCards:10,
+            cuantiCards: 10,
             numberCard: "",
-            avatarImg: 1
+            avatarImg: 1,
         }
     },
     created() {
@@ -32,7 +32,7 @@ createApp({
             axios.get("/api/clients/current/cards")
                 .then(response => {
                     this.allCards = response.data;
-                    this.cuantiCards=this.allCards.length;
+                    this.cuantiCards = this.allCards.length;
                     this.cardType()
                 })
                 .catch(err => console.log(err));
@@ -45,20 +45,29 @@ createApp({
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.patch("/api/card-delete", `numberCard=${this.numberCard}`)
-                .then(response => {
-                    this.loadCards();
-                    Swal.fire('Account Delete Successfully');
-                })
-                .catch(error => {
-                    console.log(error.data);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: error.response.data,
-                    })
-                });
+                        .then(response => {
+                            this.loadCards();
+                            Swal.fire('Account Delete Successfully');
+                        })
+                        .catch(error => {
+                            console.log(error.data);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.response.data,
+                            })
+                        });
                 }
             })
+        },
+        compareFecha: function (fecha) {
+            const fecha1 = new Date(fecha);
+            const fecha2 = new Date();
+            if (fecha1.getTime() <= fecha2.getTime()) {
+                return true;
+            } else {
+                return false;
+            }
         },
         logout: function () {
             Swal.fire({

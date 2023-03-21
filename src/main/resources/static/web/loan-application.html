@@ -67,9 +67,9 @@
                 </ul>
             </nav>
         </template>
-        <main class="d-flex justify-content-evenly align-items-center m-4 flex-wrap">
-            <div class="text-loans d-flex flex-wrap justify-content-between" style="max-width: 80%;">
-                <div>
+        <main class="d-flex justify-content-evenly align-items-center flex-wrap">
+            <div class="text-loans row justify-content-center align-items-center" style="max-width: 80%;">
+                <div class="col d-flex flex-column justify-content-center align-items-center">
                     <h3>Form Loans</h3>
                     <fieldset>Loan Type
                         <select class="form-select mt-1 input-filter" aria-label="Default select example" v-model="id">
@@ -98,14 +98,14 @@
                             ${{(amount*loanfiltrado().percentage/payments).toFixed(2)}}
                         </p>
                     </fieldset>
-                    <button class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Apply for Loan
+                    <button class="btn m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Apply for Loan
                         <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none"
                             class="h-6 w-6 icons" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
                         </svg>
                     </button>
                 </div>
-                <div v-show="loanName=='Automotive'||loanName  == 0" class="text-loans loanAutomotive">
+                <div v-show="loanName=='Automotive'||loanName  == 0" class="loanAutomotive col">
                     <h5>Automotive Loans:</h5>
                     <p> If you're looking to finance the purchase of a new or used car, this is
                         the loan
@@ -117,7 +117,7 @@
                     <p>Quotas to request {{loanfiltrado().payments}}</p>
                     <p>Interest rate {{loanfiltrado().percentage}} %</p>
                 </div>
-                <div v-show="loanName=='Personal'" class="text-loans loanPersonal">
+                <div v-show="loanName=='Personal'" class="loanPersonal col-md-6">
                     <h5>Personal Loans:</h5>
                     <p> Need money to make improvements to your home, consolidate debt, or finance
                         an
@@ -129,7 +129,7 @@
                     <p>Quotas to request {{loanfiltrado().payments}}</p>
                     <p>Interest rate {{loanfiltrado().percentage}} %</p>
                 </div>
-                <div v-show="loanName=='Mortgage'" class=" text-loans loanMortgage">
+                <div v-show="loanName=='Mortgage'" class="loanMortgage col-md-6">
                     <h5>Mortgage Loans:</h5>
                     <p> If you're looking to buy a home, a mortgage loan could be the way to go. We
                         offer

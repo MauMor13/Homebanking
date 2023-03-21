@@ -24,7 +24,7 @@
                 <h1 v-show="title" class="ms-2">Diamond Bank | Accounts</h1>
             </div>
             <div class="d-flex container_icon_exit">
-                <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
+                <img @click="logout" title="Logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
             </div>
         </header>
         <template v-if="navbar">
@@ -72,7 +72,7 @@
                     <div class="account m-3 d-flex flex-column justify-content-evenly" v-for="account of accounts">
                         <div class="d-flex justify-content-between">
                             <h5 class="ms-3 mt-3">My Balance:</h5><img class="icons-delete"
-                                @click="deleteAccount(account.number)" src="./images/icons/delete.svg"
+                                @click="deleteAccount(account.number)" title="Delete Account" src="./images/icons/delete.svg"
                                 alt="deleteAccount">
                         </div>
                         <h1 class="text-center">{{account.balance.toLocaleString('de-DE', { style: 'currency', currency:

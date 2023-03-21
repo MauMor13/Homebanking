@@ -24,7 +24,7 @@
                 <h1 v-show="title" class="ms-2">Diamond Bank | Transactions</h1>
             </div>
             <div class="d-flex container_icon_exit">
-                <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
+                <img @click="logout" title="Logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
             </div>
         </header>
         <template v-if="navbar">
@@ -69,7 +69,7 @@
         <main>
             <div class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
                 <template v-if="fromAccount">
-                    <div class="contain-table">
+                    <div class="contain-table m-2">
                         <table class="table print-content">
                             <thead>
                                 <th>Type</th>
@@ -144,8 +144,8 @@
                             </div>
                         </fieldset>
                         <div class="d-flex justify-content-evenly flex-wrap">
-                            <button type="button" class="btn" @click=" loadTransactions()">Apply Filters</button>
-                            <button type="button" @click="printPdf()" class="btn">Download PDF</button>
+                            <button type="button" class="btn m-2" @click=" loadTransactions()">Apply Filters</button>
+                            <button type="button" @click="printPdf()" class="btn m-2">Download PDF</button>
                         </div>
                     </div>
                 </template>

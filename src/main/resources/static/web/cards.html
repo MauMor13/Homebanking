@@ -21,7 +21,7 @@
                 <h1 v-show="title" class="ms-2">Diamond Bank | Cards</h1>
             </div>
             <div class="d-flex container_icon_exit">
-                <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
+                <img @click="logout" class="icon_exit mb-2" title="Logout" src="./images/icons/exit-door.png" alt="logout">
             </div>
         </header>
         <template v-if="navbar">
@@ -64,8 +64,8 @@
             </nav>
         </template >
         <main>
-            <div class="mt-4 d-flex flex-wrap justify-content-evenly">
-                <div class="text-card text-center">
+            <div class="m-2 mb-2 d-flex flex-wrap justify-content-evenly">
+                <div class="text-card m-2 text-center">
                     <h4 class="text-center">{{typeCard=="DEBIT"?"Debit":"Credit"}} Cards</h4>
                     <p>Here you can filter your cards by type and number, as well as delete the filtered card</p>
                     <div class="d-flex justify-content-evenly flex-wrap align-items-end">
@@ -94,9 +94,10 @@
                     <button v-show="cuantiCards<6" class="btn m-2" onclick="location.href='./create-cards.html'">You can get a new card by clicking here!</button>
                 </div>
                 <template v-if="data">
-                    <div class="card m-3" v-for="card of cards">
+                    <div class="card m-3" v-for="card of cards"> 
                         <div class="flip">
                             <div class="front" :style="'background-image:' + colorCard(card.color)">
+                                <img v-if="compareFecha(card.thruDate)" src="./images/icons/expired.png" style="width: 2rem; position: absolute;top: .5rem;right: .5rem;" alt="expirate">
                                 <div class="strip-bottom"></div>
                                 <div class="strip-top"></div>
                                 <img src="./images/icons/Logo.svg" class="logo-cards" alt="logo">
@@ -144,7 +145,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </template>
             </div>
         </main>
