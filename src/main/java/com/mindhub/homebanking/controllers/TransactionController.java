@@ -39,7 +39,7 @@ public class TransactionController {
             @RequestParam String numAccountOrigin,
             @RequestParam String numAccountDestini){
         Client clientAuthen = clientService.findByEmail(authentication.getName());
-        if(amount == null || amount == 0)
+        if(amount == null || amount <= 0)
             return new ResponseEntity<>("Missing amount",HttpStatus.BAD_REQUEST);
         if(description.isEmpty())
             return new ResponseEntity<>("Missing description",HttpStatus.BAD_REQUEST);

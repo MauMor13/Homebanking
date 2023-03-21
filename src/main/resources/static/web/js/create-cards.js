@@ -5,7 +5,7 @@ createApp({
             data: [],
             navbar: false,
             title: true,
-            cardType: "",
+            cardType: "DEBIT",
             cardColor: "",
             avatarImg: 1
         }

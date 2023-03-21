@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
     <title>My Cards | Diamond Bank</title>
 </head>
+
 <body class="image_day">
     <div id="app">
-        <header  class="p-2">
+        <header class="p-2">
             <div class="d-flex container_icon_nav">
-                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)" alt="buttonNav">
+                <img class="icon-nav" src="./images/icons/menu-1-svgrepo-com.svg" @click="navShow(true)"
+                    alt="buttonNav">
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
                 <h1 v-show="title" class="ms-2">Diamond Bank | Cards</h1>
             </div>
             <div class="d-flex container_icon_exit">
-                <img @click="logout" class="icon_exit mb-2" title="Logout" src="./images/icons/exit-door.png" alt="logout">
+                <img @click="logout" class="icon_exit mb-2" title="Logout" src="./images/icons/exit-door.png"
+                    alt="logout">
             </div>
         </header>
         <template v-if="navbar">
@@ -62,7 +66,7 @@
                     </li> -->
                 </ul>
             </nav>
-        </template >
+        </template>
         <main>
             <div class="m-2 mb-2 d-flex flex-wrap justify-content-evenly">
                 <div class="text-card m-2 text-center">
@@ -71,13 +75,16 @@
                     <div class="d-flex justify-content-evenly flex-wrap align-items-end">
                         <div>
                             <div class="form-check ">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT" id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="DEBIT"
+                                    id="flexRadioDefault1" @change="cardType()" v-model="typeCard">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Debit
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="CREDIT" checked @change="cardType()" v-model="typeCard">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2" value="CREDIT" checked @change="cardType()"
+                                    v-model="typeCard">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Credit
                                 </label>
@@ -91,17 +98,20 @@
                         </fieldset>
                     </div>
                     <button class="btn mt-2" @click="deleteCard()">Delete Card</button>
-                    <button v-show="cuantiCards<6" class="btn m-2" onclick="location.href='./create-cards.html'">You can get a new card by clicking here!</button>
+                    <button v-show="cuantiCards<6" class="btn m-2" onclick="location.href='./create-cards.html'">You can
+                        get a new card by clicking here!</button>
                 </div>
-                <template v-if="data">
-                    <div class="card m-3" v-for="card of cards"> 
+                <template v-if="cards.length">
+                    <div class="card m-3" v-for="card of cards">
                         <div class="flip">
                             <div class="front" :style="'background-image:' + colorCard(card.color)">
-                                <img v-if="compareFecha(card.thruDate)" src="./images/icons/expired.png" style="width: 2rem; position: absolute;top: .5rem;right: .5rem;" alt="expirate">
+                                <img v-if="compareFecha(card.thruDate)" src="./images/icons/expired.png"
+                                    style="width: 2rem; position: absolute;top: .5rem;right: .5rem;" alt="expirate">
                                 <div class="strip-bottom"></div>
                                 <div class="strip-top"></div>
                                 <img src="./images/icons/Logo.svg" class="logo-cards" alt="logo">
-                                <div class="investor" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.color}}</div>
+                                <div class="investor" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">
+                                    {{card.color}}</div>
                                 <div class="chip">
                                     <div class="chip-line"></div>
                                     <div class="chip-line"></div>
@@ -122,11 +132,14 @@
                                     </path>
                                 </svg>
                                 <div class="card-number">
-                                    <div class="section1" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.number}}</div>
+                                    <div class="section1" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">
+                                        {{card.number}}</div>
                                 </div>
-                                <div class="end"><span class="end-text">exp. end:</span><span
-                                        class="end-date" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.thruDate}}</span></div>
-                                <div class="card-holder" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.cardHolder}}</div>
+                                <div class="end"><span class="end-text">exp. end:</span><span class="end-date"
+                                        :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">{{card.thruDate}}</span>
+                                </div>
+                                <div class="card-holder" :style="card.color=='TITANIUM'?'color:white;':'color:dark;'">
+                                    {{card.cardHolder}}</div>
                             </div>
                             <div class="back">
                                 <div class="strip-black"></div>
@@ -145,19 +158,31 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="text-card m-2 text-center d-flex flex-column justify-content-evenly">
+                        <h4>You don't have a card yet!</h4>
+                        <p>At our bank, we offer a wide variety of bank cards so you can choose the one that best suits your
+                            needs. Whether you need a credit card or a debit card, we have options for you.
+                    
+                            Our bank cards come in three different types: Gold, Titanium, and Silver. Each one of them has
+                            different features and benefits so you can choose the one that suits you best.</p>
+                    </div>
                 </template>
             </div>
         </main>
-        <footer >
+        <footer>
             <div class="container">
                 <div class="ps-4 pt-4 pe-4 row justify-content-center">
                     <section id="contact" class="col-md-4 col-lg-4 col-sm-12">
                         <h5>Contact</h5>
                         <ul>
                             <li>Phones:<a class="enlace" href="tel:+15426978"> +15426978</a></li>
-                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a></li>
-                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte 1185, Bs. As.</a></li>
+                            <li>Email:<a class="enlace" href="mailto:diamonBank@gmail.com"> diamonBank@gmail.com</a>
+                            </li>
+                            <li>Direction:<a class="enlace" href="https://goo.gl/maps/JJpD1vs6fL2ZNs8v6"> Gral, Viamonte
+                                    1185, Bs. As.</a></li>
                         </ul>
                     </section>
                     <section class="col-md-4 col-lg-4 col-sm-6">
@@ -204,4 +229,5 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/cards.js"></script>
 </body>
+
 </html>

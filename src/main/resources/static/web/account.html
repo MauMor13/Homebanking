@@ -68,7 +68,7 @@
         </template >
         <main>
             <div class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
-                <template v-if="fromAccount">
+                <template v-if="transactions.length">
                     <div class="contain-table m-2">
                         <table class="table print-content">
                             <thead>
@@ -155,7 +155,7 @@
                         facilitate the process, we have created a button that will allow you to access the banking
                         transfer platform directly. Once there, you just need to follow the indicated steps to complete
                         the transaction.</p>
-                        <button type="button" class="btn" onclick="location.href='./loan-application.html'">Make a new Transaction</button>
+                        <button type="button" class="btn" onclick="location.href='./transfers.html'">Make a new Transaction</button>
                 </div>
             </div>
         </main>
