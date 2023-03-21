@@ -21,93 +21,93 @@ import static com.mindhub.homebanking.utils.Utilitis.*;
 
 @SpringBootApplication
 public class HomebankingApplication {
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository,
-									  AccountRepository accountRepository,
-									  AccountService accountService,
-									  CardService cardService,
-									  TransactionRepository transactionRepository,
-									  LoanRepository loanRepository,
-									  ClientLoanRepository clientLoanRepository,
-									  CardRepository cardRepository) {
-		return (args) -> {
-			//Creacion object
-			Client client=new Client("Jack", "Bauer","melba@mindhub.com",passwordEncoder.encode("12345"));
-			Client client2=new Client("Carl", "Ironman","ironman@mindhub.com",passwordEncoder.encode("67890"));
-			Client admin=new Client("Admin","Karl","admin@mindhub.com",passwordEncoder.encode("123456"));
-			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000,SAVING);
-			Account vin002=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),7500,CURRENT);
-			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200,SAVING);
-			Account vin004=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),300,CURRENT);
-
-			//utilizo método para generar transacciones aleatorias
-			generateRandomTransactions(vin001,15);
-			generateRandomTransactions(vin002,15);
-			generateRandomTransactions(vin003,15);
-			generateRandomTransactions(vin004,15);
-
-			Loan loan1=new Loan("Mortgage",500000, List.of(12,24,36,48,60),0.3F);
-			Loan loan2=new Loan("Personal",100000, List.of(6,12,24),1.56F);
-			Loan loan3=new Loan("Automotive",300000, List.of(6,12,24,36),0.2F);
-
-			ClientLoan pres1=new ClientLoan(400000.0, 60);
-			ClientLoan pres2=new ClientLoan(50000.0, 12);
-			ClientLoan pres3=new ClientLoan(100000.0, 24 );
-			ClientLoan pres4=new ClientLoan(200000.0, 36);
-
-			Card card1=new Card(client, CREDIT, GOLD,randomNumberCard(cardService), returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card2=new Card(client, CREDIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card3=new Card(client, CREDIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card4=new Card(client, DEBIT, GOLD,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card5=new Card(client, DEBIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-			Card card6=new Card(client, DEBIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
-
-			//método add
-			client.addAccount(vin001);
-			client.addAccount(vin002);
-			client2.addAccount(vin003);
-			client2.addAccount(vin004);
-			client.addClientLoan(pres1);
-			loan1.addClientLoan(pres1);
-			client.addClientLoan(pres2);
-			loan2.addClientLoan(pres2);
-			client2.addClientLoan(pres3);
-			loan2.addClientLoan(pres3);
-			client2.addClientLoan(pres4);
-			loan3.addClientLoan(pres4);
-			client.addCard(card1);
-			client.addCard(card2);
-			client.addCard(card3);
-			client.addCard(card4);
-			client.addCard(card5);
-			client.addCard(card6);
-
-			//método save de repositorio
-			clientRepository.save(client);
-			clientRepository.save(client2);
-			clientRepository.save(admin);
-			saveAccountsAndTransactions(client,accountRepository,transactionRepository);
-			saveAccountsAndTransactions(client2,accountRepository,transactionRepository);
-			loanRepository.save(loan1);
-			loanRepository.save(loan2);
-			loanRepository.save(loan3);
-			clientLoanRepository.save(pres1);
-			clientLoanRepository.save(pres2);
-			clientLoanRepository.save(pres3);
-			clientLoanRepository.save(pres4);
-			cardRepository.save(card1);
-			cardRepository.save(card2);
-			cardRepository.save(card3);
-			cardRepository.save(card4);
-			cardRepository.save(card5);
-			cardRepository.save(card6);
-		};
-
-	}
+//	@Bean
+//	public CommandLineRunner initData(ClientRepository clientRepository,
+//									  AccountRepository accountRepository,
+//									  AccountService accountService,
+//									  CardService cardService,
+//									  TransactionRepository transactionRepository,
+//									  LoanRepository loanRepository,
+//									  ClientLoanRepository clientLoanRepository,
+//									  CardRepository cardRepository) {
+//		return (args) -> {
+//			//Creacion object
+//			Client client=new Client("Jack", "Bauer","melba@mindhub.com",passwordEncoder.encode("12345"));
+//			Client client2=new Client("Carl", "Ironman","ironman@mindhub.com",passwordEncoder.encode("67890"));
+//			Client admin=new Client("Admin","Karl","admin@mindhub.com",passwordEncoder.encode("123456"));
+//			Account vin001=new Account("VIN-001", LocalDateTime.now(),5000,SAVING);
+//			Account vin002=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),7500,CURRENT);
+//			Account vin003=new Account("VIN-003", LocalDateTime.now(),1200,SAVING);
+//			Account vin004=new Account(GenereteNumber(accountService), LocalDateTime.now().plusDays(1),300,CURRENT);
+//
+//			//utilizo método para generar transacciones aleatorias
+//			generateRandomTransactions(vin001,15);
+//			generateRandomTransactions(vin002,15);
+//			generateRandomTransactions(vin003,15);
+//			generateRandomTransactions(vin004,15);
+//
+//			Loan loan1=new Loan("Mortgage",500000, List.of(12,24,36,48,60),0.3F);
+//			Loan loan2=new Loan("Personal",100000, List.of(6,12,24),1.56F);
+//			Loan loan3=new Loan("Automotive",300000, List.of(6,12,24,36),0.2F);
+//
+//			ClientLoan pres1=new ClientLoan(400000.0, 60);
+//			ClientLoan pres2=new ClientLoan(50000.0, 12);
+//			ClientLoan pres3=new ClientLoan(100000.0, 24 );
+//			ClientLoan pres4=new ClientLoan(200000.0, 36);
+//
+//			Card card1=new Card(client, CREDIT, GOLD,randomNumberCard(cardService), returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//			Card card2=new Card(client, CREDIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//			Card card3=new Card(client, CREDIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//			Card card4=new Card(client, DEBIT, GOLD,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//			Card card5=new Card(client, DEBIT, SILVER,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//			Card card6=new Card(client, DEBIT, TITANIUM,randomNumberCard(cardService) , returnCvvNumber(), LocalDate.now(),LocalDate.now().plusYears(5));
+//
+//			//método add
+//			client.addAccount(vin001);
+//			client.addAccount(vin002);
+//			client2.addAccount(vin003);
+//			client2.addAccount(vin004);
+//			client.addClientLoan(pres1);
+//			loan1.addClientLoan(pres1);
+//			client.addClientLoan(pres2);
+//			loan2.addClientLoan(pres2);
+//			client2.addClientLoan(pres3);
+//			loan2.addClientLoan(pres3);
+//			client2.addClientLoan(pres4);
+//			loan3.addClientLoan(pres4);
+//			client.addCard(card1);
+//			client.addCard(card2);
+//			client.addCard(card3);
+//			client.addCard(card4);
+//			client.addCard(card5);
+//			client.addCard(card6);
+//
+//			//método save de repositorio
+//			clientRepository.save(client);
+//			clientRepository.save(client2);
+//			clientRepository.save(admin);
+//			saveAccountsAndTransactions(client,accountRepository,transactionRepository);
+//			saveAccountsAndTransactions(client2,accountRepository,transactionRepository);
+//			loanRepository.save(loan1);
+//			loanRepository.save(loan2);
+//			loanRepository.save(loan3);
+//			clientLoanRepository.save(pres1);
+//			clientLoanRepository.save(pres2);
+//			clientLoanRepository.save(pres3);
+//			clientLoanRepository.save(pres4);
+//			cardRepository.save(card1);
+//			cardRepository.save(card2);
+//			cardRepository.save(card3);
+//			cardRepository.save(card4);
+//			cardRepository.save(card5);
+//			cardRepository.save(card6);
+//		};
+//
+//	}
 
 }
