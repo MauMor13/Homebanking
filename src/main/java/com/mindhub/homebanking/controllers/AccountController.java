@@ -61,8 +61,10 @@ public class AccountController {
             return new ResponseEntity<>("The account number does not exist",HttpStatus.BAD_REQUEST);
         if (clientauth.getAccountsActive().stream().noneMatch(account -> account.getNumber().equals(numberAccount)))
             return new ResponseEntity<>("The account does not belong to the customer",HttpStatus.BAD_REQUEST);
-
         Account account = accountService.findByNumber(numberAccount);
+        if (account.getBalance()>0)
+            return new ResponseEntity<>("Your account still has a balance",HttpStatus.BAD_REQUEST);
+
         account.setActive(false);
         accountService.save(account);
         return new ResponseEntity<>("Account removed successfully",HttpStatus.ACCEPTED);

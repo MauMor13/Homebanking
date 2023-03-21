@@ -33,6 +33,31 @@
                 </div>
                 <button type="submit" class="p-1 buttonAdd" @click="addClient">Add Client</button>
             </div>
+            <h2 class="text-center p-2">New Loan</h2>
+            <div>
+                <div class="mb-3">
+                    <label class="form-label" form="inpu1">Name Loan:</label>
+                    <input v-model="name" type="text" id="inpu1" class="form-control"
+                        placeholder="Name Loan">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" form="input2">Max Amount:</label>
+                    <input v-model="maxAmount" type="number" id="input2" class="form-control"
+                        placeholder="400000">
+                </div>
+                <fieldset class="mb-3">Payment
+                    <select class="form-select" aria-label="Default select example"
+                        v-model="payments">
+                        <option class="text-dark" v-for="payment of totalPayments">{{payment}}</option>
+                    </select>
+                </fieldset>
+                <div class="mb-3">
+                    <label class="form-label" form="input4">Percentage:</label>
+                    <input v-model="percentage" type="number" id="input4" class="form-control"
+                        placeholder="0.3">
+                </div>{{name}} {{maxAmount}} {{percentage}} {{payments}}
+                <button type="submit" class="p-1 buttonAdd" @click="createNewLoan()">Create New Loan</button>
+            </div>
             <h3 class="p-3 text-center">Client List</h3>
             <table class="table text-center">
                 <thead>

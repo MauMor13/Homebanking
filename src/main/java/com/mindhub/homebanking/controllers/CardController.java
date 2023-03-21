@@ -77,7 +77,7 @@ public class CardController {
     }
     @Transactional
     @CrossOrigin
-    @PostMapping("/pay")//nuevo servlet-
+    @PostMapping("/pay")
     public ResponseEntity <Object> payCards(
             @RequestBody(required = false) NewPayDTO newPayDTO){
         Card card = cardService.findByNumber(newPayDTO.getNumber());

@@ -27,43 +27,45 @@
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
             </div>
         </header>
-        <nav v-show="navbar" class="sidebar">
-            <section class="ps-3">
-                <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/avatar2.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
-                        @click="navShow(false)">
-                </div>
-                <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
-                <p class="m-2">{{data.email}}</p>
-            </section>
-            <ul>
-                <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
-                    <span>Accounts</span>
-                </li>
-                <li onclick="location.href='./cards.html'">
-                    <img class="icons" src="images/icons/credit-card.svg" alt="cards">
-                    <span>Cards</span>
-                </li>
-                <li onclick="location.href='./transfers.html'">
-                    <img class="icons" src="images/icons/finance.svg" alt="transfers">
-                    <span>Transactions</span>
-                </li>
-                <li onclick="location.href='./loan-application.html'">
-                    <img class="icons" src="images/icons/transaction.svg" alt="loans">
-                    <span>Loans</span>
-                </li>
-                <li onclick="location.href='./setting.html'">
-                    <img class="icons" src="images/icons/settings.svg" alt="settings">
-                    <span>Setting</span>
-                </li>
-                <li onclick="location.href='./help.html'">
-                    <img class="icons" src="images/icons/help.svg" alt="help">
-                    <span>Help</span>
-                </li>
-            </ul>
-        </nav>
+        <template v-if="navbar">
+            <nav class="sidebar">
+                <section class="ps-3">
+                    <div class="d-flex align-items-center justify-content-between p-1">
+                        <img class="avatar" :src="'./images/clientsimages/avatar'+avatarImg+'.svg'" alt="avatar">
+                        <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                            @click="navShow(false)">
+                    </div>
+                    <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
+                    <p class="m-2">{{data.email}}</p>
+                </section>
+                <ul>
+                    <li onclick="location.href='#'">
+                        <img class="icons" src="images/icons/wallet.svg" alt="accounts">
+                        <span>Accounts</span>
+                    </li>
+                    <li onclick="location.href='./cards.html'">
+                        <img class="icons" src="images/icons/credit-card.svg" alt="cards">
+                        <span>Cards</span>
+                    </li>
+                    <li onclick="location.href='./transfers.html'">
+                        <img class="icons" src="images/icons/finance.svg" alt="transfers">
+                        <span>Transactions</span>
+                    </li>
+                    <li onclick="location.href='./loan-application.html'">
+                        <img class="icons" src="images/icons/transaction.svg" alt="loans">
+                        <span>Loans</span>
+                    </li>
+                    <li onclick="location.href='./setting.html'">
+                        <img class="icons" src="images/icons/settings.svg" alt="settings">
+                        <span>Setting</span>
+                    </li>
+                    <li onclick="location.href='./help.html'">
+                        <img class="icons" src="images/icons/help.svg" alt="help">
+                        <span>Help</span>
+                    </li>
+                </ul>
+            </nav>
+        </template >
         <main>
             <div class="d-flex flex-wrap justify-content-evenly align-items-center">
                 <template v-if="accounts">
@@ -85,12 +87,11 @@
                     </div>
                 </template>
                 <template v-if="numAccounts<3">
-                    <div class="account-type m-3 d-flex flex-column justify-content-evenly">
-                        <h4 class=" text-center">Create Your New Account Now!</h4>
-                        <p class="text-center">Don't miss the opportunity to open an account with us and enjoy a
-                            worry-free banking experience. Click on the "New Account" button now to get started!</p>
-                        <fieldset class="mt-2 p-2">Type Account:
-                            <select class="form-select mt-1" aria-label="Default select example" v-model="accountType"
+                    <div class="account-type m-3 d-flex flex-column align-items-center justify-content-evenly">
+                        <h4 class=" text-center">Create Your New Account!</h4>
+                        <p class="text-center">Click on the "New Account" button now to get started!</p>
+                        <fieldset class="ms-1 mb-1">Type Account:
+                            <select class="form-select mt-1 input-filter" aria-label="Default select example" v-model="accountType"
                                 required="accountTypes">
                                 <option value="CURRENT">Current</option>
                                 <option value="SAVING">Saving</option>

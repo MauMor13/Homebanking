@@ -9,7 +9,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/icons/Logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./stiles/style.css">
-    <title>My Movements | Diamond Bank</title>
+    <title>Help | Diamond Bank</title>
 </head>
 
 <body class="image_day">
@@ -21,49 +21,51 @@
             </div>
             <div class="title d-flex align-items-center">
                 <img class="logo" src="./images/icons/Logo.svg" alt="logo">
-                <h1 v-show="title" class="ms-2">Diamond Bank | Transactions</h1>
+                <h1 v-show="title" class="ms-2">Diamond Bank | Help</h1>
             </div>
             <div class="d-flex container_icon_exit">
                 <img @click="logout" class="icon_exit mb-2" src="./images/icons/exit-door.png" alt="logout">
             </div>
         </header>
-        <nav v-show="navbar" class="sidebar">
-            <section class="ps-3">
-                <div class="d-flex align-items-center justify-content-between p-1">
-                    <img class="avatar" src="./images/clientsimages/avatar2.svg" alt="avatar">
-                    <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
-                        @click="navShow(false)">
-                </div>
-                <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
-                <p class="m-2">{{data.email}}</p>
-            </section>
-            <ul>
-                <li onclick="location.href='./accounts.html'">
-                    <img class="icons" src="images/icons/wallet.svg" alt="accounts">
-                    <span>Accounts</span>
-                </li>
-                <li onclick="location.href='./cards.html'">
-                    <img class="icons" src="images/icons/credit-card.svg" alt="cards">
-                    <span>Cards</span>
-                </li>
-                <li onclick="location.href='./transfers.html'">
-                    <img class="icons" src="images/icons/finance.svg" alt="transfers">
-                    <span>Transactions</span>
-                </li>
-                <li onclick="location.href='./loan-application.html'">
-                    <img class="icons" src="images/icons/transaction.svg" alt="loans">
-                    <span>Loans</span>
-                </li>
-                <li onclick="location.href='./setting.html'">
-                    <img class="icons" src="images/icons/settings.svg" alt="settings">
-                    <span>Setting</span>
-                </li>
-                <li onclick="location.href='#'">
-                    <img class="icons" src="images/icons/help.svg" alt="help">
-                    <span>Help</span>
-                </li>
-            </ul>
-        </nav>
+        <template v-if="navbar">
+            <nav class="sidebar">
+                <section class="ps-3">
+                    <div class="d-flex align-items-center justify-content-between p-1">
+                        <img class="avatar" :src="'./images/clientsimages/avatar'+avatarImg+'.svg'" alt="avatar">
+                        <img class="icon-exit-nav" src="./images/icons/cross-circle-svgrepo-com.svg" alt="exitNav"
+                            @click="navShow(false)">
+                    </div>
+                    <h4 class="m-2 text-bottom">{{data.firstName}} {{data.lastName}}</h4>
+                    <p class="m-2">{{data.email}}</p>
+                </section>
+                <ul>
+                    <li onclick="location.href='./accounts.html'">
+                        <img class="icons" src="images/icons/wallet.svg" alt="accounts">
+                        <span>Accounts</span>
+                    </li>
+                    <li onclick="location.href='./cards.html'">
+                        <img class="icons" src="images/icons/credit-card.svg" alt="cards">
+                        <span>Cards</span>
+                    </li>
+                    <li onclick="location.href='./transfers.html'">
+                        <img class="icons" src="images/icons/finance.svg" alt="transfers">
+                        <span>Transactions</span>
+                    </li>
+                    <li onclick="location.href='./loan-application.html'">
+                        <img class="icons" src="images/icons/transaction.svg" alt="loans">
+                        <span>Loans</span>
+                    </li>
+                    <li onclick="location.href='./setting.html'">
+                        <img class="icons" src="images/icons/settings.svg" alt="settings">
+                        <span>Setting</span>
+                    </li>
+                    <li onclick="location.href='#'">
+                        <img class="icons" src="images/icons/help.svg" alt="help">
+                        <span>Help</span>
+                    </li>
+                </ul>
+            </nav>
+        </template>
         <main class="p-4 d-flex flex-wrap justify-content-evenly align-items-center text-light">
             
         </main>

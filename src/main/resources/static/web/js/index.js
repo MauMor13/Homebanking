@@ -16,14 +16,33 @@ createApp({
         login: function () {
             axios.post('/api/login', `email=${this.email}&password=${this.password}`)
                 .then(response => {
+                    if (this.email == "admin@mindhub.com") {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Login successful!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        window.location.href = '/manager/manager.html';
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Login successful!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        window.location.href = '/web/accounts.html';
+                    }
                     this.email = '';
                     this.password = '';
-                    window.location.href = '/web/accounts.html';
                 })
                 .catch(error => {
                     this.error = error.response.data.message;
-                    this.email= '';
-                    this.password= '';
+                    this.email = '';
+                    this.password = '';
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -64,7 +83,7 @@ createApp({
         },
     },
     mounted() {
-        const icons =[
+        const icons = [
             document.getElementById('icon1'),
             document.getElementById('icon2'),
             document.getElementById('icon3'),
@@ -79,11 +98,11 @@ createApp({
             document.getElementById('icon12'),
             document.getElementById('icon13'),
             document.getElementById('icon14'),
-            document.getElementById('icon15')] ;
+            document.getElementById('icon15')];
         setInterval(() => {
             let random;
-            for(let i=0;i<15;i++){
-                random=  Math.round(Math.random());
+            for (let i = 0; i < 15; i++) {
+                random = Math.round(Math.random());
                 if (random == 0) {
                     icons[i].classList.remove('vibra');
                 }
@@ -91,7 +110,7 @@ createApp({
                     icons[i].classList.add('vibra');
                 }
             }
-        },500);
+        }, 500);
     },
 }).mount('#app')
 

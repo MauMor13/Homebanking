@@ -7,9 +7,11 @@ createApp({
             title: true,
             cardType: "",
             cardColor:"",
+            avatarImg:1
         }
     },
     created() {
+        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
         this.loadData();
     },
     methods: {
@@ -24,13 +26,22 @@ createApp({
                 .catch(err => console.log(err));
         },
         logout: function () {
-            axios.post('/api/logout')
-                .then(response => {
-                    window.location.href = '/web/index.html';
-                })
-                .catch(error => {
-                    this.error = error.response.data.message;
-                });
+            Swal.fire({
+                title: 'Are you sure to go out?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/logout')
+                        .then(response => {
+                            Swal.fire('Logout successful!', '', 'success')
+                            window.location.href = '/web/index.html';
+                        })
+                        .catch(error => {
+                            this.error = error.response.data;
+                        });
+                }
+            })
         },
         newCard: function () {
             axios.post('/api/clients/current/cards',`type=${this.cardType}&color=${this.cardColor}`)

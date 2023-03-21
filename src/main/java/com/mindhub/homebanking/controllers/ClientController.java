@@ -50,14 +50,14 @@ public class ClientController {
             return new ResponseEntity<>("Missing firstname", HttpStatus.BAD_REQUEST);
         else if (lastName.isEmpty())
             return new ResponseEntity<>("Missing lastname", HttpStatus.BAD_REQUEST);
-        else if (email.isEmpty() )
+        else if (email.isEmpty())
             return new ResponseEntity<>("Missing email", HttpStatus.BAD_REQUEST);
         else if (password.isEmpty())
             return new ResponseEntity<>("Missing password", HttpStatus.BAD_REQUEST);
-        if (clientService.findByEmail(email) !=  null)
+        if (clientService.findByEmail(email) != null)
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
-        Account newAccount=new Account(GenereteNumber(accountService), LocalDateTime.now(),0,SAVING);
-        Client newClient=new Client(firstName, lastName, email, passwordEncoder.encode(password));
+        Account newAccount = new Account(GenereteNumber(accountService), LocalDateTime.now(), 0, SAVING);
+        Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         newClient.addAccount(newAccount);
         clientService.save(newClient);
         accountService.save(newAccount);

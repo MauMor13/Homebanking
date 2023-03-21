@@ -40,7 +40,7 @@ public class Card {
     public CardType getType() { return type; }
     public CardColor getColor() { return color; }
     public String getNumber() {return number; }
-    public int getCvv() { return cvv; }
+    public Integer getCvv() { return cvv; }
     public LocalDate getFromDate() {return fromDate; }
     public LocalDate getThruDate() { return thruDate; }
     public String getCardHolder() { return cardHolder; }

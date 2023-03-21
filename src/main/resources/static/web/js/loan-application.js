@@ -4,17 +4,20 @@ createApp({
     data() {
         return {
             data: "",
-            loans:"",
+            loans:[],
             navbar:false,
             title:true,
             id:0,
-            amount:0,
-            payments:"",
+            loanName:"Automotive",
+            amount:"",
+            payments:0,
             numberAccountDestini:"",
-            paymentsFilter:""
+            paymentsFilter:"",
+            avatarImg:1
         }
     },
     created() {
+        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
         this.loadData();
         this.loansExist();
     },
@@ -29,13 +32,24 @@ createApp({
         loansExist:function(){
             axios.get("/api/loans")
             .then(response=>{
-                console.log(response.data);
                 this.loans=response.data;
                 this.paymentsFilter=this.filterLoans();
             }).catch(err=>console.log(err));
         },
         filterLoans:function(){
-            return this.loans.filter(loan=>loan.id==this.id)[0]?.payments;
+            let loan = this.loans.filter(loan=>loan.id==this.id)[0];
+            if(this.id>0)
+                this.loanName = loan?.name;
+            else
+                this.loanName = 0
+
+            return loan?.payments;
+        },
+        loanfiltrado:function(){
+            if(this.id>0)
+                return this.loans.filter(loan=>loan.id==this.id)?.[0];
+            else
+                return [];
         },
         newLoan:function(){
             axios.post("/api/loans",{"id":this.id,"amount":this.amount,"payments":this.payments,"numberAccountDestini":this.numberAccountDestini})
@@ -49,14 +63,23 @@ createApp({
             })
         })
         },
-        logout:function() {
-            axios.post('/api/logout') 
-                .then(response => {
-                    window.location.href = '/web/index.html';
-                })
-                .catch(error => {
-                    this.error = error.response.data.message;
-                });
+        logout: function () {
+            Swal.fire({
+                title: 'Are you sure to go out?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/logout')
+                        .then(response => {
+                            Swal.fire('Logout successful!', '', 'success')
+                            window.location.href = '/web/index.html';
+                        })
+                        .catch(error => {
+                            this.error = error.response.data;
+                        });
+                }
+            })
         },
         navShow:function(value){
             this.navbar=value;

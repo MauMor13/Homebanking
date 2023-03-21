@@ -21,11 +21,11 @@ public class ClientDTO {
 
         this.email = client.getEmail();
 
-        this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(toSet());
+        this.accounts = client.getAccountsActive().stream().map(account -> new AccountDTO(account)).collect(toSet());
 
         this.loans = client.getClientLoans().stream().map(loan -> new ClientLoanDTO(loan)).collect(toSet());
 
-        this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(toSet());
+        this.cards = client.getCardsActive().stream().map(card -> new CardDTO(card)).collect(toSet());
     }
     public String getFirstName(){ return firstName; }
     public String getLastName(){

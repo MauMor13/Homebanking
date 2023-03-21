@@ -9,9 +9,11 @@ createApp({
             title: true,
             typeCard: "CREDIT",
             allCards: [],
+            avatarImg:1
         }
     },
     created() {
+        this.avatarImg=localStorage.getItem("myAvatar")?localStorage.getItem("myAvatar"):1;
         this.loadData();
         this.loadCards();
     },
@@ -49,13 +51,22 @@ createApp({
             });
         },
         logout: function () {
-            axios.post('/api/logout')
-                .then(response => {
-                    window.location.href = '/web/index.html';
-                })
-                .catch(error => {
-                    this.error = error.response.data.message;
-                });
+            Swal.fire({
+                title: 'Are you sure to go out?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/logout')
+                        .then(response => {
+                            Swal.fire('Logout successful!', '', 'success')
+                            window.location.href = '/web/index.html';
+                        })
+                        .catch(error => {
+                            this.error = error.response.data;
+                        });
+                }
+            })
         },
         colorCard: function (color) {
             if (color == "SILVER")

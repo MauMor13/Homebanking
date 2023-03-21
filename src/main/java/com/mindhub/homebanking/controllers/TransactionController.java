@@ -70,7 +70,7 @@ public class TransactionController {
         transactionService.save(transactionDestini);
         return new ResponseEntity<>( "successful transaction", HttpStatus.ACCEPTED);
     }
-    @GetMapping("/filter-transactions")//nuevo servlet-
+    @GetMapping("/filter-transactions")
     public ResponseEntity<?> filterTransactions(@RequestParam String fromAccount,
                                                 @RequestParam (required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
                                                 @RequestParam (required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
