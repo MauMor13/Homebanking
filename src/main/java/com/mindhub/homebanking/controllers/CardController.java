@@ -2,10 +2,6 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.CardDTO;
 import com.mindhub.homebanking.dtos.NewPayDTO;
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.CardService;
 import com.mindhub.homebanking.services.ClientService;
@@ -76,7 +72,7 @@ public class CardController {
         return new ResponseEntity<>("Card removed successfully",HttpStatus.ACCEPTED);
     }
     @Transactional
-    @CrossOrigin
+    @CrossOrigin(origins = {"http://127.0.0.1:5500"})
     @PostMapping("/pay")
     public ResponseEntity <Object> payCards(
             @RequestBody(required = false) NewPayDTO newPayDTO){

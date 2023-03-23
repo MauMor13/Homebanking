@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 @EnableWebSecurity
 @Configuration
-public class WebAuthorization{
+public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/web/index.html").permitAll()
+                .antMatchers("/web/stiles/**").permitAll()
+                .antMatchers("/web/images/**").permitAll()
+                .antMatchers("/web/js/**").permitAll()
                 .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
                 .antMatchers("/web/account.html").hasAuthority("CLIENT")
                 .antMatchers("/web/cards.html").hasAuthority("CLIENT")
