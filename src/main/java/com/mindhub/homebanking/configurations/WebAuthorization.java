@@ -46,6 +46,8 @@ public class WebAuthorization {
                 .antMatchers(HttpMethod.POST, "/api/logout").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/**").hasAuthority("ADMIN");
 
+        http.cors().disable();
+
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")

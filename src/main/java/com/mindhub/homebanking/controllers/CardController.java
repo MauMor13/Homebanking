@@ -72,7 +72,6 @@ public class CardController {
         return new ResponseEntity<>("Card removed successfully",HttpStatus.ACCEPTED);
     }
     @Transactional
-    @CrossOrigin(origins = {"http://127.0.0.1:5500"})
     @PostMapping("/pay")
     public ResponseEntity <Object> payCards(
             @RequestBody(required = false) NewPayDTO newPayDTO){
