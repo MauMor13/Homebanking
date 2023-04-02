@@ -4,10 +4,10 @@ public class NewPayDTO {
     private final Integer cvv;
     private final double amount;
     private final String description;
-    public NewPayDTO(String number, Integer cvv, double amount, String description) {
+    public NewPayDTO(String number, String cvv, String amount, String description) {
         this.number = number;
-        this.cvv = cvv;
-        this.amount = amount;
+        this.cvv = Integer.parseInt(cvv);
+        this.amount = Integer.parseInt(amount);
         this.description = description;
     }
     public String getNumber() { return number; }
